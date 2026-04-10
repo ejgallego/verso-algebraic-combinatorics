@@ -1,0 +1,6 @@
+[submodule "tools/verso-harness"]
+	path = tools/verso-harness
+	url = https://github.com/ejgallego/leanblueprint-to-verso.git
+[submodule "algebraic-combinatorics"]
+	path = algebraic-combinatorics
+	url = https://github.com/facebookresearch/algebraic-combinatorics.git
