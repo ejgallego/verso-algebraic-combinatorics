@@ -27,6 +27,7 @@ than maintained as free-form prose.
 :::definition "porting_status_snapshot" (parent := "porting_status")
 The current direct-port work now covers all of `chapter_notations.tex` in
 `NotationsExamples`, from the opening prose through the auxiliary
-generating-function results. The remaining source chapters are still pending
-first-pass Verso transcription.
+generating-function results. `CommutativeRings` is now started through the
+commutative-ring definition and the first standard identities. The remaining
+source chapters are still pending first-pass Verso transcription.
 :::

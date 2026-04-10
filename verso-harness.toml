@@ -7,6 +7,7 @@ tex_source_glob = "algebraic-combinatorics/blueprint/src/chapter_*.tex"
 [lt]
 default_chapters = [
   "AlgebraicCombinatoricsBlueprint/Chapters/NotationsExamples.lean",
+  "AlgebraicCombinatoricsBlueprint/Chapters/CommutativeRings.lean",
 ]
 
 [lt.node_kinds]

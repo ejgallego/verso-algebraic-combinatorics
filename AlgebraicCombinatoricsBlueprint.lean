@@ -6,6 +6,7 @@ import VersoBlueprint.Commands.Summary
 import AlgebraicCombinatoricsBlueprint.TeXPrelude
 import AlgebraicCombinatoricsBlueprint.Chapters.PortingStatus
 import AlgebraicCombinatoricsBlueprint.Chapters.NotationsExamples
+import AlgebraicCombinatoricsBlueprint.Chapters.CommutativeRings
 
 open Verso.Genre
 open Verso.Genre.Manual
@@ -20,6 +21,7 @@ checkout.
 
 {include 0 AlgebraicCombinatoricsBlueprint.Chapters.PortingStatus}
 {include 0 AlgebraicCombinatoricsBlueprint.Chapters.NotationsExamples}
+{include 0 AlgebraicCombinatoricsBlueprint.Chapters.CommutativeRings}
 
 {blueprint_graph}
 {blueprint_summary}
