@@ -968,3 +968,139 @@ Follows from Mathlib's identity $C(x)^2 \cdot x + 1 = C(x)$ for the Catalan gene
 after showing that $C(x)$ equals the image of Mathlib's Catalan series under the natural map.
 \end{proof}
 ```
+
+:::group "catalan_gf_helpers"
+Helper lemmas for the explicit Catalan generating function.
+:::
+
+```tex
+\subsubsection{Helpers for the Catalan generating function}
+```
+
+:::lemma_ "lem.catalan.choose_half_recurrence" (parent := "catalan_gf_helpers") (lean := "FPS.choose_half_recurrence")
+For $`n \in \mathbb{N}`,
+$`(n+1)\dbinom{1/2}{n+1} = \left(\frac{1}{2}-n\right)\dbinom{1/2}{n}`.
+:::
+
+```tex "lem.catalan.choose_half_recurrence" (slot := statement)
+\begin{lemma}
+\label{lem.catalan.choose_half_recurrence}
+\lean{FPS.choose_half_recurrence}
+\leanhelper
+\leanok
+For $n\in\mathbb{N}$,
+$(n+1)\dbinom{1/2}{n+1} = \left(\frac{1}{2}-n\right)\dbinom{1/2}{n}$.
+\end{lemma}
+```
+
+:::proof "lem.catalan.choose_half_recurrence"
+This follows from the descending Pochhammer recurrence applied to
+$`\dbinom{1/2}{n}`.
+:::
+
+```tex "lem.catalan.choose_half_recurrence" (slot := proof)
+\begin{proof}
+\leanok
+Follows from the descending Pochhammer recurrence
+applied to $\dbinom{1/2}{n}$.
+\end{proof}
+```
+
+:::lemma_ "lem.catalan.A_eq_neg_two_centralBinom" (parent := "catalan_gf_helpers") (lean := "FPS.A_eq_neg_two_centralBinom")
+For $`n \in \mathbb{N}`,
+$`\dbinom{1/2}{n+1}\cdot(-4)^{n+1}\cdot(n+1) = -2\cdot\dbinom{2n}{n}`.
+:::
+
+```tex "lem.catalan.A_eq_neg_two_centralBinom" (slot := statement)
+\begin{lemma}
+\label{lem.catalan.A_eq_neg_two_centralBinom}
+\lean{FPS.A_eq_neg_two_centralBinom}
+\leanhelper
+\leanok
+For $n\in\mathbb{N}$,
+$\dbinom{1/2}{n+1}\cdot(-4)^{n+1}\cdot(n+1) = -2\cdot\dbinom{2n}{n}$.
+\end{lemma}
+```
+
+:::proof "lem.catalan.A_eq_neg_two_centralBinom"
+By induction on $`n`, using the previous recurrence lemma and the central
+binomial coefficient recurrence
+$`(n+1)\dbinom{2(n+1)}{n+1} = 2(2n+1)\dbinom{2n}{n}`.
+:::
+
+```tex "lem.catalan.A_eq_neg_two_centralBinom" (slot := proof)
+\begin{proof}
+\leanok
+By induction on $n$, using Lemma~\ref{lem.catalan.choose_half_recurrence}
+and the central binomial coefficient recurrence $(n+1)\dbinom{2(n+1)}{n+1} = 2(2n+1)\dbinom{2n}{n}$.
+\end{proof}
+```
+
+:::lemma_ "lem.catalan.choose_half_neg4_pow" (parent := "catalan_gf_helpers") (lean := "FPS.choose_half_neg4_pow_eq")
+For $`n \in \mathbb{N}`,
+$`\dbinom{1/2}{n+1}\cdot(-4)^{n+1} = -2\, c_n`.
+:::
+
+```tex "lem.catalan.choose_half_neg4_pow" (slot := statement)
+\begin{lemma}
+\label{lem.catalan.choose_half_neg4_pow}
+\lean{FPS.choose_half_neg4_pow_eq}
+\leanhelper
+\leanok
+For $n\in\mathbb{N}$,
+$\dbinom{1/2}{n+1}\cdot(-4)^{n+1} = -2\, c_n$.
+\end{lemma}
+```
+
+:::proof "lem.catalan.choose_half_neg4_pow"
+This follows from the previous lemma by dividing both sides by $`(n+1)`, using
+$`(n+1)\mid\dbinom{2n}{n}` and
+$`c_n = \dbinom{2n}{n}/(n+1)`.
+:::
+
+```tex "lem.catalan.choose_half_neg4_pow" (slot := proof)
+\begin{proof}
+\leanok
+Follows from Lemma~\ref{lem.catalan.A_eq_neg_two_centralBinom} by dividing both sides by $(n+1)$,
+using $(n+1)\mid\dbinom{2n}{n}$ and $c_n = \dbinom{2n}{n}/(n+1)$.
+\end{proof}
+```
+
+:::theorem "thm.catalan.gf_explicit" (parent := "catalan_gf_helpers") (lean := "FPS.catalan_gf_explicit")
+The generating function of the Catalan numbers satisfies
+$$`2x\,C(x) = 1 - \sqrt{1-4x},`
+where $`\sqrt{1-4x} = \sum_{n\geq 0}\dbinom{1/2}{n}(-4)^n x^n` is the
+binomial series.
+:::
+
+```tex "thm.catalan.gf_explicit" (slot := statement)
+\begin{theorem}
+\label{thm.catalan.gf_explicit}
+\lean{FPS.catalan_gf_explicit}
+\leanhelper
+\leanok
+The generating function of the Catalan numbers satisfies
+\[
+2x\,C(x) = 1 - \sqrt{1-4x},
+\]
+where $\sqrt{1-4x} = \sum_{n\geq 0}\dbinom{1/2}{n}(-4)^n x^n$ is the binomial series.
+\end{theorem}
+```
+
+:::proof "thm.catalan.gf_explicit"
+We check coefficient by coefficient. For $`n=0`, both sides give $`0`.
+For $`n \ge 1`, the $`n`-th coefficient of the left side is $`2c_{n-1}`,
+and the $`n`-th coefficient of $`1 - \sqrt{1-4x}` is
+$`-\dbinom{1/2}{n}(-4)^n`, which equals $`2c_{n-1}` by the previous helper
+lemma.
+:::
+
+```tex "thm.catalan.gf_explicit" (slot := proof)
+\begin{proof}
+\leanok
+We check coefficient by coefficient. For $n=0$, both sides give $0$.
+For $n \geq 1$, the $n$-th coefficient of the left side is $2c_{n-1}$,
+and the $n$-th coefficient of $1 - \sqrt{1-4x}$ is $-\dbinom{1/2}{n}(-4)^n$,
+which equals $2c_{n-1}$ by Lemma~\ref{lem.catalan.choose_half_neg4_pow}.
+\end{proof}
+```

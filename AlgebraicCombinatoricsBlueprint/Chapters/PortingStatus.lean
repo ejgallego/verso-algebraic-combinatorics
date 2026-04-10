@@ -27,7 +27,7 @@ than maintained as free-form prose.
 :::definition "porting_status_snapshot" (parent := "porting_status")
 The current direct-port work covers the opening prose and the first
 binomial-coefficient, Fibonacci, and Catalan batches in `NotationsExamples`,
-through `thm.catalan.gf_equation`, all sourced from `chapter_notations.tex`.
+through `thm.catalan.gf_explicit`, all sourced from `chapter_notations.tex`.
 The remaining source chapters and later subsections of `NotationsExamples` are
 still pending first-pass Verso transcription.
 :::
