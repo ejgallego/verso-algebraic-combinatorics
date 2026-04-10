@@ -15,6 +15,7 @@ definition = "definition"
 lemma = "lemma_"
 corollary = "corollary"
 proof = "proof"
+proposition = "theorem"
 
 [harness]
 native_warnings = false

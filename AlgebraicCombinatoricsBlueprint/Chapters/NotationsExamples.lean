@@ -1,26 +1,23 @@
 import Verso
 import VersoManual
 import VersoBlueprint
+import AlgebraicCombinatorics.FPS.NotationsExamples
 
 open Verso.Genre
 open Verso.Genre.Manual
 open Informal
+open AlgebraicCombinatorics
 
 #doc (Manual) "Notations and Elementary Facts" =>
 
 :::group "notational_conventions"
-Starter direct-port chapter for
-`algebraic-combinatorics/blueprint/src/chapter_notations.tex`.
+Basic notation and elementary counting principles used later in the chapter.
 :::
 
-:::group "binomial_coefficients"
-The source chapter continues with a binomial-coefficients subsection whose
-labeled statements are formalized in the upstream `AlgebraicCombinatorics.FPS`
-namespace.
-:::
-
-The legacy blueprint opens with basic notational conventions and a short list
-of elementary counting principles.
+We will use the following notations and conventions:
+- The symbol $`\mathbb{N}` will denote the set $`\{0,1,2,3,\ldots\}` of
+  nonnegative integers.
+- The size, that is, cardinality, of a set $`A` will be denoted by $`|A|`.
 
 ```tex
 \section{Notations and elementary facts}
@@ -36,21 +33,396 @@ A\right\vert $.
 \end{itemize}
 ```
 
-The same source file then begins the binomial-coefficient material that will
-anchor the first LT pass for this repository.
+We will need some basics from enumerative combinatorics:
+- *Addition principle (sum rule):* If $`A` and $`B` are two disjoint sets,
+  then $`|A \cup B| = |A| + |B|`.
+- *Multiplication principle (product rule):* If $`A` and $`B` are any two
+  sets, then $`|A \times B| = |A| \cdot |B|`.
+- *Bijection principle:* There is a bijection between two sets $`X` and
+  $`Y` if and only if $`|X| = |Y|`.
+- A set with $`n` elements has $`2^n` subsets, and has $`\dbinom{n}{k}`
+  size-$`k` subsets for any $`k \in \mathbb{R}`.
+- A set with $`n` elements has $`n!` permutations.
+
+```tex
+We will need some basics from enumerative combinatorics:
+
+\begin{itemize}
+\item \textbf{Addition principle (sum rule):} If $A$ and $B$ are two disjoint
+sets, then $\left\vert A\cup B\right\vert =\left\vert A\right\vert +\left\vert
+B\right\vert $.
+
+\item \textbf{Multiplication principle (product rule):} If $A$ and $B$ are any
+two sets, then $\left\vert A\times B\right\vert =\left\vert A\right\vert
+\cdot\left\vert B\right\vert $.
+
+\item \textbf{Bijection principle:} There is a bijection between two sets $X$ and $Y$ if
+and only if $\left\vert X\right\vert =\left\vert Y\right\vert $.
+
+\item A set with $n$ elements has $2^{n}$ subsets, and has $\dbinom{n}{k}$
+size-$k$ subsets for any $k\in\mathbb{R}$.
+
+\item A set with $n$ elements has $n!$ permutations.
+\end{itemize}
+```
+
+:::group "binomial_coefficients"
+The opening binomial-coefficient definitions and identities.
+:::
 
 ```tex
 \subsection{Binomial coefficients}
+```
 
+:::definition "def.binom.binom" (parent := "binomial_coefficients") (lean := "FPS.binom_def_formula")
+For any numbers $`n` and $`k`, we set
+$$`\dbinom{n}{k} =
+\begin{cases}
+\dfrac{n(n-1)(n-2)\cdots(n-k+1)}{k!}, & \text{if } k \in \mathbb{N};\\
+0, & \text{else.}
+\end{cases}`
+Note that "numbers" is to be understood fairly liberally here. In particular,
+$`n` can be any integer, rational, real, or complex number, or more generally
+any element in a $`\mathbb{Q}`-algebra, whereas $`k` can be anything, although
+the only nonzero values of $`\dbinom{n}{k}` are achieved for
+$`k \in \mathbb{N}` by the above definition.
+:::
+
+```tex "def.binom.binom" (slot := statement)
 \begin{definition}
 \label{def.binom.binom}
 \lean{FPS.binom_def_formula}
 \leantarget
 \leanok
-...
+For any numbers $n$ and $k$, we set%
+\begin{equation}
+\dbinom{n}{k}=%
+\begin{cases}
+\dfrac{n\left(  n-1\right)  \left(  n-2\right)  \cdots\left(  n-k+1\right)
+}{k!}, & \text{if }k\in\mathbb{N};\\
+0, & \text{else.}%
+\end{cases}
+\label{eq.def.binom.binom.eq}%
+\end{equation}
+Note that ``numbers'' is to be understood
+fairly liberally here. In particular, $n$ can be any integer, rational, real
+or complex number (or, more generally, any element in a $\mathbb{Q}$-algebra),
+whereas $k$ can be anything (although the only nonzero values of $\dbinom
+{n}{k}$ will be achieved for $k\in\mathbb{N}$, by the above definition).
 \end{definition}
 ```
 
-The first labeled results in this source section are `FPS.binom_def_formula`,
-`FPS.binom_neg_one`, `FPS.binom_factorial_formula`, `FPS.binom_two_n_n_eq`,
-`FPS.pascal_identity_ring`, `FPS.binom_zero_of_lt`, and `FPS.binom_symm`.
+:::lemma_ "lem.binom.neg_one" (parent := "binomial_coefficients") (lean := "FPS.binom_neg_one")
+For any $`k \in \mathbb{N}`, we have $`\dbinom{-1}{k} = (-1)^k`.
+:::
+
+```tex "lem.binom.neg_one" (slot := statement)
+\begin{lemma}
+\label{lem.binom.neg_one}
+\lean{FPS.binom_neg_one}
+\leanhelper
+\leanok
+For any $k\in\mathbb{N}$, we have
+$\dbinom{-1}{k} = (-1)^k$.
+\end{lemma}
+```
+
+:::proof "lem.binom.neg_one"
+We have
+$$`\dbinom{-1}{k}
+= \dfrac{(-1)(-1-1)(-1-2)\cdots(-1-k+1)}{k!}
+= \dfrac{(-1)(-2)(-3)\cdots(-k)}{k!}
+= \dfrac{(-1)^k k!}{k!}
+= (-1)^k.`
+:::
+
+```tex "lem.binom.neg_one" (slot := proof)
+\begin{proof}
+\leanok
+We have
+\begin{align*}
+\dbinom{-1}{k}  &  =\dfrac{\left(  -1\right)  \left(  -1-1\right)  \left(
+-1-2\right)  \cdots\left(  -1-k+1\right)  }{k!}\\
+&  =\dfrac{\left(  -1\right)  \left(  -2\right)  \left(  -3\right)
+\cdots\left(  -k\right)  }{k!}=\dfrac{\left(  -1\right)  ^{k}k!}{k!}=\left(
+-1\right)  ^{k}.
+\end{align*}
+\end{proof}
+```
+
+If $`n, k \in \mathbb{N}` and $`n \ge k`, then
+$$`\dbinom{n}{k} = \dfrac{n!}{k!(n-k)!}.`
+But this formula only applies to the case when $`n, k \in \mathbb{N}` and
+$`n \ge k`. The above definition is more general than it.
+
+```tex
+If $n,k\in\mathbb{N}$ and $n\geq k$, then
+\begin{equation}
+\dbinom{n}{k}=\dfrac{n!}{k!\left(  n-k\right)  !}. \label{eq.binom.fac-form}%
+\end{equation}
+But this formula only applies to the case when $n,k\in\mathbb{N}$ and $n\geq
+k$. The above definition is more general than it.
+```
+
+:::lemma_ "lem.binom.fac-form" (parent := "binomial_coefficients") (lean := "FPS.binom_factorial_formula")
+For $`n, k \in \mathbb{N}` with $`k \le n`, we have
+$`\dbinom{n}{k} = \dfrac{n!}{k!(n-k)!}`.
+:::
+
+```tex "lem.binom.fac-form" (slot := statement)
+\begin{lemma}
+\label{lem.binom.fac-form}
+\lean{FPS.binom_factorial_formula}
+\leanhelper
+\leanok
+For $n,k\in\mathbb{N}$ with $k \leq n$, we have
+$\dbinom{n}{k}=\dfrac{n!}{k!\left(  n-k\right)  !}$.
+\end{lemma}
+```
+
+:::proof "lem.binom.fac-form"
+This follows directly from the definition by cancellation.
+:::
+
+```tex "lem.binom.fac-form" (slot := proof)
+\begin{proof}
+\leanok
+This follows directly from the definition by cancellation.
+\end{proof}
+```
+
+:::lemma_ "lem.binom.2n-choose-n" (parent := "binomial_coefficients") (lean := "FPS.binom_two_n_n_eq")
+Let $`n \in \mathbb{N}`. Then
+$$`\dbinom{2n}{n} =
+\dfrac{1 \cdot 3 \cdot 5 \cdot \cdots \cdot (2n-1)}{n!} \cdot 2^n.`
+:::
+
+```tex "lem.binom.2n-choose-n" (slot := statement)
+\begin{lemma}
+\label{lem.binom.2n-choose-n}
+\lean{FPS.binom_two_n_n_eq}
+\leanhelper
+\leanok
+Let $n\in\mathbb{N}$. Then, $\dbinom{2n}{n}=\dfrac{1\cdot3\cdot5\cdot\cdots\cdot\left(  2n-1\right)  }{n!}\cdot2^{n}$.
+\end{lemma}
+```
+
+:::proof "lem.binom.2n-choose-n"
+We have
+$$`(2n)!
+= 1 \cdot 2 \cdot \cdots \cdot (2n)
+= \left(1 \cdot 3 \cdot 5 \cdot \cdots \cdot (2n-1)\right)
+\cdot \left(2 \cdot 4 \cdot 6 \cdot \cdots \cdot (2n)\right)
+= \left(1 \cdot 3 \cdot 5 \cdot \cdots \cdot (2n-1)\right) \cdot 2^n n!.`
+
+Now the factorial formula yields
+$$`\dbinom{2n}{n}
+= \dfrac{(2n)!}{n!n!}
+= \dfrac{\left(1 \cdot 3 \cdot 5 \cdot \cdots \cdot (2n-1)\right) \cdot 2^n n!}{n! \cdot n!}
+= \dfrac{1 \cdot 3 \cdot 5 \cdot \cdots \cdot (2n-1)}{n!} \cdot 2^n.`
+:::
+
+```tex "lem.binom.2n-choose-n" (slot := proof)
+\begin{proof}
+\leanok
+We have%
+\begin{align*}
+\left(  2n\right)  !  &  =1\cdot2\cdot\cdots\cdot\left(  2n\right) \\
+&  =\left(  1\cdot3\cdot5\cdot\cdots\cdot\left(  2n-1\right)  \right)
+\cdot\underbrace{\left(  2\cdot4\cdot6\cdot\cdots\cdot\left(  2n\right)
+\right)  }_{=2^{n}\left(  1\cdot2\cdot
+\cdots\cdot n\right)  }\\
+&  =\left(  1\cdot3\cdot5\cdot\cdots\cdot\left(  2n-1\right)  \right)
+\cdot2^{n}\underbrace{\left(  1\cdot2\cdot\cdots\cdot n\right)  }_{=n!}\\
+&  =\left(  1\cdot3\cdot5\cdot\cdots\cdot\left(  2n-1\right)  \right)
+\cdot2^{n}n!.
+\end{align*}
+Now, (\ref{eq.binom.fac-form}) yields%
+\begin{align*}
+\dbinom{2n}{n}  &  =\dfrac{\left(  2n\right)  !}{n!n!}=\dfrac{\left(  1\cdot3\cdot5\cdot
+\cdots\cdot\left(  2n-1\right)  \right)  \cdot2^{n}n!}{n!\cdot n!}\\
+&  =\dfrac{1\cdot3\cdot5\cdot\cdots\cdot\left(  2n-1\right)  }{n!}\cdot2^{n}.
+\end{align*}
+\end{proof}
+```
+
+:::theorem "prop.binom.rec" (parent := "binomial_coefficients") (lean := "FPS.pascal_identity_ring")
+We have
+$$`\dbinom{m}{n} = \dbinom{m-1}{n-1} + \dbinom{m-1}{n}`
+for any numbers $`m` and $`n`.
+:::
+
+```tex "prop.binom.rec" (slot := statement)
+\begin{proposition}
+[\emph{Pascal's identity}, aka \emph{recurrence of the binomial coefficients}]
+\label{prop.binom.rec}
+\lean{FPS.pascal_identity_ring}
+\leantarget
+\leanok
+We have%
+\begin{equation}
+\dbinom{m}{n}=\dbinom{m-1}{n-1}+\dbinom{m-1}{n} \label{eq.binom.rec.m}%
+\end{equation}
+for any numbers $m$ and $n$.
+\end{proposition}
+```
+
+:::proof "prop.binom.rec"
+This follows from the identity
+$`\dbinom{r+1}{k+1} = \dbinom{r}{k} + \dbinom{r}{k+1}`, the successor form
+of Pascal's identity, by substituting $`r = m - 1` and $`k = n - 1`.
+:::
+
+```tex "prop.binom.rec" (slot := proof)
+\begin{proof}
+\leanok
+This follows from the identity
+$\dbinom{r+1}{k+1} = \dbinom{r}{k} + \dbinom{r}{k+1}$
+(the successor form of Pascal's identity)
+by substituting $r = m - 1$ and $k = n - 1$.
+\end{proof}
+```
+
+:::lemma_ "lem.binom.pascal_nat" (parent := "binomial_coefficients") (lean := "FPS.pascal_identity")
+For natural numbers $`m, n` with $`m > 0` and $`n > 0`, we have
+$`\dbinom{m}{n} = \dbinom{m-1}{n-1} + \dbinom{m-1}{n}`.
+:::
+
+```tex "lem.binom.pascal_nat" (slot := statement)
+\begin{lemma}
+\label{lem.binom.pascal_nat}
+\lean{FPS.pascal_identity}
+\leanhelper
+\leanok
+For natural numbers $m, n$ with $m > 0$ and $n > 0$, we have
+$\dbinom{m}{n}=\dbinom{m-1}{n-1}+\dbinom{m-1}{n}$.
+\end{lemma}
+```
+
+:::proof "lem.binom.pascal_nat"
+This is the natural-number specialization of Pascal's identity.
+:::
+
+```tex "lem.binom.pascal_nat" (slot := proof)
+\begin{proof}
+\leanok
+This is the natural number specialization of Proposition~\ref{prop.binom.rec}.
+\end{proof}
+```
+
+:::lemma_ "lem.binom.pascal_succ" (parent := "binomial_coefficients") (lean := "FPS.pascal_identity_succ")
+For any element $`r` in a binomial ring and $`k \in \mathbb{N}`,
+$`\dbinom{r+1}{k+1} = \dbinom{r}{k} + \dbinom{r}{k+1}`.
+:::
+
+```tex "lem.binom.pascal_succ" (slot := statement)
+\begin{lemma}
+\label{lem.binom.pascal_succ}
+\lean{FPS.pascal_identity_succ}
+\leanhelper
+\leanok
+For any element $r$ in a binomial ring and $k \in \mathbb{N}$,
+$\dbinom{r+1}{k+1} = \dbinom{r}{k} + \dbinom{r}{k+1}$.
+\end{lemma}
+```
+
+:::proof "lem.binom.pascal_succ"
+This is the successor form of Pascal's identity, which is a standard result in
+Mathlib.
+:::
+
+```tex "lem.binom.pascal_succ" (slot := proof)
+\begin{proof}
+\leanok
+This is the successor form of Pascal's identity,
+which is a standard result in Mathlib.
+\end{proof}
+```
+
+:::theorem "prop.binom.0" (parent := "binomial_coefficients") (lean := "FPS.binom_zero_of_lt")
+Let $`m, n \in \mathbb{N}` satisfy $`m < n`. Then
+$`\dbinom{m}{n} = 0`.
+:::
+
+```tex "prop.binom.0" (slot := statement)
+\begin{proposition}
+\label{prop.binom.0}
+\lean{FPS.binom_zero_of_lt}
+\leantarget
+\leanok
+Let $m,n\in\mathbb{N}$ satisfy $m<n$. Then, $\dbinom{m}{n}=0$.
+\end{proposition}
+```
+
+:::proof "prop.binom.0"
+If $`m < n`, then in the product
+$`m(m-1)(m-2)\cdots(m-n+1)` in the numerator of $`\dbinom{m}{n}`, one of the
+factors is $`m-m = 0`. Hence the entire product is $`0`, and so
+$`\dbinom{m}{n} = 0`.
+
+Note that this really requires $`m \in \mathbb{N}`. For example,
+$`1.5 < 2` but $`\dbinom{1.5}{2} = 0.375 \neq 0`.
+:::
+
+```tex "prop.binom.0" (slot := proof)
+\begin{proof}
+\leanok
+If $m < n$, then in the product $m(m-1)(m-2)\cdots(m-n+1)$ in the numerator of $\dbinom{m}{n}$,
+one of the factors is $m - m = 0$ (since $m - n + 1 \leq 0 \leq m$ when $m < n$ and $m \in \mathbb{N}$).
+Hence the entire product is $0$, and so $\dbinom{m}{n} = 0$.
+
+Note that this really requires $m\in\mathbb{N}$. For
+example, $1.5<2$ but $\dbinom{1.5}{2}=0.375\neq0$.
+\end{proof}
+```
+
+:::theorem "thm.binom.sym" (parent := "binomial_coefficients") (lean := "FPS.binom_symm")
+Let $`n \in \mathbb{N}` and $`k \in \mathbb{R}`. Then
+$$`\dbinom{n}{k} = \dbinom{n}{n-k}.`
+:::
+
+```tex "thm.binom.sym" (slot := statement)
+\begin{theorem}
+[\emph{Symmetry of the binomial coefficients}]
+\label{thm.binom.sym}
+\lean{FPS.binom_symm}
+\leantarget
+\leanok
+Let $n\in\mathbb{N}$ and $k\in\mathbb{R}$. Then,%
+\[
+\dbinom{n}{k}=\dbinom{n}{n-k}.
+\]
+\end{theorem}
+```
+
+:::proof "thm.binom.sym"
+For $`k \notin \{0, 1, \ldots, n\}`, both sides are $`0`. If $`k < 0` or
+$`k > n`, then both $`\dbinom{n}{k} = 0` and $`\dbinom{n}{n-k} = 0` by the
+previous proposition or by the definition.
+
+For $`k \in \{0, 1, \ldots, n\}`, we use the factorial formula:
+$$`\dbinom{n}{k}
+= \dfrac{n!}{k!(n-k)!}
+= \dfrac{n!}{(n-k)!k!}
+= \dbinom{n}{n-k}.`
+
+Note the requirement $`n \in \mathbb{N}`. This statement would fail for
+$`n = -1` and $`k = 0`, since $`\dbinom{-1}{0} = 1` but
+$`\dbinom{-1}{-1} = 0`.
+:::
+
+```tex "thm.binom.sym" (slot := proof)
+\begin{proof}
+\leanok
+For $k \notin \{0, 1, \ldots, n\}$, both sides are $0$
+(if $k < 0$ or $k > n$, then both $\dbinom{n}{k} = 0$ and $\dbinom{n}{n-k} = 0$
+by Proposition~\ref{prop.binom.0} or by the definition).
+For $k \in \{0, 1, \ldots, n\}$, we use the factorial formula (\ref{eq.binom.fac-form}):
+\[
+\dbinom{n}{k} = \frac{n!}{k!(n-k)!} = \frac{n!}{(n-k)!k!} = \dbinom{n}{n-k}.
+\]
+
+Note the $n\in\mathbb{N}$ requirement. Theorem~\ref{thm.binom.sym} would fail for $n=-1$ and $k=0$,
+since $\dbinom{-1}{0} = 1$ but $\dbinom{-1}{-1} = 0$.
+\end{proof}
+```

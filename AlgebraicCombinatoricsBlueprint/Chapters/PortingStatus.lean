@@ -25,7 +25,9 @@ than maintained as free-form prose.
 :::
 
 :::definition "porting_status_snapshot" (parent := "porting_status")
-The current scaffold creates one direct-port chapter starter,
-`NotationsExamples`, sourced from `chapter_notations.tex`. The remaining source
-chapters are still pending first-pass Verso transcription.
+The current direct-port work covers the opening prose and the first
+binomial-coefficient batch in `NotationsExamples`, through
+`thm.binom.sym`, sourced from `chapter_notations.tex`. The remaining source
+chapters and later subsections of `NotationsExamples` are still pending
+first-pass Verso transcription.
 :::
