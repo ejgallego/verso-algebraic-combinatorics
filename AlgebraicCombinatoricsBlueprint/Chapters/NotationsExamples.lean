@@ -692,3 +692,119 @@ Uses the factorization $(2n)! = 2^n \cdot n! \cdot (2n-1)!!$ together with the
 divisibility $n!\cdot n! \mid (2n)!$.
 \end{proof}
 ```
+
+:::group "fibonacci_sequence"
+The Fibonacci example and its generating-function formulas.
+:::
+
+```tex
+\subsection{The Fibonacci sequence (Example 1)}
+```
+
+:::definition "def.fib.fibonacci" (parent := "fibonacci_sequence") (lean := "FPS.fibonacci")
+The Fibonacci sequence $`(f_0, f_1, f_2, \ldots)` is defined by
+$`f_0 = 0`, $`f_1 = 1`, and $`f_n = f_{n-1} + f_{n-2}` for $`n \ge 2`.
+:::
+
+```tex "def.fib.fibonacci" (slot := statement)
+\begin{definition}
+\label{def.fib.fibonacci}
+\lean{FPS.fibonacci}
+\leanhelper
+\leanok
+The \emph{Fibonacci sequence} $(f_0, f_1, f_2, \ldots)$ is defined by
+$f_0 = 0$, $f_1 = 1$, and $f_n = f_{n-1} + f_{n-2}$ for $n \geq 2$.
+\end{definition}
+```
+
+:::definition "def.fib.golden_ratio_plus" (parent := "fibonacci_sequence") (lean := "FPS.goldenRatioPlus")
+The golden ratio is $`\phi_+ = \frac{1+\sqrt{5}}{2}`.
+:::
+
+```tex "def.fib.golden_ratio_plus" (slot := statement)
+\begin{definition}
+\label{def.fib.golden_ratio_plus}
+\lean{FPS.goldenRatioPlus}
+\leanhelper
+\leanok
+The \emph{golden ratio} $\phi_+ = \frac{1+\sqrt{5}}{2}$.
+\end{definition}
+```
+
+:::definition "def.fib.golden_ratio_minus" (parent := "fibonacci_sequence") (lean := "FPS.goldenRatioMinus")
+The conjugate golden ratio is $`\phi_- = \frac{1-\sqrt{5}}{2}`.
+:::
+
+```tex "def.fib.golden_ratio_minus" (slot := statement)
+\begin{definition}
+\label{def.fib.golden_ratio_minus}
+\lean{FPS.goldenRatioMinus}
+\leanhelper
+\leanok
+The \emph{conjugate golden ratio} $\phi_- = \frac{1-\sqrt{5}}{2}$.
+\end{definition}
+```
+
+:::theorem "thm.fib.gf" (parent := "fibonacci_sequence") (lean := "FPS.fibonacci_gf")
+The generating function of the Fibonacci sequence is
+$$`F(x) = \sum_{n \geq 0} f_n x^n = \frac{x}{1-x-x^2}.`
+:::
+
+```tex "thm.fib.gf" (slot := statement)
+\begin{theorem}
+\label{thm.fib.gf}
+\lean{FPS.fibonacci_gf}
+\leanhelper
+\leanok
+The generating function of the Fibonacci sequence is
+\[
+F(x) = \sum_{n\geq 0} f_n x^n = \frac{x}{1-x-x^2}.
+\]
+\end{theorem}
+```
+
+:::proof "thm.fib.gf"
+Let $`D = 1 - x - x^2`. We verify $`F \cdot D = x` by checking that for each
+$`n`, $`[x^n](F \cdot D) = f_n - f_{n-1} - f_{n-2} = 0` for $`n \ge 2`,
+$`[x^1](F \cdot D) = 1`, and $`[x^0](F \cdot D) = 0`.
+Then $`F = x \cdot D^{-1}` since the constant term of $`D` is nonzero.
+:::
+
+```tex "thm.fib.gf" (slot := proof)
+\begin{proof}
+\leanok
+Let $D = 1 - x - x^2$. We verify $F \cdot D = x$ by checking that for each $n$,
+$[x^n](F\cdot D) = f_n - f_{n-1} - f_{n-2} = 0$ for $n \geq 2$,
+$[x^1](F\cdot D) = 1$, and $[x^0](F\cdot D) = 0$.
+Then $F = x \cdot D^{-1}$ since the constant term of $D$ is nonzero.
+\end{proof}
+```
+
+:::theorem "thm.fib.binet" (parent := "fibonacci_sequence") (lean := "FPS.fibonacci_binet")
+For any $`n \in \mathbb{N}`,
+$$`f_n = \frac{\phi_+^n - \phi_-^n}{\sqrt{5}}.`
+:::
+
+```tex "thm.fib.binet" (slot := statement)
+\begin{theorem}[Binet's formula]
+\label{thm.fib.binet}
+\lean{FPS.fibonacci_binet}
+\leanhelper
+\leanok
+For any $n\in\mathbb{N}$,
+\[
+f_n = \frac{\phi_+^n - \phi_-^n}{\sqrt{5}}.
+\]
+\end{theorem}
+```
+
+:::proof "thm.fib.binet"
+This follows from Binet's formula as established in Mathlib.
+:::
+
+```tex "thm.fib.binet" (slot := proof)
+\begin{proof}
+\leanok
+This follows from Binet's formula as established in Mathlib.
+\end{proof}
+```

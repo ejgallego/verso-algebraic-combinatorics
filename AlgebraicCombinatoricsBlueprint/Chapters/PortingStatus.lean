@@ -26,8 +26,8 @@ than maintained as free-form prose.
 
 :::definition "porting_status_snapshot" (parent := "porting_status")
 The current direct-port work covers the opening prose and the first
-binomial-coefficient batches in `NotationsExamples`, through the helper
-subsection for `lem.binom.2n-choose-n`, sourced from `chapter_notations.tex`.
-The remaining source chapters and later subsections of `NotationsExamples`
-are still pending first-pass Verso transcription.
+binomial-coefficient batches in `NotationsExamples`, through the Fibonacci
+example, sourced from `chapter_notations.tex`. The remaining source chapters
+and later subsections of `NotationsExamples` are still pending first-pass
+Verso transcription.
 :::
