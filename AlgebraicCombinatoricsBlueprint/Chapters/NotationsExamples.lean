@@ -1104,3 +1104,95 @@ and the $n$-th coefficient of $1 - \sqrt{1-4x}$ is $-\dbinom{1/2}{n}(-4)^n$,
 which equals $2c_{n-1}$ by Lemma~\ref{lem.catalan.choose_half_neg4_pow}.
 \end{proof}
 ```
+
+:::group "vandermonde_example"
+The Vandermonde convolution identity.
+:::
+
+```tex
+\subsection{The Vandermonde convolution (Example 3)}
+```
+
+:::theorem "thm.vandermonde" (parent := "vandermonde_example") (lean := "FPS.vandermonde_convolution")
+For $`a, b, n \in \mathbb{N}`,
+$$`\dbinom{a+b}{n} = \sum_{k=0}^{n}\dbinom{a}{k}\dbinom{b}{n-k}.`
+:::
+
+```tex "thm.vandermonde" (slot := statement)
+\begin{theorem}[Vandermonde convolution]
+\label{thm.vandermonde}
+\lean{FPS.vandermonde_convolution}
+\leanhelper
+\leanok
+For $a, b, n \in \mathbb{N}$,
+\[
+\dbinom{a+b}{n} = \sum_{k=0}^{n}\dbinom{a}{k}\dbinom{b}{n-k}.
+\]
+\end{theorem}
+```
+
+:::proof "thm.vandermonde"
+This follows from the Vandermonde convolution identity for natural-number
+binomial coefficients from Mathlib, with the antidiagonal sum rewritten as a
+range sum.
+:::
+
+```tex "thm.vandermonde" (slot := proof)
+\begin{proof}
+\leanok
+Follows from the Vandermonde convolution identity for natural-number binomial coefficients
+from Mathlib, with the antidiagonal sum
+rewritten as a range sum.
+\end{proof}
+```
+
+:::group "recurrence_example"
+Solving a linear recurrence.
+:::
+
+```tex
+\subsection{Solving a recurrence (Example 4)}
+```
+
+:::definition "def.recurrence.seq" (parent := "recurrence_example") (lean := "FPS.exampleRecurrence")
+The sequence $`(a_n)` defined by $`a_0 = 1` and
+$`a_{n+1} = 2a_n + n` for all $`n\geq 0`.
+:::
+
+```tex "def.recurrence.seq" (slot := statement)
+\begin{definition}
+\label{def.recurrence.seq}
+\lean{FPS.exampleRecurrence}
+\leanhelper
+\leanok
+The sequence $(a_n)$ defined by $a_0 = 1$ and $a_{n+1} = 2a_n + n$ for all $n\geq 0$.
+\end{definition}
+```
+
+:::theorem "thm.recurrence.explicit" (parent := "recurrence_example") (lean := "FPS.exampleRecurrence_explicit")
+For all $`n\in\mathbb{N}`, $`a_n = 2^{n+1} - (n+1)`.
+:::
+
+```tex "thm.recurrence.explicit" (slot := statement)
+\begin{theorem}
+\label{thm.recurrence.explicit}
+\lean{FPS.exampleRecurrence_explicit}
+\leanhelper
+\leanok
+For all $n\in\mathbb{N}$, $a_n = 2^{n+1} - (n+1)$.
+\end{theorem}
+```
+
+:::proof "thm.recurrence.explicit"
+Proceed by induction on $`n`. The base case
+$`a_0 = 1 = 2^1 - 1` is immediate. For the induction step,
+$`a_{n+1} = 2a_n + n = 2(2^{n+1}-(n+1)) + n = 2^{n+2} - (n+2)`.
+:::
+
+```tex "thm.recurrence.explicit" (slot := proof)
+\begin{proof}
+\leanok
+By induction on $n$. The base case $a_0 = 1 = 2^1 - 1$ is immediate.
+For the induction step, $a_{n+1} = 2a_n + n = 2(2^{n+1}-(n+1)) + n = 2^{n+2} - (n+2)$.
+\end{proof}
+```
