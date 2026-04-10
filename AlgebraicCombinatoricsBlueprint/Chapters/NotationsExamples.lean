@@ -808,3 +808,163 @@ This follows from Binet's formula as established in Mathlib.
 This follows from Binet's formula as established in Mathlib.
 \end{proof}
 ```
+
+:::group "catalan_example"
+Dyck words, Catalan numbers, and their generating function.
+:::
+
+```tex
+\subsection{Dyck words and Catalan numbers (Example 2)}
+```
+
+:::definition "def.catalan.dyck" (parent := "catalan_example") (lean := "FPS.isDyckWord")
+A _Dyck word_ of length $`2n` is a list of $`0`s and $`1`s with equal numbers
+of each, such that every prefix has at least as many $`1`s as $`0`s.
+:::
+
+```tex "def.catalan.dyck" (slot := statement)
+\begin{definition}
+\label{def.catalan.dyck}
+\lean{FPS.isDyckWord}
+\leanhelper
+\leanok
+A \emph{Dyck word} of length $2n$ is a list of $0$s and $1$s
+with equal numbers of each, such that every prefix has at least as many $1$s as $0$s.
+\end{definition}
+```
+
+:::definition "def.catalan.catalan" (parent := "catalan_example") (lean := "FPS.catalan")
+The $`n`-th _Catalan number_ is
+$`c_n = \frac{1}{n+1}\dbinom{2n}{n}`.
+:::
+
+```tex "def.catalan.catalan" (slot := statement)
+\begin{definition}
+\label{def.catalan.catalan}
+\lean{FPS.catalan}
+\leanhelper
+\leanok
+The $n$-th \emph{Catalan number} is $c_n = \frac{1}{n+1}\dbinom{2n}{n}$.
+\end{definition}
+```
+
+:::theorem "thm.catalan.recurrence" (parent := "catalan_example") (lean := "FPS.catalan_recurrence")
+For $`n \ge 1`, the Catalan numbers satisfy the recurrence
+$$`c_n = \sum_{k=0}^{n-1} c_k \, c_{n-1-k}.`
+:::
+
+```tex "thm.catalan.recurrence" (slot := statement)
+\begin{theorem}
+\label{thm.catalan.recurrence}
+\lean{FPS.catalan_recurrence}
+\leanhelper
+\leanok
+For $n \geq 1$, the Catalan numbers satisfy the recurrence
+\[
+c_n = \sum_{k=0}^{n-1} c_k \, c_{n-1-k}.
+\]
+\end{theorem}
+```
+
+:::proof "thm.catalan.recurrence"
+This follows from Mathlib's Catalan number recurrence, converting between
+Mathlib's recursive definition and the explicit formula.
+:::
+
+```tex "thm.catalan.recurrence" (slot := proof)
+\begin{proof}
+\leanok
+Follows from Mathlib's Catalan number recurrence, converting between
+Mathlib's recursive definition and the explicit formula.
+\end{proof}
+```
+
+:::lemma_ "lem.catalan.explicit" (parent := "catalan_example") (lean := "FPS.catalan_explicit")
+The explicit formula for Catalan numbers is
+$`c_n = \frac{1}{n+1}\dbinom{2n}{n}`.
+:::
+
+```tex "lem.catalan.explicit" (slot := statement)
+\begin{lemma}
+\label{lem.catalan.explicit}
+\lean{FPS.catalan_explicit}
+\leanhelper
+\leanok
+The explicit formula for Catalan numbers:
+$c_n = \frac{1}{n+1}\dbinom{2n}{n}$.
+\end{lemma}
+```
+
+:::proof "lem.catalan.explicit"
+This is immediate from the definition of $`c_n`.
+:::
+
+```tex "lem.catalan.explicit" (slot := proof)
+\begin{proof}
+\leanok
+This is immediate from the definition of $c_n$.
+\end{proof}
+```
+
+:::lemma_ "lem.catalan.as_diff" (parent := "catalan_example") (lean := "FPS.catalan_as_diff")
+For $`n \ge 1`,
+$`c_n = \dbinom{2n}{n} - \dbinom{2n}{n-1}`.
+:::
+
+```tex "lem.catalan.as_diff" (slot := statement)
+\begin{lemma}
+\label{lem.catalan.as_diff}
+\lean{FPS.catalan_as_diff}
+\leanhelper
+\leanok
+For $n \geq 1$,
+$c_n = \dbinom{2n}{n} - \dbinom{2n}{n-1}$.
+\end{lemma}
+```
+
+:::proof "lem.catalan.as_diff"
+This uses the identity
+$`\dbinom{2n}{n-1}\cdot(n+1) = \dbinom{2n}{n}\cdot n`, coming from the
+recurrence for binomial coefficients, together with the divisibility
+$`(n+1) \mid \dbinom{2n}{n}`.
+:::
+
+```tex "lem.catalan.as_diff" (slot := proof)
+\begin{proof}
+\leanok
+Uses the identity $\dbinom{2n}{n-1}\cdot(n+1) = \dbinom{2n}{n}\cdot n$
+(from the recurrence for binomial coefficients) and the divisibility $(n+1) \mid \dbinom{2n}{n}$.
+\end{proof}
+```
+
+:::theorem "thm.catalan.gf_equation" (parent := "catalan_example") (lean := "FPS.catalan_gf_equation")
+The generating function $`C(x) = \sum_{n\geq 0} c_n x^n` satisfies the
+functional equation
+$`C(x) = 1 + x\, C(x)^2`.
+:::
+
+```tex "thm.catalan.gf_equation" (slot := statement)
+\begin{theorem}
+\label{thm.catalan.gf_equation}
+\lean{FPS.catalan_gf_equation}
+\leanhelper
+\leanok
+The generating function $C(x) = \sum_{n\geq 0} c_n x^n$ satisfies the functional equation
+$C(x) = 1 + x\, C(x)^2$.
+\end{theorem}
+```
+
+:::proof "thm.catalan.gf_equation"
+This follows from Mathlib's identity
+$`C(x)^2 \cdot x + 1 = C(x)` for the Catalan generating function, after
+showing that $`C(x)` equals the image of Mathlib's Catalan series under the
+natural map.
+:::
+
+```tex "thm.catalan.gf_equation" (slot := proof)
+\begin{proof}
+\leanok
+Follows from Mathlib's identity $C(x)^2 \cdot x + 1 = C(x)$ for the Catalan generating function,
+after showing that $C(x)$ equals the image of Mathlib's Catalan series under the natural map.
+\end{proof}
+```
