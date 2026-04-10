@@ -1196,3 +1196,154 @@ By induction on $n$. The base case $a_0 = 1 = 2^1 - 1$ is immediate.
 For the induction step, $a_{n+1} = 2a_n + n = 2(2^{n+1}-(n+1)) + n = 2^{n+2} - (n+2)$.
 \end{proof}
 ```
+
+:::group "auxiliary_generating_function_results"
+Auxiliary power-series identities used by the examples.
+:::
+
+```tex
+\subsection{Auxiliary generating function results}
+```
+
+:::lemma_ "lem.gf.geometric_series" (parent := "auxiliary_generating_function_results") (lean := "FPS.geometric_series")
+The geometric series identity is
+$`\frac{1}{1-x} = 1 + x + x^2 + x^3 + \cdots = \sum_{n\geq 0} x^n`.
+:::
+
+```tex "lem.gf.geometric_series" (slot := statement)
+\begin{lemma}
+\label{lem.gf.geometric_series}
+\lean{FPS.geometric_series}
+\leanhelper
+\leanok
+The geometric series identity:
+$\frac{1}{1-x} = 1 + x + x^2 + x^3 + \cdots = \sum_{n\geq 0} x^n$.
+\end{lemma}
+```
+
+:::proof "lem.gf.geometric_series"
+We verify $`(1-x)\cdot\sum_{n\geq 0}x^n = 1` and invert, using that the
+constant term of $`(1-x)` is nonzero.
+:::
+
+```tex "lem.gf.geometric_series" (slot := proof)
+\begin{proof}
+\leanok
+We verify $(1-x)\cdot\sum_{n\geq 0}x^n = 1$ and invert,
+using that the constant term of $(1-x)$ is nonzero.
+\end{proof}
+```
+
+:::lemma_ "lem.gf.geometric_series_scaled" (parent := "auxiliary_generating_function_results") (lean := "FPS.geometric_series_scaled")
+For any $`\alpha \in \mathbb{Q}`,
+$`\frac{1}{1-\alpha x} = \sum_{n\geq 0}\alpha^n x^n`.
+:::
+
+```tex "lem.gf.geometric_series_scaled" (slot := statement)
+\begin{lemma}
+\label{lem.gf.geometric_series_scaled}
+\lean{FPS.geometric_series_scaled}
+\leanhelper
+\leanok
+For any $\alpha \in \mathbb{Q}$,
+$\frac{1}{1-\alpha x} = \sum_{n\geq 0}\alpha^n x^n$.
+\end{lemma}
+```
+
+:::proof "lem.gf.geometric_series_scaled"
+We verify $`(1-\alpha x)\cdot\sum_{n\geq 0}\alpha^n x^n = 1` by checking
+coefficients, then invert.
+:::
+
+```tex "lem.gf.geometric_series_scaled" (slot := proof)
+\begin{proof}
+\leanok
+We verify $(1-\alpha x)\cdot\sum_{n\geq 0}\alpha^n x^n = 1$ by checking coefficients,
+then invert.
+\end{proof}
+```
+
+:::lemma_ "lem.gf.deriv_inv_one_minus_x" (parent := "auxiliary_generating_function_results") (lean := "FPS.deriv_inv_one_minus_x")
+The formal derivative of $`\frac{1}{1-x}` is $`\frac{1}{(1-x)^2}`.
+:::
+
+```tex "lem.gf.deriv_inv_one_minus_x" (slot := statement)
+\begin{lemma}
+\label{lem.gf.deriv_inv_one_minus_x}
+\lean{FPS.deriv_inv_one_minus_x}
+\leanhelper
+\leanok
+The formal derivative of $\frac{1}{1-x}$ is $\frac{1}{(1-x)^2}$.
+\end{lemma}
+```
+
+:::proof "lem.gf.deriv_inv_one_minus_x"
+This follows from the derivative of an inverse formula in Mathlib.
+:::
+
+```tex "lem.gf.deriv_inv_one_minus_x" (slot := proof)
+\begin{proof}
+\leanok
+Follows from the derivative of an inverse formula in Mathlib.
+\end{proof}
+```
+
+:::lemma_ "lem.gf.sum_n_plus_one_pow" (parent := "auxiliary_generating_function_results") (lean := "FPS.sum_n_plus_one_pow")
+The power series identity is
+$`\sum_{n\geq 0}(n+1)x^n = \frac{1}{(1-x)^2}`.
+:::
+
+```tex "lem.gf.sum_n_plus_one_pow" (slot := statement)
+\begin{lemma}
+\label{lem.gf.sum_n_plus_one_pow}
+\lean{FPS.sum_n_plus_one_pow}
+\leanhelper
+\leanok
+The power series identity
+$\sum_{n\geq 0}(n+1)x^n = \frac{1}{(1-x)^2}$.
+\end{lemma}
+```
+
+:::proof "lem.gf.sum_n_plus_one_pow"
+This uses the identity
+$`\sum_{n\geq 0}(n+1)x^n = \frac{1}{(1-x)^2}` from Mathlib.
+:::
+
+```tex "lem.gf.sum_n_plus_one_pow" (slot := proof)
+\begin{proof}
+\leanok
+Uses the identity $\sum_{n\geq 0}(n+1)x^n = \frac{1}{(1-x)^2}$
+from Mathlib.
+\end{proof}
+```
+
+:::lemma_ "lem.gf.sum_n_pow" (parent := "auxiliary_generating_function_results") (lean := "FPS.sum_n_pow")
+The power series identity is
+$`\sum_{n\geq 0}n\, x^n = \frac{x}{(1-x)^2}`.
+:::
+
+```tex "lem.gf.sum_n_pow" (slot := statement)
+\begin{lemma}
+\label{lem.gf.sum_n_pow}
+\lean{FPS.sum_n_pow}
+\leanhelper
+\leanok
+The power series identity
+$\sum_{n\geq 0}n\, x^n = \frac{x}{(1-x)^2}$.
+\end{lemma}
+```
+
+:::proof "lem.gf.sum_n_pow"
+For $`n=0` both sides give $`0`; for $`n \geq 1`,
+$`[x^n]\left(\frac{x}{(1-x)^2}\right) = [x^{n-1}]\frac{1}{(1-x)^2} = n`,
+using the previous lemma.
+:::
+
+```tex "lem.gf.sum_n_pow" (slot := proof)
+\begin{proof}
+\leanok
+For $n=0$ both sides give $0$; for $n \geq 1$,
+$[x^n]\left(\frac{x}{(1-x)^2}\right) = [x^{n-1}]\frac{1}{(1-x)^2} = n$,
+using Lemma~\ref{lem.gf.sum_n_plus_one_pow}.
+\end{proof}
+```

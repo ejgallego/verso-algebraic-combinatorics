@@ -25,9 +25,8 @@ than maintained as free-form prose.
 :::
 
 :::definition "porting_status_snapshot" (parent := "porting_status")
-The current direct-port work covers the opening prose and the first
-binomial-coefficient, Fibonacci, and Catalan batches in `NotationsExamples`,
-through the Vandermonde and recurrence examples, all sourced from
-`chapter_notations.tex`. The remaining source chapters and later subsections of
-`NotationsExamples` are still pending first-pass Verso transcription.
+The current direct-port work now covers all of `chapter_notations.tex` in
+`NotationsExamples`, from the opening prose through the auxiliary
+generating-function results. The remaining source chapters are still pending
+first-pass Verso transcription.
 :::
