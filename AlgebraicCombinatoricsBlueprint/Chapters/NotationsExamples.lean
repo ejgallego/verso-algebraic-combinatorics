@@ -426,3 +426,269 @@ Note the $n\in\mathbb{N}$ requirement. Theorem~\ref{thm.binom.sym} would fail fo
 since $\dbinom{-1}{0} = 1$ but $\dbinom{-1}{-1} = 0$.
 \end{proof}
 ```
+
+:::lemma_ "lem.binom.symm_add" (parent := "binomial_coefficients") (lean := "FPS.binom_symm_add")
+For any $`a, b \in \mathbb{N}`, we have
+$`\dbinom{a+b}{a} = \dbinom{a+b}{b}`.
+:::
+
+```tex "lem.binom.symm_add" (slot := statement)
+\begin{lemma}
+\label{lem.binom.symm_add}
+\lean{FPS.binom_symm_add}
+\leanhelper
+\leanok
+For any $a, b \in \mathbb{N}$, we have $\dbinom{a+b}{a} = \dbinom{a+b}{b}$.
+\end{lemma}
+```
+
+:::proof "lem.binom.symm_add"
+This follows from the symmetry theorem since $`(a+b) - a = b`.
+:::
+
+```tex "lem.binom.symm_add" (slot := proof)
+\begin{proof}
+\leanok
+This follows from Theorem~\ref{thm.binom.sym} since $(a+b) - a = b$.
+\end{proof}
+```
+
+:::lemma_ "lem.binom.symm_ring" (parent := "binomial_coefficients") (lean := "FPS.binom_symm_ring")
+For any binomial ring $`R`, natural numbers $`n, k` with $`k \le n`,
+$`\dbinom{n}{k} = \dbinom{n}{n-k}` where $`n` is viewed as an element of
+$`R`.
+:::
+
+```tex "lem.binom.symm_ring" (slot := statement)
+\begin{lemma}
+\label{lem.binom.symm_ring}
+\lean{FPS.binom_symm_ring}
+\leanhelper
+\leanok
+For any binomial ring $R$, natural numbers $n, k$ with $k \leq n$,
+$\dbinom{n}{k} = \dbinom{n}{n-k}$
+where $n$ is viewed as an element of $R$.
+\end{lemma}
+```
+
+:::proof "lem.binom.symm_ring"
+This follows from the natural-number symmetry and the fact that the
+generalized binomial coefficient agrees with the natural-number binomial
+coefficient on natural numbers.
+:::
+
+```tex "lem.binom.symm_ring" (slot := proof)
+\begin{proof}
+\leanok
+This follows from the natural-number symmetry (Theorem~\ref{thm.binom.sym})
+and the fact that the generalized binomial coefficient agrees with the
+natural-number binomial coefficient on natural numbers (Lemma~\ref{lem.binom.natCast}).
+\end{proof}
+```
+
+:::lemma_ "lem.binom.zero_right" (parent := "binomial_coefficients") (lean := "FPS.binom_zero_right")
+For any $`r`, we have $`\dbinom{r}{0} = 1`.
+:::
+
+```tex "lem.binom.zero_right" (slot := statement)
+\begin{lemma}
+\label{lem.binom.zero_right}
+\lean{FPS.binom_zero_right}
+\leanhelper
+\leanok
+For any $r$, we have $\dbinom{r}{0} = 1$.
+\end{lemma}
+```
+
+:::proof "lem.binom.zero_right"
+The empty product in the numerator of $`\dbinom{r}{0}` equals $`1`, and
+$`0! = 1`.
+:::
+
+```tex "lem.binom.zero_right" (slot := proof)
+\begin{proof}
+\leanok
+The empty product in the numerator of $\dbinom{r}{0}$ equals $1$, and $0! = 1$.
+\end{proof}
+```
+
+:::lemma_ "lem.binom.one_right" (parent := "binomial_coefficients") (lean := "FPS.binom_one_right")
+For any $`r`, we have $`\dbinom{r}{1} = r`.
+:::
+
+```tex "lem.binom.one_right" (slot := statement)
+\begin{lemma}
+\label{lem.binom.one_right}
+\lean{FPS.binom_one_right}
+\leanhelper
+\leanok
+For any $r$, we have $\dbinom{r}{1} = r$.
+\end{lemma}
+```
+
+:::proof "lem.binom.one_right"
+We have $`\dbinom{r}{1} = \frac{r}{1!} = r`.
+:::
+
+```tex "lem.binom.one_right" (slot := proof)
+\begin{proof}
+\leanok
+We have $\dbinom{r}{1} = \frac{r}{1!} = r$.
+\end{proof}
+```
+
+:::lemma_ "lem.binom.zero_left_pos" (parent := "binomial_coefficients") (lean := "FPS.binom_zero_left_pos")
+For $`k > 0`, we have $`\dbinom{0}{k} = 0`.
+:::
+
+```tex "lem.binom.zero_left_pos" (slot := statement)
+\begin{lemma}
+\label{lem.binom.zero_left_pos}
+\lean{FPS.binom_zero_left_pos}
+\leanhelper
+\leanok
+For $k > 0$, we have $\dbinom{0}{k} = 0$.
+\end{lemma}
+```
+
+:::proof "lem.binom.zero_left_pos"
+The numerator of $`\dbinom{0}{k}` contains the factor $`0`.
+:::
+
+```tex "lem.binom.zero_left_pos" (slot := proof)
+\begin{proof}
+\leanok
+The numerator of $\dbinom{0}{k}$ contains the factor $0$.
+\end{proof}
+```
+
+:::lemma_ "lem.binom.factorial_smul" (parent := "binomial_coefficients") (lean := "FPS.binom_factorial_smul")
+For any element $`r` in a binomial ring and $`n \in \mathbb{N}`,
+$$`n! \cdot \dbinom{r}{n} = r(r-1)(r-2)\cdots(r-n+1).`
+:::
+
+```tex "lem.binom.factorial_smul" (slot := statement)
+\begin{lemma}
+\label{lem.binom.factorial_smul}
+\lean{FPS.binom_factorial_smul}
+\leanhelper
+\leanok
+For any element $r$ in a binomial ring and $n \in \mathbb{N}$,
+$n! \cdot \dbinom{r}{n} = r(r-1)(r-2)\cdots(r-n+1)$.
+\end{lemma}
+```
+
+:::proof "lem.binom.factorial_smul"
+This is the defining property of generalized binomial coefficients in a
+binomial ring, expressed using the descending Pochhammer symbol.
+:::
+
+```tex "lem.binom.factorial_smul" (slot := proof)
+\begin{proof}
+\leanok
+This is the defining property of generalized binomial coefficients in a binomial ring,
+expressed using the descending Pochhammer symbol.
+\end{proof}
+```
+
+:::lemma_ "lem.binom.natCast" (parent := "binomial_coefficients") (lean := "FPS.binom_natCast")
+For natural numbers $`n, k`, the generalized binomial coefficient
+$`\dbinom{n}{k}`, computed in any binomial ring, agrees with the
+natural-number binomial coefficient $`\dbinom{n}{k}` as computed from the
+defining formula for binomial coefficients.
+:::
+
+```tex "lem.binom.natCast" (slot := statement)
+\begin{lemma}
+\label{lem.binom.natCast}
+\lean{FPS.binom_natCast}
+\leanhelper
+\leanok
+For natural numbers $n, k$, the generalized binomial coefficient $\dbinom{n}{k}$
+(computed in any binomial ring) agrees with the natural-number binomial coefficient
+$\dbinom{n}{k}$ as computed from Definition~\ref{def.binom.binom}.
+\end{lemma}
+```
+
+:::proof "lem.binom.natCast"
+This follows from the fact that the generalized binomial coefficient agrees
+with the natural-number binomial coefficient when $`n` and $`k` are natural
+numbers.
+:::
+
+```tex "lem.binom.natCast" (slot := proof)
+\begin{proof}
+\leanok
+This follows from the fact that the generalized binomial coefficient
+agrees with the natural-number binomial coefficient when $n$ and $k$ are natural numbers.
+\end{proof}
+```
+
+:::group "binom_helpers_two_n_choose_n"
+Helper lemmas for the odd-factor product appearing in the central binomial
+coefficient formula.
+:::
+
+```tex
+\subsection{Helpers for Lemma~\ref{lem.binom.2n-choose-n}}
+```
+
+:::lemma_ "lem.binom.prod_odd_eq_doubleFactorial" (parent := "binom_helpers_two_n_choose_n") (lean := "FPS.prod_odd_eq_doubleFactorial")
+For any $`n \in \mathbb{N}`,
+$$`\prod_{i=0}^{n-1}(2i+1) = (2n-1)!!`
+That is, the product of odd numbers
+$`1 \cdot 3 \cdot 5 \cdots (2n-1)` equals the double factorial
+$`(2n-1)!!`.
+:::
+
+```tex "lem.binom.prod_odd_eq_doubleFactorial" (slot := statement)
+\begin{lemma}
+\label{lem.binom.prod_odd_eq_doubleFactorial}
+\lean{FPS.prod_odd_eq_doubleFactorial}
+\leanhelper
+\leanok
+For any $n\in\mathbb{N}$, $\prod_{i=0}^{n-1}(2i+1) = (2n-1)!!$.
+That is, the product of odd numbers $1\cdot 3\cdot 5\cdots(2n-1)$ equals the double factorial $(2n-1)!!$.
+\end{lemma}
+```
+
+:::proof "lem.binom.prod_odd_eq_doubleFactorial"
+By induction on $`n`, using the double factorial recurrence
+$`(2m+3)!! = (2m+3)\cdot(2m+1)!!`.
+:::
+
+```tex "lem.binom.prod_odd_eq_doubleFactorial" (slot := proof)
+\begin{proof}
+\leanok
+By induction on $n$, using the double factorial recurrence $(2m+3)!! = (2m+3)\cdot(2m+1)!!$.
+\end{proof}
+```
+
+:::lemma_ "lem.binom.factorial_dvd_prod_odd_mul_pow" (parent := "binom_helpers_two_n_choose_n") (lean := "FPS.factorial_dvd_prod_odd_mul_pow")
+For any $`n \in \mathbb{N}`,
+$`n!` divides $`\left(\prod_{i=0}^{n-1}(2i+1)\right)\cdot 2^n`.
+:::
+
+```tex "lem.binom.factorial_dvd_prod_odd_mul_pow" (slot := statement)
+\begin{lemma}
+\label{lem.binom.factorial_dvd_prod_odd_mul_pow}
+\lean{FPS.factorial_dvd_prod_odd_mul_pow}
+\leanhelper
+\leanok
+For any $n\in\mathbb{N}$, $n!$ divides $\left(\prod_{i=0}^{n-1}(2i+1)\right)\cdot 2^n$.
+\end{lemma}
+```
+
+:::proof "lem.binom.factorial_dvd_prod_odd_mul_pow"
+This uses the factorization
+$`(2n)! = 2^n \cdot n! \cdot (2n-1)!!` together with the divisibility
+$`n!\cdot n! \mid (2n)!`.
+:::
+
+```tex "lem.binom.factorial_dvd_prod_odd_mul_pow" (slot := proof)
+\begin{proof}
+\leanok
+Uses the factorization $(2n)! = 2^n \cdot n! \cdot (2n-1)!!$ together with the
+divisibility $n!\cdot n! \mid (2n)!$.
+\end{proof}
+```
