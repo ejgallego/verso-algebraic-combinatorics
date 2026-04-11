@@ -491,3 +491,153 @@ By Theorem~\ref{thm.binom.upneg-n}, we have
 $(-1)^k \dbinom{n+k-1}{k} = (-1)^k \dbinom{k+n-1}{k} = \dbinom{-n}{k}$.
 \end{proof}
 ```
+
+:::group "fps_div_by_x"
+Division by the indeterminate x.
+:::
+
+```tex
+\subsection{Dividing by $x$}
+```
+
+:::definition "def.fps.div-by-x" (parent := "fps_div_by_x") (lean := "AlgebraicCombinatorics.PowerSeries.divByX")
+Let $`a=\left(a_{0},a_{1},a_{2},\ldots\right)` be an FPS whose constant term
+$`a_{0}` is $`0`. Then $`\dfrac{a}{x}` is defined to be the FPS
+$`\left(a_{1},a_{2},a_{3},\ldots\right)`.
+:::
+
+```tex "def.fps.div-by-x" (slot := statement)
+\begin{definition}
+\label{def.fps.div-by-x}
+\lean{AlgebraicCombinatorics.PowerSeries.divByX}
+\leantarget
+\leanok
+Let $a=\left(a_{0},a_{1},a_{2},\ldots\right)$ be
+an FPS whose constant term $a_{0}$ is $0$. Then, $\dfrac{a}{x}$ is defined to
+be the FPS $\left(a_{1},a_{2},a_{3},\ldots\right)$.
+\end{definition}
+```
+
+:::lemma_ "lem.fps.coeff-divByX" (parent := "fps_div_by_x") (lean := "AlgebraicCombinatorics.PowerSeries.coeff_divByX")
+Let $`a\in K[[x]]` with $`\left[x^0\right]a=0`. Then for each
+$`n\in\mathbb{N}`,
+$$`\left[x^{n}\right]\frac{a}{x} = \left[x^{n+1}\right]a.`
+:::
+
+```tex "lem.fps.coeff-divByX" (slot := statement)
+\begin{lemma}
+\label{lem.fps.coeff-divByX}
+\lean{AlgebraicCombinatorics.PowerSeries.coeff_divByX}
+\leanhelper
+\leanok
+Let $a\in K[[x]]$ with $[x^0]a=0$. Then for each $n\in\mathbb{N}$,
+\[
+\left[x^{n}\right]\frac{a}{x} = \left[x^{n+1}\right]a.
+\]
+\end{lemma}
+```
+
+:::proof "lem.fps.coeff-divByX"
+By definition, $`\frac{a}{x}=(a_1,a_2,a_3,\ldots)`, so its $`n`-th
+coefficient is $`a_{n+1}=[x^{n+1}]a`.
+:::
+
+```tex "lem.fps.coeff-divByX" (slot := proof)
+\begin{proof}
+\leanok
+By definition, $\frac{a}{x}=(a_1,a_2,a_3,\ldots)$, so its $n$-th coefficient
+is $a_{n+1}=[x^{n+1}]a$.
+\end{proof}
+```
+
+:::theorem "prop.fps.div-by-x-inverts" (parent := "fps_div_by_x") (lean := "AlgebraicCombinatorics.fps_eq_X_mul_iff")
+Let $`a,b\in K[[x]]` be two FPSs. Then $`a=xb` if and only if
+$`\left[x^{0}\right]a=0` and $`b=\dfrac{a}{x}`.
+:::
+
+```tex "prop.fps.div-by-x-inverts" (slot := statement)
+\begin{proposition}
+\label{prop.fps.div-by-x-inverts}
+\lean{AlgebraicCombinatorics.fps_eq_X_mul_iff}
+\leantarget
+\leanok
+Let $a,b\in K[[x]]$ be two FPSs. Then, $a=xb$ if
+and only if $\left[x^{0}\right]a=0$ and $b=\dfrac{a}{x}$.
+\end{proposition}
+```
+
+:::proof "prop.fps.div-by-x-inverts"
+This follows directly from the definitions.
+:::
+
+```tex "prop.fps.div-by-x-inverts" (slot := proof)
+\begin{proof}
+\leanok
+Follows directly from the definitions.
+\end{proof}
+```
+
+:::group "fps_div_by_x_helpers"
+Helpers for division by x.
+:::
+
+```tex
+\subsubsection{Helpers for division by $x$}
+```
+
+:::lemma_ "lem.fps.eq-X-mul-divByX" (parent := "fps_div_by_x_helpers") (lean := "AlgebraicCombinatorics.fps_eq_X_mul_divByX")
+Let $`a\in K[[x]]` with $`\left[x^0\right]a=0`. Then
+$`a = x\cdot\frac{a}{x}`.
+:::
+
+```tex "lem.fps.eq-X-mul-divByX" (slot := statement)
+\begin{lemma}
+\label{lem.fps.eq-X-mul-divByX}
+\lean{AlgebraicCombinatorics.fps_eq_X_mul_divByX}
+\leanhelper
+\leanok
+Let $a\in K[[x]]$ with $[x^0]a=0$. Then $a = x\cdot\frac{a}{x}$.
+\end{lemma}
+```
+
+:::proof "lem.fps.eq-X-mul-divByX"
+This follows from the previous proposition: setting $`b=\frac{a}{x}`, the
+right-to-left direction gives $`a=xb`.
+:::
+
+```tex "lem.fps.eq-X-mul-divByX" (slot := proof)
+\begin{proof}
+\leanok
+Follows from Proposition~\ref{prop.fps.div-by-x-inverts}: setting
+$b=\frac{a}{x}$, the right-to-left direction gives $a=xb$.
+\end{proof}
+```
+
+:::lemma_ "lem.fps.divByX-X-mul" (parent := "fps_div_by_x_helpers") (lean := "AlgebraicCombinatorics.fps_divByX_X_mul")
+For any FPS $`b\in K[[x]]`, we have $`\frac{xb}{x}=b`.
+:::
+
+```tex "lem.fps.divByX-X-mul" (slot := statement)
+\begin{lemma}
+\label{lem.fps.divByX-X-mul}
+\lean{AlgebraicCombinatorics.fps_divByX_X_mul}
+\leanhelper
+\leanok
+For any FPS $b\in K[[x]]$, we have $\frac{xb}{x}=b$.
+\end{lemma}
+```
+
+:::proof "lem.fps.divByX-X-mul"
+For each $`n\in\mathbb{N}`,
+$`[x^n]\frac{xb}{x}=[x^{n+1}](xb)=[x^n]b`,
+by the coefficient formula for $`\frac{a}{x}` and the coefficient formula for
+$`xb`.
+:::
+
+```tex "lem.fps.divByX-X-mul" (slot := proof)
+\begin{proof}
+\leanok
+For each $n\in\mathbb{N}$, $[x^n]\frac{xb}{x}=[x^{n+1}](xb)=[x^n]b$
+(by Lemma~\ref{lem.fps.coeff-divByX} and the coefficient formula for $xb$).
+\end{proof}
+```
