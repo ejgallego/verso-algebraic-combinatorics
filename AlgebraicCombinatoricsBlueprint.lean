@@ -10,6 +10,7 @@ import AlgebraicCombinatoricsBlueprint.Chapters.FPSDefinition
 import AlgebraicCombinatoricsBlueprint.Chapters.DividingFPS
 import AlgebraicCombinatoricsBlueprint.Chapters.Polynomials
 import AlgebraicCombinatoricsBlueprint.Chapters.Substitution
+import AlgebraicCombinatoricsBlueprint.Chapters.Derivatives
 
 open Verso.Genre
 open Verso.Genre.Manual
@@ -28,6 +29,7 @@ checkout.
 {include 0 AlgebraicCombinatoricsBlueprint.Chapters.DividingFPS}
 {include 0 AlgebraicCombinatoricsBlueprint.Chapters.Polynomials}
 {include 0 AlgebraicCombinatoricsBlueprint.Chapters.Substitution}
+{include 0 AlgebraicCombinatoricsBlueprint.Chapters.Derivatives}
 
 {blueprint_graph}
 {blueprint_summary}

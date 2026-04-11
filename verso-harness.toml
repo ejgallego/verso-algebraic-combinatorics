@@ -12,6 +12,7 @@ default_chapters = [
   "AlgebraicCombinatoricsBlueprint/Chapters/DividingFPS.lean",
   "AlgebraicCombinatoricsBlueprint/Chapters/Polynomials.lean",
   "AlgebraicCombinatoricsBlueprint/Chapters/Substitution.lean",
+  "AlgebraicCombinatoricsBlueprint/Chapters/Derivatives.lean",
 ]
 
 [lt.node_kinds]
