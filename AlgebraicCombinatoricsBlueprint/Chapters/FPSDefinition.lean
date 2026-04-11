@@ -1360,3 +1360,47 @@ Immediate from the definitions.
 Immediate from the definitions.
 \end{proof}
 ```
+
+:::group "fps_vandermonde"
+The Chu--Vandermonde identity.
+:::
+
+```tex
+\subsection{The Chu--Vandermonde identity}
+```
+
+:::theorem "prop.binom.vandermonde.NN" (parent := "fps_vandermonde") (lean := "AlgebraicCombinatorics.FPS.vandermonde_nat")
+Let $`a,b\in\mathbb{N}` and let $`n\in\mathbb{N}`. Then
+$$`\binom{a+b}{n}=\sum_{k=0}^{n}\binom{a}{k}\binom{b}{n-k}.`
+:::
+
+```tex "prop.binom.vandermonde.NN" (slot := statement)
+\begin{proposition}
+\label{prop.binom.vandermonde.NN}
+\lean{AlgebraicCombinatorics.FPS.vandermonde_nat}
+\leantarget
+\leanok
+Let $a,b\in\mathbb{N}$, and let
+$n\in\mathbb{N}$. Then,
+\[
+\binom{a+b}{n}=\sum_{k=0}^{n}\binom{a}{k}\binom{b}{n-k}.
+\]
+\end{proposition}
+```
+
+:::proof "prop.binom.vandermonde.NN"
+Multiply out the identity
+$`\left(1+x\right)^{a+b}=\left(1+x\right)^{a}\left(1+x\right)^{b}` using the
+binomial formula and compare the coefficient of $`x^{n}` on both sides.
+The left side gives $`\binom{a+b}{n}`, and the right side gives
+$`\sum_{k=0}^{n}\binom{a}{k}\binom{b}{n-k}` by the product formula for FPSs.
+:::
+
+```tex "prop.binom.vandermonde.NN" (slot := proof)
+\begin{proof}
+Multiply out the identity $\left(1+x\right)^{a+b}=\left(1+x\right)^{a}\left(1+x\right)^{b}$
+using the binomial formula and compare the coefficient of $x^{n}$ on both sides.
+The left side gives $\binom{a+b}{n}$, and the right side gives
+$\sum_{k=0}^{n}\binom{a}{k}\binom{b}{n-k}$ by the product formula for FPSs.
+\end{proof}
+```
