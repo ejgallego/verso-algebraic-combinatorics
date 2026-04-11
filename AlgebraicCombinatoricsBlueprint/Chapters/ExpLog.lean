@@ -813,3 +813,89 @@ yields $\overline{\log}\circ\left(f-1\right)\in K\left[\left[x\right]
 \right]_{0}$.
 \end{proof}
 ```
+
+:::lemma_ "lem.fps.Exp-Log-maps-inv" (parent := "exp_log_maps") (lean := "PowerSeries.Log_Exp, PowerSeries.Exp_Log, PowerSeries.Exp_Log_inverse")
+The maps $`\operatorname{Exp}` and $`\operatorname{Log}` are mutually inverse
+bijections between
+$`K\left[\left[x\right]\right]_0` and $`K\left[\left[x\right]\right]_1`.
+:::
+
+```tex "lem.fps.Exp-Log-maps-inv" (slot := statement)
+\begin{lemma}
+\label{lem.fps.Exp-Log-maps-inv}
+\lean{PowerSeries.Log_Exp, PowerSeries.Exp_Log, PowerSeries.Exp_Log_inverse}
+\leantarget
+\leanok
+The maps $\operatorname{Exp}$ and
+$\operatorname{Log}$ are mutually inverse bijections between $K\left[
+\left[x\right]\right]_{0}$ and $K\left[\left[x\right]\right]_{1}$.
+\end{lemma}
+```
+
+:::proof "lem.fps.Exp-Log-maps-inv"
+First observe that every $`g\in K\left[\left[x\right]\right]_0` satisfies
+$`\exp\circ g = \overline{\exp}\circ g + 1`, since
+$`\exp=\overline{\exp}+\underline{1}` and $`\underline{1}\circ g=\underline{1}`.
+
+Now let $`f\in K\left[\left[x\right]\right]_1`. Then
+$`f-1\in K\left[\left[x\right]\right]_0` by the previous lemma. Using
+associativity of composition together with
+$`\overline{\exp}\circ\overline{\log}=x`, we obtain
+$`\overline{\exp}\circ\left(\overline{\log}\circ (f-1)\right)=f-1`.
+Adding $`1` and using the observation above shows
+$`\left(\operatorname{Exp}\circ\operatorname{Log}\right)(f)=f`.
+
+The same idea, using
+$`\overline{\log}\circ\overline{\exp}=x`, shows that
+$`\operatorname{Log}\circ\operatorname{Exp}=\operatorname{id}`.
+Hence the two maps are mutually inverse bijections.
+:::
+
+```tex "lem.fps.Exp-Log-maps-inv" (slot := proof)
+\begin{proof}
+\leanok
+First, we make a simple
+auxiliary observation: Each $g\in K\left[\left[x\right]\right]_{0}$
+satisfies
+\begin{equation}
+\exp\circ g=\overline{\exp}\circ g+1.
+\end{equation}
+
+[\textit{Proof of this auxiliary observation:} Recall that $\overline{\exp}=\exp-1$, so
+that $\exp=\overline{\exp}+\underline{1}$. Hence,
+$\exp\circ g=\left(\overline{\exp}+\underline{1}\right)\circ g=\overline
+{\exp}\circ g+\underline{1}\circ g$. But
+$\underline{1}\circ g=\underline{1}=1$. Hence, $\exp\circ g=\overline{\exp
+}\circ g+1$.]
+
+Now, let us show that $\operatorname{Exp}\circ\operatorname{Log}
+=\operatorname{id}$. Indeed, we fix some $f\in K\left[\left[x\right]
+\right]_{1}$. Then, $f-1\in K\left[\left[x\right]\right]_{0}$ (by
+Lemma \ref{lem.fps.Exp-Log-maps-wd} \textbf{(d)}). By associativity of composition and Theorem \ref{thm.fps.exp-log-inv}, we get
+\[
+\overline{\exp}\circ\left(\overline{\log}\circ\left(f-1\right)\right)
+=\underbrace{\left(\overline{\exp}\circ\overline{\log}\right)
+}_{=x}\circ\left(f-1\right)=x\circ\left(f-1\right)
+=f-1.
+\]
+Hence
+\begin{align*}
+\left(\operatorname{Exp}\circ\operatorname{Log}\right)\left(f\right)
+&  =\exp\circ\left(\operatorname{Log}f\right) \\
+&  =\overline{\exp}\circ\underbrace{\left(\operatorname{Log}f\right)
+}_{=\overline{\log}\circ\left(f-1\right)}+\,1
+\end{align*}
+(by the auxiliary observation above), so
+\begin{align*}
+\left(\operatorname{Exp}\circ\operatorname{Log}\right)\left(f\right)
+&  =\underbrace{\overline{\exp}\circ\left(\overline{\log}\circ\left(
+f-1\right)\right)}_{=f-1}+\,1
+=\left(f-1\right)+1=f.
+\end{align*}
+
+Using a similar argument (with $\overline{\log}\circ\overline{\exp}=x$ from Theorem \ref{thm.fps.exp-log-inv}), we can show that $\operatorname{Log}\circ
+\operatorname{Exp}=\operatorname{id}$.
+Combining, $\operatorname{Exp}$ and
+$\operatorname{Log}$ are mutually inverse bijections.
+\end{proof}
+```
