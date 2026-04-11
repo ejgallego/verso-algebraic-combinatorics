@@ -827,7 +827,7 @@ g^{n}\right)  ^{\prime}\\\text{(by part \textbf{(c)})}}}
 \underbrace{\left(  g^{0}\right)  ^{\prime}}_{=1^{\prime}=0}+\sum_{n>0}%
 f_{n}\underbrace{\left(  g^{n}\right)  ^{\prime}}_{\substack{=ng^{\prime
 }g^{n-1}\\\text{(by part \textbf{(f)})}%
-}}=\sum_{n>0}f_{n} n g^{\prime} g^{n-1}. \label{pf.thm.fps.deriv.rules.g.3}%
+}}=\sum_{n>0}f_{n} n g^{\prime} g^{n-1}.%
 \end{align}
 
 On the other hand, from $f=\sum_{n\in\mathbb{N}}f_{n}x^{n}$, we obtain
@@ -843,7 +843,7 @@ of this equality by $g^{\prime}$, we find%
 f^{\prime}\left[  g\right]  \cdot g^{\prime}=\left(  \sum_{n>0}nf_{n}%
 g^{n-1}\right)  \cdot g^{\prime}=\sum_{n>0}nf_{n}g^{n-1}g^{\prime}.
 \]
-Comparing this with (\ref{pf.thm.fps.deriv.rules.g.3}), we find $\left(
+Comparing this with the previous displayed equality, we find $\left(
 f\left[  g\right]  \right)  ^{\prime}=f^{\prime}\left[  g\right]  \cdot
 g^{\prime}$. In other words, $\left(  f\circ g\right)  ^{\prime}=\left(
 f^{\prime}\circ g\right)  \cdot g^{\prime}$ (since $f\circ g$ is a synonym for
