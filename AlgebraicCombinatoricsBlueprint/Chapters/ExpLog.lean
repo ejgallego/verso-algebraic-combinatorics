@@ -200,3 +200,189 @@ We have $(\iota \circ g) \cdot (1 + g)
 Since $[x^0](1+g) \ne 0$, this gives $\iota \circ g = (1+g)^{-1}$.
 \end{proof}
 ```
+
+:::group "exp_log_inverse_derivatives"
+Derivative identities underlying the inverse relationship between exp and log.
+:::
+
+```tex
+\subsection{The exponential and the logarithm are inverse}
+```
+
+:::theorem "prop.fps.exp-log-der" (parent := "exp_log_inverse_derivatives") (lean := "PowerSeries.derivative_exp_comp, PowerSeries.derivative_expbar_comp, PowerSeries.derivative_logbar_comp")
+Let $`g\in K\left[\left[x\right]\right]` with $`\left[x^{0}\right]g=0`.
+Then:
+
+*(a)* We have
+$$`\left(\overline{\exp}\circ g\right)^{\prime}
+=\left(\exp\circ g\right)^{\prime}
+=\left(\exp\circ g\right)\cdot g^{\prime}.`
+
+*(b)* We have
+$$`\left(\overline{\log}\circ g\right)^{\prime}
+=\left(1+g\right)^{-1}\cdot g^{\prime}.`
+:::
+
+```tex "prop.fps.exp-log-der" (slot := statement)
+\begin{proposition}
+\label{prop.fps.exp-log-der}
+\lean{PowerSeries.derivative_exp_comp, PowerSeries.derivative_expbar_comp, PowerSeries.derivative_logbar_comp}
+\leantarget
+\leanok
+Let $g\in K\left[\left[x\right]\right]$
+with $\left[x^{0}\right]g=0$. Then: \medskip
+
+\textbf{(a)} We have
+\[
+\left(\overline{\exp}\circ g\right)^{\prime}=\left(\exp\circ g\right)
+^{\prime}=\left(\exp\circ g\right)\cdot g^{\prime}.
+\]
+
+\textbf{(b)} We have
+\[
+\left(\overline{\log}\circ g\right)^{\prime}=\left(1+g\right)
+^{-1}\cdot g^{\prime}.
+\]
+\end{proposition}
+```
+
+:::proof "prop.fps.exp-log-der"
+*(a)* Let us first show that
+$`\overline{\exp}^{\prime}=\exp^{\prime}=\exp`.
+Indeed, $`\overline{\exp}=\exp-1`, so that $`\exp=\overline{\exp}+1` and
+therefore
+$$`\exp^{\prime}
+=\left(\overline{\exp}+1\right)^{\prime}
+=\overline{\exp}^{\prime}+\underbrace{1^{\prime}}_{=0}
+=\overline{\exp}^{\prime}.`
+Next, since
+$`\exp=\sum_{n\in\mathbb{N}}\dfrac{1}{n!}x^{n}`, the definition of a
+derivative yields
+$$`\exp^{\prime}
+=\sum_{n\geq1}\underbrace{n\cdot\dfrac{1}{n!}}_{=\dfrac{1}{\left(n-1\right)!}}x^{n-1}
+=\sum_{n\geq1}\dfrac{1}{\left(n-1\right)!}x^{n-1}
+=\sum_{n\in\mathbb{N}}\dfrac{1}{n!}x^{n}
+=\exp,`
+where we have substituted $`n` for $`n-1` in the sum.
+Comparing these equalities, we find
+$`\overline{\exp}^{\prime}=\exp`.
+
+Now we can apply the chain rule to $`f=\overline{\exp}`, since
+$`\left[x^{0}\right]g=0`, and thus obtain
+$$`\left(\overline{\exp}\circ g\right)^{\prime}
+=\left(\underbrace{\overline{\exp}^{\prime}}_{=\exp}\circ g\right)\cdot g^{\prime}
+=\left(\exp\circ g\right)\cdot g^{\prime}.`
+The same computation, but with $`\overline{\exp}` replaced by $`\exp`,
+yields
+$`\left(\exp\circ g\right)^{\prime}=\left(\exp\circ g\right)\cdot g^{\prime}`.
+Combining these formulas proves part *(a)*.
+
+*(b)* We have
+$`\overline{\log}=\sum_{n\geq1}\dfrac{\left(-1\right)^{n-1}}{n}x^{n}`.
+Thus
+$$`\overline{\log}^{\prime}
+=\left(\sum_{n\geq1}\dfrac{\left(-1\right)^{n-1}}{n}x^{n}\right)^{\prime}
+=\sum_{n\geq1}\underbrace{\dfrac{\left(-1\right)^{n-1}}{n}n}_{=\left(-1\right)^{n-1}}
+\underbrace{x^{\prime}}_{=1}x^{n-1}
+=\sum_{n\geq1}\left(-1\right)^{n-1}x^{n-1}
+=\sum_{n\in\mathbb{N}}\left(-1\right)^{n}x^{n},`
+where we have substituted $`n` for $`n-1` in the sum.
+On the other hand,
+$`\left(1+x\right)^{-1}=\sum_{n\in\mathbb{N}}\left(-1\right)^{n}x^{n}`.
+Comparing these two equalities, we find
+$`\overline{\log}^{\prime}=\left(1+x\right)^{-1}`.
+
+Now we can apply the chain rule to $`f=\overline{\log}`, again using
+$`\left[x^{0}\right]g=0`, and thus obtain
+$$`\left(\overline{\log}\circ g\right)^{\prime}
+=\left(\underbrace{\overline{\log}^{\prime}}_{=\left(1+x\right)^{-1}}\circ g\right)\cdot g^{\prime}
+=\left(\left(1+x\right)^{-1}\circ g\right)\cdot g^{\prime}.`
+However, $`\left(1+x\right)^{-1}\circ g=\left(1+g\right)^{-1}`. Indeed,
+$`\dfrac{1}{1+x}\circ g=\dfrac{1\circ g}{\left(1+x\right)\circ g}` since the
+FPS $`1+x` is invertible, while $`1\circ g=\underline{1}` and
+$`\left(1+x\right)\circ g=1+g`.
+Hence
+$$`\left(\overline{\log}\circ g\right)^{\prime}
+=\left(1+g\right)^{-1}\cdot g^{\prime},`
+which proves part *(b)*.
+:::
+
+```tex "prop.fps.exp-log-der" (slot := proof)
+\begin{proof}
+\textbf{(a)} Let us first
+show that $\overline{\exp}^{\prime}=\exp^{\prime}=\exp$. Indeed,
+$\overline{\exp}=\exp-1$, so that $\exp=\overline{\exp}+1$ and therefore
+\begin{align}
+\exp^{\prime} &  =\left(\overline{\exp}+1\right)^{\prime}=\overline{\exp
+}^{\prime}+\underbrace{1^{\prime}}_{=0}
+=\overline{\exp}^{\prime}.
+\end{align}
+Next, we recall that $\exp=\sum_{n\in\mathbb{N}}\dfrac{1}{n!}x^{n}$. Hence,
+the definition of a derivative yields
+\begin{align}
+\exp^{\prime} &  =\sum_{n\geq1}\underbrace{n\cdot\dfrac{1}{n!}}%
+_{\substack{=\dfrac{1}{\left(n-1\right)!}\\\text{(since }n!=n\cdot\left(
+n-1\right)!\text{)}}}x^{n-1}=\sum_{n\geq1}\dfrac{1}{\left(n-1\right)
+!}x^{n-1}=\sum_{n\in\mathbb{N}}\dfrac{1}{n!}x^{n}\nonumber\\
+& \qquad\qquad\left(\text{here, we have
+substituted }n\text{ for }n-1\text{ in the sum}\right) \nonumber\\
+&  =\exp.
+\end{align}
+Comparing this with the previous equality, we find
+\begin{equation}
+\overline{\exp}^{\prime}=\exp.
+\end{equation}
+
+Now, we can apply the chain rule to $f=\overline{\exp}$
+(since $\left[x^{0}\right]g=0$), and
+thus obtain
+\[
+\left(\overline{\exp}\circ g\right)^{\prime}=\left(\underbrace{\overline
+{\exp}^{\prime}}_{=\exp}\circ\,g\right)\cdot g^{\prime}=\left(\exp\circ
+g\right)\cdot g^{\prime}.
+\]
+The same computation (but with $\overline{\exp}$ replaced by $\exp$) yields
+$\left(\exp\circ g\right)^{\prime}=\left(\exp\circ g\right)\cdot
+g^{\prime}$. Combining these two formulas, we obtain $\left(\overline{\exp
+}\circ g\right)^{\prime}=\left(\exp\circ g\right)^{\prime}=\left(
+\exp\circ g\right)\cdot g^{\prime}$. This proves part \textbf{(a)}.
+
+\textbf{(b)} We have $\overline{\log}=\sum_{n\geq1}\dfrac{\left(-1\right)
+^{n-1}}{n}x^{n}$. Thus,
+\begin{align*}
+\overline{\log}^{\prime} &  =\left(\sum_{n\geq1}\dfrac{\left(-1\right)
+^{n-1}}{n}x^{n}\right)^{\prime}
+=\sum_{n\geq1}\underbrace{\dfrac{\left(-1\right)^{n-1}}{n}n}_{=\left(
+-1\right)^{n-1}}\underbrace{x^{\prime}}_{=1}x^{n-1}=\sum_{n\geq1}\left(
+-1\right)^{n-1}x^{n-1}=\sum_{n\in\mathbb{N}}\left(-1\right)^{n}x^{n}
+\end{align*}
+(here, we have substituted $n$ for $n-1$ in the sum). On the other hand,
+$\left(1+x\right)^{-1}
+=\sum_{n\in\mathbb{N}}\left(-1\right)^{n}x^{n}$. Comparing these two
+equalities, we find
+\begin{equation}
+\overline{\log}^{\prime}=\left(1+x\right)^{-1}.
+\end{equation}
+
+Now, we can apply the chain rule to $f=\overline{\log}$ (since $\left[x^{0}\right]g=0$), and
+thus obtain
+\begin{equation}
+\left(\overline{\log}\circ g\right)^{\prime}=\left(\underbrace{\overline
+{\log}^{\prime}}_{=\left(1+x\right)^{-1}}\circ\,g\right)\cdot g^{\prime
+}=\left(\left(1+x\right)^{-1}\circ g\right)\cdot g^{\prime}.
+\end{equation}
+
+However, we claim that $\left(1+x\right)^{-1}\circ g=\left(1+g\right)
+^{-1}$. Indeed, $\dfrac{1}{1+x}\circ g=\dfrac{1\circ
+g}{\left(1+x\right)\circ g}$ (since the FPS $1+x$ is invertible), and
+$1\circ\,g=\underline{1}$ and
+$\left(1+x\right)\circ g=1+g$,
+so $\left(1+x\right)^{-1}\circ g=\left(1+g\right)^{-1}$. Hence, this
+becomes
+\[
+\left(\overline{\log}\circ g\right)^{\prime}=\left(1+g\right)^{-1}\cdot
+g^{\prime}.
+\]
+This proves part \textbf{(b)}.
+\end{proof}
+```
