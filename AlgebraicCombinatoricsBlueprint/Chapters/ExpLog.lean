@@ -1377,3 +1377,148 @@ this further as $\left(\operatorname{Log}f\right)^{\prime}=\dfrac
 {f^{\prime}}{f}=\operatorname{loder}f$.
 \end{proof}
 ```
+
+:::theorem "prop.fps.loder.prod" (parent := "exp_log_loder") (lean := "PowerSeries.loder_mul")
+Let $`f,g\in K\left[\left[x\right]\right]_1` be two FPSs. Then
+$`\operatorname{loder}(fg)=\operatorname{loder}f+\operatorname{loder}g`.
+
+Here we do _not_ use the standing $`\mathbb{Q}`-algebra convention, so
+$`K` can be an arbitrary commutative ring.
+:::
+
+```tex "prop.fps.loder.prod" (slot := statement)
+\begin{proposition}
+\label{prop.fps.loder.prod}
+\lean{PowerSeries.loder_mul}
+\leantarget
+\leanok
+Let $f,g\in K\left[\left[x\right]\right]
+_{1}$ be two FPSs. Then, $\operatorname{loder}\left(fg\right)
+=\operatorname{loder}f+\operatorname{loder}g$.
+
+(Here, we do \textbf{not} use Convention \ref{conv.fps.exp.K-Q-alg}; thus, $K$
+can be an arbitrary commutative ring.)
+\end{proposition}
+```
+
+:::proof "prop.fps.loder.prod"
+By definition,
+$`\operatorname{loder}f=\dfrac{f'}{f}` and
+$`\operatorname{loder}g=\dfrac{g'}{g}`.
+Also,
+$$`\operatorname{loder}(fg)
+=\dfrac{(fg)'}{fg}
+=\dfrac{f'g+fg'}{fg}
+=\underbrace{\dfrac{f'}{f}}_{=\operatorname{loder}f}
++\underbrace{\dfrac{g'}{g}}_{=\operatorname{loder}g}
+=\operatorname{loder}f+\operatorname{loder}g,`
+using the product rule in the middle step.
+:::
+
+```tex "prop.fps.loder.prod" (slot := proof)
+\begin{proof}
+The definition of a
+logarithmic derivative yields $\operatorname{loder}f=\dfrac{f^{\prime}}{f}$
+and $\operatorname{loder}g=\dfrac{g^{\prime}}{g}$, but it also yields
+\begin{align*}
+\operatorname{loder}\left(fg\right) &  =\dfrac{\left(fg\right)
+^{\prime}}{fg}=\dfrac{f^{\prime}g+fg^{\prime}}{fg}
+\qquad\text{(by the product rule)}
+=\underbrace{\dfrac{f^{\prime}}{f}}_{=\operatorname{loder}f}
++\underbrace{\dfrac{g^{\prime}}{g}}_{=\operatorname{loder}g}
+=\operatorname{loder}f+\operatorname{loder}g.
+\end{align*}
+\end{proof}
+```
+
+:::corollary "cor.fps.loder.prodk" (parent := "exp_log_loder") (lean := "PowerSeries.loder_prod")
+Let $`f_1,f_2,\ldots,f_k` be any $`k` FPSs in
+$`K\left[\left[x\right]\right]_1`. Then
+$$`\operatorname{loder}(f_1f_2\cdots f_k)
+=\operatorname{loder}(f_1)+\operatorname{loder}(f_2)+\cdots+\operatorname{loder}(f_k).`
+
+Here we do _not_ use the standing $`\mathbb{Q}`-algebra convention, so
+$`K` can be an arbitrary commutative ring.
+:::
+
+```tex "cor.fps.loder.prodk" (slot := statement)
+\begin{corollary}
+\label{cor.fps.loder.prodk}
+\lean{PowerSeries.loder_prod}
+\leantarget
+\leanok
+Let $f_{1},f_{2},\ldots,f_{k}$ be any $k$ FPSs in
+$K\left[\left[x\right]\right]_{1}$. Then,
+\[
+\operatorname{loder}\left(f_{1}f_{2}\cdots f_{k}\right)
+=\operatorname{loder}\left(f_{1}\right)+\operatorname{loder}\left(
+f_{2}\right)+\cdots+\operatorname{loder}\left(f_{k}\right).
+\]
+
+(Here, we do \textbf{not} use Convention \ref{conv.fps.exp.K-Q-alg}; thus, $K$
+can be an arbitrary commutative ring.)
+\end{corollary}
+```
+
+:::proof "cor.fps.loder.prodk"
+Induct on $`k`. The base case is
+$`\operatorname{loder}(1)=0`, and the induction step follows directly from the
+product formula above.
+:::
+
+```tex "cor.fps.loder.prodk" (slot := proof)
+\begin{proof}
+Induct on $k$. The \textit{base
+case} ($k=0$) requires showing that $\operatorname{loder}1=0$, which is easy
+to see from the definition of a logarithmic derivative (since $1^{\prime}=0$).
+The \textit{induction step} follows easily from Proposition
+\ref{prop.fps.loder.prod}.
+\end{proof}
+```
+
+:::corollary "cor.fps.loder.inv" (parent := "exp_log_loder") (lean := "PowerSeries.loder_inv")
+Let $`f` be any FPS in $`K\left[\left[x\right]\right]_1`. Then
+$`\operatorname{loder}(f^{-1})=-\operatorname{loder}f`.
+
+Here we do _not_ use the standing $`\mathbb{Q}`-algebra convention, so
+$`K` can be an arbitrary commutative ring.
+:::
+
+```tex "cor.fps.loder.inv" (slot := statement)
+\begin{corollary}
+\label{cor.fps.loder.inv}
+\lean{PowerSeries.loder_inv}
+\leantarget
+\leanok
+Let $f$ be any FPS in $K\left[\left[x\right]
+\right]_{1}$. Then, $\operatorname{loder}\left(f^{-1}\right)
+=-\operatorname{loder}f$.
+
+(Here, we do \textbf{not} use Convention \ref{conv.fps.exp.K-Q-alg}; thus, $K$
+can be an arbitrary commutative ring.)
+\end{corollary}
+```
+
+:::proof "cor.fps.loder.inv"
+Since $`f\in K\left[\left[x\right]\right]_1`, the series $`f` is invertible,
+so $`f^{-1}` is well-defined. Apply the product formula to
+$`f\cdot f^{-1}=1`. Since $`\operatorname{loder}(1)=0`, this yields
+$`\operatorname{loder}f+\operatorname{loder}(f^{-1})=0`, hence
+$`\operatorname{loder}(f^{-1})=-\operatorname{loder}f`.
+:::
+
+```tex "cor.fps.loder.inv" (slot := proof)
+\begin{proof}
+First of all, $f$ is invertible. This shows that $f^{-1}$
+is well-defined.
+
+Proposition \ref{prop.fps.loder.prod} (applied to $g=f^{-1}$) yields
+$\operatorname{loder}\left(ff^{-1}\right)=\operatorname{loder}
+f+\operatorname{loder}\left(f^{-1}\right)$. However, we also have
+$\operatorname{loder}\left(\underbrace{ff^{-1}}_{=1}\right)
+=\operatorname{loder}1=0$ (since $1^{\prime}=0$). Comparing these two
+equalities, we obtain $\operatorname{loder}f+\operatorname{loder}\left(
+f^{-1}\right)=0$. In other words, $\operatorname{loder}\left(
+f^{-1}\right)=-\operatorname{loder}f$.
+\end{proof}
+```
