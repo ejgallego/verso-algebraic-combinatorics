@@ -8,6 +8,7 @@ import AlgebraicCombinatoricsBlueprint.Chapters.PortingStatus
 import AlgebraicCombinatoricsBlueprint.Chapters.NotationsExamples
 import AlgebraicCombinatoricsBlueprint.Chapters.CommutativeRings
 import AlgebraicCombinatoricsBlueprint.Chapters.FPSDefinition
+import AlgebraicCombinatoricsBlueprint.Chapters.DividingFPS
 
 open Verso.Genre
 open Verso.Genre.Manual
@@ -24,6 +25,7 @@ checkout.
 {include 0 AlgebraicCombinatoricsBlueprint.Chapters.NotationsExamples}
 {include 0 AlgebraicCombinatoricsBlueprint.Chapters.CommutativeRings}
 {include 0 AlgebraicCombinatoricsBlueprint.Chapters.FPSDefinition}
+{include 0 AlgebraicCombinatoricsBlueprint.Chapters.DividingFPS}
 
 {blueprint_graph}
 {blueprint_summary}

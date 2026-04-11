@@ -9,6 +9,7 @@ default_chapters = [
   "AlgebraicCombinatoricsBlueprint/Chapters/NotationsExamples.lean",
   "AlgebraicCombinatoricsBlueprint/Chapters/CommutativeRings.lean",
   "AlgebraicCombinatoricsBlueprint/Chapters/FPSDefinition.lean",
+  "AlgebraicCombinatoricsBlueprint/Chapters/DividingFPS.lean",
 ]
 
 [lt.node_kinds]
