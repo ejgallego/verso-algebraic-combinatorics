@@ -780,3 +780,126 @@ Apply Theorem~\ref{thm.fps.gen-newton} with $c=-n$ and use the upper negation
 identity $\binom{-n}{i} = (-1)^i\binom{n+i-1}{i}$.
 \end{proof}
 ```
+
+:::group "non_integer_powers_further_rules"
+Further consequences of the exponent definition.
+:::
+
+```tex
+\subsection{Further rules of exponents}
+```
+
+:::lemma_ "lem.fps.one-fpsPow" (parent := "non_integer_powers_further_rules") (lean := "AlgebraicCombinatorics.FPS.one_fpsPow")
+For any $`c\in K`, we have $`1^c = 1`.
+:::
+
+```tex "lem.fps.one-fpsPow" (slot := statement)
+\begin{lemma}
+\label{lem.fps.one-fpsPow}
+\lean{AlgebraicCombinatorics.FPS.one_fpsPow}
+\leanhelper
+\leanok
+For any $c\in K$, we have $1^c = 1$.
+\end{lemma}
+```
+
+:::proof "lem.fps.one-fpsPow"
+$`1^c=\operatorname{Exp}(c\cdot\operatorname{Log}1)
+=\operatorname{Exp}(c\cdot 0)=\operatorname{Exp}(0)=1`.
+:::
+
+```tex "lem.fps.one-fpsPow" (slot := proof)
+\begin{proof}
+\leanok
+$1^c = \operatorname{Exp}(c\cdot\operatorname{Log}1) = \operatorname{Exp}(c\cdot 0) = \operatorname{Exp}(0) = 1$.
+\end{proof}
+```
+
+:::lemma_ "lem.fps.constantCoeff-fpsPow" (parent := "non_integer_powers_further_rules") (lean := "AlgebraicCombinatorics.FPS.constantCoeff_fpsPow")
+For $`f\in K[[x]]_1` and $`c\in K`, we have
+$`\left[x^0\right](f^c)=1`.
+:::
+
+```tex "lem.fps.constantCoeff-fpsPow" (slot := statement)
+\begin{lemma}
+\label{lem.fps.constantCoeff-fpsPow}
+\lean{AlgebraicCombinatorics.FPS.constantCoeff_fpsPow}
+\leanhelper
+\leanok
+For $f\in K[[x]]_1$ and $c\in K$, we have $[x^0](f^c) = 1$.
+\end{lemma}
+```
+
+:::proof "lem.fps.constantCoeff-fpsPow"
+Immediate from the fact that $`f^c\in K[[x]]_1`.
+:::
+
+```tex "lem.fps.constantCoeff-fpsPow" (slot := proof)
+\begin{proof}
+\leanok
+Immediate from $f^c\in K[[x]]_1$.
+\end{proof}
+```
+
+:::lemma_ "lem.fps.fpsPow-neg" (parent := "non_integer_powers_further_rules") (lean := "AlgebraicCombinatorics.FPS.fpsPow_neg")
+For $`f\in K'[[x]]_1` over a field $`K'` and $`c\in K'`, we have
+$$`f^{-c} = (f^c)^{-1}.`
+:::
+
+```tex "lem.fps.fpsPow-neg" (slot := statement)
+\begin{lemma}
+\label{lem.fps.fpsPow-neg}
+\lean{AlgebraicCombinatorics.FPS.fpsPow_neg}
+\leanhelper
+\leanok
+For $f\in K'[[x]]_1$ (over a field $K'$) and $c\in K'$,
+\[
+f^{-c} = (f^c)^{-1}.
+\]
+\end{lemma}
+```
+
+:::proof "lem.fps.fpsPow-neg"
+We have
+$`f^{-c}\cdot f^c = f^{-c+c} = f^0 = 1`, so $`f^{-c}` is the inverse of
+$`f^c`.
+:::
+
+```tex "lem.fps.fpsPow-neg" (slot := proof)
+\begin{proof}
+\leanok
+We have $f^{-c}\cdot f^c = f^{-c+c} = f^0 = 1$, so $f^{-c}$ is the
+inverse of~$f^c$.
+\end{proof}
+```
+
+:::lemma_ "lem.fps.fpsPow-int" (parent := "non_integer_powers_further_rules") (lean := "AlgebraicCombinatorics.FPS.fpsPow_int")
+For integer exponents, $`f^c` agrees with the standard power:
+for $`n\ge 0`, $`f^n` is the usual nonnegative power, and for $`n<0`,
+$`f^n = (f^{|n|})^{-1}`.
+:::
+
+```tex "lem.fps.fpsPow-int" (slot := statement)
+\begin{lemma}
+\label{lem.fps.fpsPow-int}
+\lean{AlgebraicCombinatorics.FPS.fpsPow_int}
+\leanhelper
+\leanok
+For integer exponents, $f^c$ agrees with the standard power:
+for $n\ge 0$, $f^n = f^n$ (standard), and for $n<0$, $f^n = (f^{|n|})^{-1}$.
+\end{lemma}
+```
+
+:::proof "lem.fps.fpsPow-int"
+For $`n\ge 0`, use the natural-number compatibility lemma.
+For $`n<0`, combine
+$`f^{-c}\cdot f^c=1` with the natural-number case for $`f^{|n|}`.
+:::
+
+```tex "lem.fps.fpsPow-int" (slot := proof)
+\begin{proof}
+\leanok
+For $n\ge 0$, use Lemma~\ref{lem.fps.fpsPow-nat}.
+For $n<0$, combine $f^{-c}\cdot f^c = 1$ with $f^{|n|}$ computed via the natural-number case.
+\end{proof}
+```
