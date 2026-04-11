@@ -819,3 +819,171 @@ Since all coefficients beyond the degree of $f$ are zero, extending or
 restricting the sum to this range does not change the result.
 \end{proof}
 ```
+
+:::theorem "thm.pol.eval.a+b" (parent := "polynomials_evaluation") (lean := "FPS.eval_add', FPS.eval_mul', FPS.eval_smul', FPS.eval_C', FPS.eval_X', FPS.eval_X_pow', FPS.eval_comp'")
+Let $`A` be a $`K`-algebra and let $`a\in A`. Then:
+
+*(a)* Any $`f,g\in K[x]` satisfy
+$$`\left(f+g\right)[a] = f[a] + g[a]
+\qquad\text{and}\qquad
+\left(fg\right)[a] = f[a]\cdot g[a].`
+
+*(b)* Any $`\lambda\in K` and $`f\in K[x]` satisfy
+$$`\left(\lambda f\right)[a] = \lambda\cdot f[a].`
+
+*(c)* Any $`\lambda\in K` satisfies
+$`\underline{\lambda}[a] = \lambda\cdot 1_A`, where $`1_A` is the unity of the
+ring $`A`.
+
+*(d)* We have $`x[a] = a`.
+
+*(e)* We have $`x^i[a] = a^i` for each $`i\in\mathbb{N}`.
+
+*(f)* Any $`f,g\in K[x]` satisfy
+$`f[g[a]] = \left(f[g]\right)[a]`.
+:::
+
+```tex "thm.pol.eval.a+b" (slot := statement)
+\begin{theorem}
+\label{thm.pol.eval.a+b}
+\lean{FPS.eval_add', FPS.eval_mul', FPS.eval_smul', FPS.eval_C', FPS.eval_X', FPS.eval_X_pow', FPS.eval_comp'}
+\leantarget
+\leanok
+Let $A$ be a $K$-algebra. Let $a\in A$. Then: \medskip
+
+\textbf{(a)} Any $f,g\in K\left[  x\right]  $ satisfy%
+\[
+\left(  f+g\right)  \left[  a\right]  =f\left[  a\right]  +g\left[  a\right]
+\ \ \ \ \ \ \ \ \ \ \text{and}\ \ \ \ \ \ \ \ \ \ \left(  fg\right)  \left[
+a\right]  =f\left[  a\right]  \cdot g\left[  a\right]  .
+\]
+
+
+\textbf{(b)} Any $\lambda\in K$ and $f\in K\left[  x\right]  $ satisfy%
+\[
+\left(  \lambda f\right)  \left[  a\right]  =\lambda\cdot f\left[  a\right]
+.
+\]
+
+
+\textbf{(c)} Any $\lambda\in K$ satisfies $\underline{\lambda}\left[
+a\right]  =\lambda\cdot1_{A}$, where $1_{A}$ is the unity of the ring $A$.
+\medskip
+
+\textbf{(d)} We have $x\left[  a\right]  =a$. \medskip
+
+\textbf{(e)} We have $x^{i}\left[  a\right]  =a^{i}$ for each $i\in\mathbb{N}%
+$. \medskip
+
+\textbf{(f)} Any $f,g\in K\left[  x\right]  $ satisfy $f\left[  g\left[
+a\right]  \right]  =\left(  f\left[  g\right]  \right)  \left[  a\right]  $.
+\end{theorem}
+```
+
+:::proof "thm.pol.eval.a+b"
+Parts *(a)* through *(e)* are the standard algebraic rules for polynomial
+evaluation. Part *(f)* is compatibility of evaluation with polynomial
+composition.
+:::
+
+```tex "thm.pol.eval.a+b" (slot := proof)
+\begin{proof}
+See \cite[Theorem 7.6.3]{19s} for parts \textbf{(a)}, \textbf{(b)},
+\textbf{(c)}, \textbf{(d)} and \textbf{(e)}. Part \textbf{(f)} is
+\cite[Proposition 7.6.14]{19s}.
+\end{proof}
+```
+
+:::group "polynomials_special_evaluation"
+Special values of polynomial evaluation.
+:::
+
+```tex
+\subsection{Special evaluation results}
+```
+
+:::lemma_ "lem.pol.eval.X-self" (parent := "polynomials_special_evaluation") (lean := "FPS.eval_X_eq_self")
+For any polynomial $`f\in K[x]`, we have $`f[x]=f`.
+:::
+
+```tex "lem.pol.eval.X-self" (slot := statement)
+\begin{lemma}
+\label{lem.pol.eval.X-self}
+\lean{FPS.eval_X_eq_self}
+\leanhelper
+\leanok
+For any polynomial $f\in K[x]$, we have $f[x]=f$.
+\end{lemma}
+```
+
+:::proof "lem.pol.eval.X-self"
+The evaluation map at $`x` is the identity on $`K[x]`.
+:::
+
+```tex "lem.pol.eval.X-self" (slot := proof)
+\begin{proof}
+\leanok
+The evaluation map at $x$ is the identity on $K[x]$.
+\end{proof}
+```
+
+:::lemma_ "lem.pol.eval.zero" (parent := "polynomials_special_evaluation") (lean := "FPS.eval_zero_eq_coeff_zero")
+For any polynomial $`f\in K[x]` and any $`K`-algebra $`A`, we have
+$`f[0]=\left[x^{0}\right]f`; this is the constant term of $`f`, coerced into
+$`A`.
+:::
+
+```tex "lem.pol.eval.zero" (slot := statement)
+\begin{lemma}
+\label{lem.pol.eval.zero}
+\lean{FPS.eval_zero_eq_coeff_zero}
+\leanhelper
+\leanok
+For any polynomial $f\in K[x]$ and any $K$-algebra $A$, we have
+$f[0]=\left[x^{0}\right]f$ (the constant term of $f$, coerced into $A$).
+\end{lemma}
+```
+
+:::proof "lem.pol.eval.zero"
+Setting $`a=0`, all terms $`f_n\cdot 0^n` with $`n\ge 1` vanish, leaving only
+$`f_0\cdot 0^0 = f_0\cdot 1 = f_0`.
+:::
+
+```tex "lem.pol.eval.zero" (slot := proof)
+\begin{proof}
+\leanok
+Setting $a=0$: all terms $f_{n}\cdot 0^{n}$ for $n\geq 1$ vanish, leaving
+only $f_{0}\cdot 0^{0}=f_{0}\cdot 1=f_{0}$.
+\end{proof}
+```
+
+:::lemma_ "lem.pol.eval.one" (parent := "polynomials_special_evaluation") (lean := "FPS.eval_one_eq_sum_coeffs")
+For any polynomial $`f\in K[x]` and any $`K`-algebra $`A`, we have
+$`f[1]=\left[x^{0}\right]f+\left[x^{1}\right]f+\left[x^{2}\right]f+\cdots`;
+that is, $`f[1]` is the sum of all coefficients of $`f`, coerced into $`A`.
+:::
+
+```tex "lem.pol.eval.one" (slot := statement)
+\begin{lemma}
+\label{lem.pol.eval.one}
+\lean{FPS.eval_one_eq_sum_coeffs}
+\leanhelper
+\leanok
+For any polynomial $f\in K[x]$ and any $K$-algebra $A$, we have
+$f[1]=\left[x^{0}\right]f+\left[x^{1}\right]f+\left[x^{2}\right]f+\cdots$
+(the sum of all coefficients of $f$, coerced into $A$).
+\end{lemma}
+```
+
+:::proof "lem.pol.eval.one"
+Setting $`a=1`, each term $`f_n\cdot 1^n = f_n`, so
+$`f[1]=\sum_n f_n`.
+:::
+
+```tex "lem.pol.eval.one" (slot := proof)
+\begin{proof}
+\leanok
+Setting $a=1$: each term $f_{n}\cdot 1^{n}=f_{n}$, so
+$f[1]=\sum_{n}f_{n}$.
+\end{proof}
+```
