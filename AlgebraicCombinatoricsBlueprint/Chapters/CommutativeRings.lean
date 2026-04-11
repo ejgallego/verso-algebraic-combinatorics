@@ -529,3 +529,281 @@ By definition.
 By definition.
 \end{proof}
 ```
+
+:::group "commutative_rings_modules"
+The definition of a K-module.
+:::
+
+```tex
+\subsection{$K$-modules}
+```
+
+:::definition "def.alg.module" (parent := "commutative_rings_modules") (lean := "AlgebraicCombinatorics.FPS.module_add_comm, AlgebraicCombinatorics.FPS.module_add_assoc, AlgebraicCombinatorics.FPS.module_add_zero, AlgebraicCombinatorics.FPS.module_sub_iff_add, AlgebraicCombinatorics.FPS.module_smul_assoc, AlgebraicCombinatorics.FPS.module_smul_add, AlgebraicCombinatorics.FPS.module_add_smul, AlgebraicCombinatorics.FPS.module_one_smul, AlgebraicCombinatorics.FPS.module_zero_smul, AlgebraicCombinatorics.FPS.module_smul_zero")
+Let $`K` be a commutative ring.
+
+A $`K`-module means a set $`M` equipped with three maps
+$$`\oplus : M\times M\rightarrow M, \qquad
+\ominus : M\times M\rightarrow M, \qquad
+\rightharpoonup : K\times M\rightarrow M`
+and an element $`\overrightarrow{0}\in M` satisfying the following axioms:
+
+1. _Commutativity of addition:_ We have $`a\oplus b=b\oplus a` for all
+   $`a,b\in M`.
+2. _Associativity of addition:_ We have
+   $`a\oplus\left(  b\oplus c\right)  =\left(  a\oplus b\right)  \oplus c`
+   for all $`a,b,c\in M`.
+3. _Neutrality of zero:_ We have
+   $`a\oplus\overrightarrow{0}=\overrightarrow{0}\oplus a=a` for all
+   $`a\in M`.
+4. _Subtraction undoes addition:_ Let $`a,b,c\in M`. We have
+   $`a\oplus b=c` if and only if $`a=c\ominus b`.
+5. _Associativity of scaling:_ We have
+   $`u\rightharpoonup\left( v\rightharpoonup a\right)
+   =\left( uv\right)\rightharpoonup a` for all $`u,v\in K` and $`a\in M`.
+6. _Left distributivity:_ We have
+   $`u\rightharpoonup\left(  a\oplus b\right)
+   =\left(  u\rightharpoonup a\right)  \oplus\left(  u\rightharpoonup b\right)`
+   for all $`u\in K` and $`a,b\in M`.
+7. _Right distributivity:_ We have
+   $`\left(  u+v\right)\rightharpoonup a
+   =\left(  u\rightharpoonup a\right)  \oplus\left(  v\rightharpoonup a\right)`
+   for all $`u,v\in K` and $`a\in M`.
+8. _Neutrality of one:_ We have $`1\rightharpoonup a=a` for all $`a\in M`.
+9. _Left annihilation:_ We have
+   $`0\rightharpoonup a=\overrightarrow{0}` for all $`a\in M`.
+10. _Right annihilation:_ We have
+   $`u\rightharpoonup\overrightarrow{0}=\overrightarrow{0}` for all
+   $`u\in K`.
+
+The operations $`\oplus`, $`\ominus` and $`\rightharpoonup` are called the
+_addition_, the _subtraction_ and the _scaling_, or the
+$`K`-action, of the $`K`-module $`M`. When confusion is unlikely, we will
+denote these three operations by $`+`, $`-` and $`\cdot`, respectively, and we
+will abbreviate $`a\rightharpoonup b=a\cdot b` by $`ab`.
+
+The element $`\overrightarrow{0}` is called the _zero_ or the _zero vector_ of
+the $`K`-module $`M`. We will usually just call it $`0`.
+
+When $`M` is a $`K`-module, the elements of $`M` are called _vectors_, while
+the elements of $`K` are called _scalars_.
+
+We will use _PEMDAS conventions_ for the three operations $`\oplus`,
+$`\ominus` and $`\rightharpoonup`, with $`\rightharpoonup` having higher
+precedence than $`\oplus` and $`\ominus`.
+:::
+
+```tex "def.alg.module" (slot := statement)
+\begin{definition}
+\label{def.alg.module}
+\lean{AlgebraicCombinatorics.FPS.module_add_comm, AlgebraicCombinatorics.FPS.module_add_assoc, AlgebraicCombinatorics.FPS.module_add_zero, AlgebraicCombinatorics.FPS.module_sub_iff_add, AlgebraicCombinatorics.FPS.module_smul_assoc, AlgebraicCombinatorics.FPS.module_smul_add, AlgebraicCombinatorics.FPS.module_add_smul, AlgebraicCombinatorics.FPS.module_one_smul, AlgebraicCombinatorics.FPS.module_zero_smul, AlgebraicCombinatorics.FPS.module_smul_zero}
+\leantarget
+\leanok
+Let $K$ be a commutative ring.
+
+A $K$\emph{-module} means a set $M$ equipped with three maps
+\begin{align*}
+\oplus &  :M\times M\rightarrow M,\\
+\ominus &  :M\times M\rightarrow M,\\
+\rightharpoonup &  :K\times M\rightarrow M
+\end{align*}
+(notice that the third map has domain $K\times M$, not $M\times M$) and an
+element $\overrightarrow{0}\in M$ satisfying the following axioms:
+
+\begin{enumerate}
+\item \emph{Commutativity of addition:} We have $a\oplus b=b\oplus a$ for all
+$a,b\in M$.
+
+\item \emph{Associativity of addition:} We have $a\oplus\left(  b\oplus
+c\right)  =\left(  a\oplus b\right)  \oplus c$ for all $a,b,c\in M$.
+
+\item \emph{Neutrality of zero:} We have $a\oplus\overrightarrow{0}%
+=\overrightarrow{0}\oplus a=a$ for all $a\in M$.
+
+\item \emph{Subtraction undoes addition:} Let $a,b,c\in M$. We have $a\oplus
+b=c$ if and only if $a=c\ominus b$.
+
+\item \emph{Associativity of scaling:} We have $u\rightharpoonup\left(
+v\rightharpoonup a\right)  =\left(  uv\right)  \rightharpoonup a$ for all
+$u,v\in K$ and $a\in M$.
+
+\item \emph{Left distributivity:} We have $u\rightharpoonup\left(  a\oplus
+b\right)  =\left(  u\rightharpoonup a\right)  \oplus\left(  u\rightharpoonup
+b\right)  $ for all $u\in K$ and $a,b\in M$.
+
+\item \emph{Right distributivity:} We have $\left(  u+v\right)
+\rightharpoonup a=\left(  u\rightharpoonup a\right)  \oplus\left(
+v\rightharpoonup a\right)  $ for all $u,v\in K$ and $a\in M$.
+
+\item \emph{Neutrality of one:} We have $1\rightharpoonup a=a$ for all $a\in
+M$.
+
+\item \emph{Left annihilation:} We have $0\rightharpoonup a=\overrightarrow{0}%
+$ for all $a\in M$.
+
+\item \emph{Right annihilation:} We have $u\rightharpoonup\overrightarrow{0}%
+=\overrightarrow{0}$ for all $u\in K$.
+\end{enumerate}
+
+The operations $\oplus$, $\ominus$ and $\rightharpoonup$ are called the
+\emph{addition}, the \emph{subtraction} and the \emph{scaling} (or the
+$K$\emph{-action}) of the $K$-module $M$. When confusion is unlikely, we will
+denote these three operations $\oplus$, $\ominus$ and $\rightharpoonup$ by
+$+$, $-$ and $\cdot$, respectively, and we will abbreviate $a\rightharpoonup
+b=a\cdot b$ by $ab$.
+
+The element $\overrightarrow{0}$ is called the \emph{zero} (or the \emph{zero
+vector}) of the $K$-module $M$. We will usually just call it $0$.
+
+When $M$ is a $K$-module, the elements of $M$ are called \emph{vectors}, while
+the elements of $K$ are called \emph{scalars}.
+
+We will use \emph{PEMDAS conventions} for the three operations $\oplus$,
+$\ominus$ and $\rightharpoonup$, with the operation $\rightharpoonup$ having
+higher precedence than $\oplus$ and $\ominus$.
+\end{definition}
+```
+
+:::group "module_additive_inverses"
+Additive inverses in modules.
+:::
+
+```tex
+\subsection{Additive inverses in modules}
+```
+
+:::lemma_ "lem.module.neg-one-smul" (parent := "module_additive_inverses") (lean := "AlgebraicCombinatorics.FPS.module_neg_eq_neg_one_smul")
+Let $`K` be a commutative ring and $`M` a $`K`-module. For any $`a\in M`, the
+additive inverse of $`a` can be constructed as $`(-1)\cdot a`, that is,
+$`-a = (-1)\cdot a`.
+:::
+
+```tex "lem.module.neg-one-smul" (slot := statement)
+\begin{lemma}
+\label{lem.module.neg-one-smul}
+\lean{AlgebraicCombinatorics.FPS.module_neg_eq_neg_one_smul}
+\leanhelper
+\leanok
+Let $K$ be a commutative ring and $M$ a $K$-module. For any $a\in M$,
+the additive inverse of $a$ can be constructed as $(-1)\cdot a$, i.e.,
+$-a = (-1)\cdot a$.
+\end{lemma}
+```
+
+:::proof "lem.module.neg-one-smul"
+Standard module theory.
+:::
+
+```tex "lem.module.neg-one-smul" (slot := proof)
+\begin{proof}
+\leanok
+Standard module theory.
+\end{proof}
+```
+
+:::lemma_ "lem.module.sub-eq-add-neg" (parent := "module_additive_inverses") (lean := "AlgebraicCombinatorics.FPS.module_sub_eq_add_neg")
+Let $`K` be a commutative ring and $`M` a $`K`-module. For any
+$`a,b\in M`, we have $`a - b = a + (-b)`.
+:::
+
+```tex "lem.module.sub-eq-add-neg" (slot := statement)
+\begin{lemma}
+\label{lem.module.sub-eq-add-neg}
+\lean{AlgebraicCombinatorics.FPS.module_sub_eq_add_neg}
+\leanhelper
+\leanok
+Let $K$ be a commutative ring and $M$ a $K$-module. For any $a,b\in M$,
+we have $a - b = a + (-b)$.
+\end{lemma}
+```
+
+:::proof "lem.module.sub-eq-add-neg"
+Standard module theory.
+:::
+
+```tex "lem.module.sub-eq-add-neg" (slot := proof)
+\begin{proof}
+\leanok
+Standard module theory.
+\end{proof}
+```
+
+:::lemma_ "lem.module.sub-eq-add-neg-one-smul" (parent := "module_additive_inverses") (lean := "AlgebraicCombinatorics.FPS.module_sub_eq_add_neg_one_smul")
+Let $`K` be a commutative ring and $`M` a $`K`-module. For any
+$`a,b\in M`, we have $`a - b = a + (-1)\cdot b`.
+:::
+
+```tex "lem.module.sub-eq-add-neg-one-smul" (slot := statement)
+\begin{lemma}
+\label{lem.module.sub-eq-add-neg-one-smul}
+\lean{AlgebraicCombinatorics.FPS.module_sub_eq_add_neg_one_smul}
+\leanhelper
+\leanok
+Let $K$ be a commutative ring and $M$ a $K$-module. For any $a,b\in M$,
+we have $a - b = a + (-1)\cdot b$.
+\end{lemma}
+```
+
+:::proof "lem.module.sub-eq-add-neg-one-smul"
+Combine the fact that $`-b = (-1)\cdot b` with $`a - b = a + (-b)`.
+:::
+
+```tex "lem.module.sub-eq-add-neg-one-smul" (slot := proof)
+\begin{proof}
+\leanok
+Combine the fact that $-b = (-1)\cdot b$ with $a - b = a + (-b)$.
+\end{proof}
+```
+
+:::lemma_ "lem.module.neg-add" (parent := "module_additive_inverses") (lean := "AlgebraicCombinatorics.FPS.module_neg_add")
+Let $`K` be a commutative ring and $`M` a $`K`-module. For any
+$`a,b\in M`, we have $`-(a+b) = (-a) + (-b)`.
+:::
+
+```tex "lem.module.neg-add" (slot := statement)
+\begin{lemma}
+\label{lem.module.neg-add}
+\lean{AlgebraicCombinatorics.FPS.module_neg_add}
+\leanhelper
+\leanok
+Let $K$ be a commutative ring and $M$ a $K$-module. For any $a,b\in M$,
+we have $-(a+b) = (-a) + (-b)$.
+\end{lemma}
+```
+
+:::proof "lem.module.neg-add"
+Standard module theory.
+:::
+
+```tex "lem.module.neg-add" (slot := proof)
+\begin{proof}
+\leanok
+Standard module theory.
+\end{proof}
+```
+
+:::lemma_ "lem.module.neg-neg" (parent := "module_additive_inverses") (lean := "AlgebraicCombinatorics.FPS.module_neg_neg")
+Let $`K` be a commutative ring and $`M` a $`K`-module. For any
+$`a\in M`, we have $`-(-a) = a`.
+:::
+
+```tex "lem.module.neg-neg" (slot := statement)
+\begin{lemma}
+\label{lem.module.neg-neg}
+\lean{AlgebraicCombinatorics.FPS.module_neg_neg}
+\leanhelper
+\leanok
+Let $K$ be a commutative ring and $M$ a $K$-module. For any $a\in M$,
+we have $-(-a) = a$.
+\end{lemma}
+```
+
+:::proof "lem.module.neg-neg"
+Standard module theory.
+:::
+
+```tex "lem.module.neg-neg" (slot := proof)
+\begin{proof}
+\leanok
+Standard module theory.
+\end{proof}
+```
