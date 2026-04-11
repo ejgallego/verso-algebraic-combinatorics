@@ -28,6 +28,6 @@ than maintained as free-form prose.
 The current direct-port work now covers all of `chapter_notations.tex` in
 `NotationsExamples`, from the opening prose through the auxiliary
 generating-function results. `CommutativeRings` is now started through the
-`Additive inverses in modules` subsection. The remaining source chapters are
+`Fractions and integer powers` subsection. The remaining source chapters are
 still pending first-pass Verso transcription.
 :::

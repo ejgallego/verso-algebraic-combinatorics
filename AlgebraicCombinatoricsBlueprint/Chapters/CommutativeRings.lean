@@ -807,3 +807,271 @@ Standard module theory.
 Standard module theory.
 \end{proof}
 ```
+
+
+:::group "commutative_rings_inverses"
+Inverses and invertible elements in commutative rings.
+:::
+
+```tex
+\subsection{Inverses in commutative rings}
+```
+
+:::definition "def.commring.inverse" (parent := "commutative_rings_inverses") (lean := "AlgebraicCombinatorics.FPS.IsInverse")
+Let $`L` be a commutative ring and $`a, b \in L`.
+
+*(a)* We say that $`b` is an _inverse_, or _multiplicative inverse_, of
+$`a` if $`a \cdot b = 1`.
+
+*(b)* We say that $`a` is _invertible_ in $`L`, or a _unit_ of $`L`, if
+$`a` has an inverse.
+:::
+
+```tex "def.commring.inverse" (slot := statement)
+\begin{definition}
+\label{def.commring.inverse}
+\lean{AlgebraicCombinatorics.FPS.IsInverse}
+\leanhelper
+\leanok
+Let $L$ be a commutative ring and $a, b \in L$.
+
+\textbf{(a)} We say that $b$ is an \emph{inverse} (or \emph{multiplicative inverse})
+of $a$ if $a \cdot b = 1$.
+
+\textbf{(b)} We say that $a$ is \emph{invertible} in $L$ (or a \emph{unit} of $L$)
+if $a$ has an inverse.
+\end{definition}
+```
+
+:::lemma_ "lem.commring.inverse-uni" (parent := "commutative_rings_inverses") (lean := "AlgebraicCombinatorics.FPS.isInverse_unique")
+Let $`L` be a commutative ring. If $`b` and $`c` are both inverses of $`a`,
+then $`b = c`. In other words, the inverse of an element, if it exists, is
+unique.
+:::
+
+```tex "lem.commring.inverse-uni" (slot := statement)
+\begin{lemma}
+\label{lem.commring.inverse-uni}
+\lean{AlgebraicCombinatorics.FPS.isInverse_unique}
+\leanhelper
+\leanok
+Let $L$ be a commutative ring. If $b$ and $c$ are both inverses of $a$,
+then $b = c$. In other words, the inverse of an element (if it exists) is unique.
+\end{lemma}
+```
+
+:::proof "lem.commring.inverse-uni"
+We have
+$`b = b \cdot 1 = b \cdot (a \cdot c) = (b \cdot a) \cdot c = 1 \cdot c = c`.
+:::
+
+```tex "lem.commring.inverse-uni" (slot := proof)
+\begin{proof}
+\leanok
+We have $b = b \cdot 1 = b \cdot (a \cdot c) = (b \cdot a) \cdot c = 1 \cdot c = c$.
+\end{proof}
+```
+
+:::definition "def.commring.invertible" (parent := "commutative_rings_inverses") (lean := "AlgebraicCombinatorics.FPS.IsInvertible")
+An element $`a \in L` is _invertible_ if there exists $`b \in L` such that
+$`a \cdot b = 1`.
+:::
+
+```tex "def.commring.invertible" (slot := statement)
+\begin{definition}
+\label{def.commring.invertible}
+\lean{AlgebraicCombinatorics.FPS.IsInvertible}
+\leanhelper
+\leanok
+An element $a \in L$ is \emph{invertible} if there exists $b \in L$ such that
+$a \cdot b = 1$.
+\end{definition}
+```
+
+:::lemma_ "lem.commring.invertible-iff-isUnit" (parent := "commutative_rings_inverses") (lean := "AlgebraicCombinatorics.FPS.isInvertible_iff_isUnit")
+The definition of invertibility from the inverse definition is equivalent to
+the definition of a unit in Mathlib.
+:::
+
+```tex "lem.commring.invertible-iff-isUnit" (slot := statement)
+\begin{lemma}
+\label{lem.commring.invertible-iff-isUnit}
+\lean{AlgebraicCombinatorics.FPS.isInvertible_iff_isUnit}
+\leanhelper
+\leanok
+The definition of invertibility from Definition~\ref{def.commring.inverse} is equivalent
+to the definition of a unit in Mathlib.
+\end{lemma}
+```
+
+:::proof "lem.commring.invertible-iff-isUnit"
+Both express the existence of a multiplicative inverse; the equivalence is
+immediate from the definitions.
+:::
+
+```tex "lem.commring.invertible-iff-isUnit" (slot := proof)
+\begin{proof}
+\leanok
+Both express the existence of a multiplicative inverse; the equivalence is
+immediate from the definitions.
+\end{proof}
+```
+
+:::lemma_ "lem.commring.invertible-mul" (parent := "commutative_rings_inverses") (lean := "AlgebraicCombinatorics.FPS.isInvertible_mul")
+If $`a` and $`b` are invertible in $`L`, then $`a \cdot b` is invertible.
+:::
+
+```tex "lem.commring.invertible-mul" (slot := statement)
+\begin{lemma}
+\label{lem.commring.invertible-mul}
+\lean{AlgebraicCombinatorics.FPS.isInvertible_mul}
+\leanhelper
+\leanok
+If $a$ and $b$ are invertible in $L$, then $a \cdot b$ is invertible.
+\end{lemma}
+```
+
+:::proof "lem.commring.invertible-mul"
+Convert to the equivalent notion of a unit and use the fact that the product
+of two units is a unit.
+:::
+
+```tex "lem.commring.invertible-mul" (slot := proof)
+\begin{proof}
+\leanok
+Convert to the equivalent notion of a unit and use the fact that the product
+of two units is a unit.
+\end{proof}
+```
+
+:::lemma_ "lem.commring.field-isUnit" (parent := "commutative_rings_inverses") (lean := "AlgebraicCombinatorics.FPS.field_isUnit_iff")
+In a field $`F`, an element $`a` is invertible if and only if $`a \neq 0`.
+:::
+
+```tex "lem.commring.field-isUnit" (slot := statement)
+\begin{lemma}
+\label{lem.commring.field-isUnit}
+\lean{AlgebraicCombinatorics.FPS.field_isUnit_iff}
+\leanhelper
+\leanok
+In a field $F$, an element $a$ is invertible if and only if $a \neq 0$.
+\end{lemma}
+```
+
+:::proof "lem.commring.field-isUnit"
+Every nonzero element of a field has a multiplicative inverse.
+:::
+
+```tex "lem.commring.field-isUnit" (slot := proof)
+\begin{proof}
+\leanok
+Every nonzero element of a field has a multiplicative inverse.
+\end{proof}
+```
+
+:::group "commutative_rings_fractions"
+Fractions and integer powers.
+:::
+
+```tex
+\subsection{Fractions and integer powers}
+```
+
+:::definition "def.commring.fraction" (parent := "commutative_rings_fractions") (lean := "AlgebraicCombinatorics.FPS.fraction")
+For an invertible element $`a` and any $`b \in L`, the _fraction_ $`b/a` is
+defined as $`b \cdot a^{-1}`.
+:::
+
+```tex "def.commring.fraction" (slot := statement)
+\begin{definition}
+\label{def.commring.fraction}
+\lean{AlgebraicCombinatorics.FPS.fraction}
+\leanhelper
+\leanok
+For an invertible element $a$ and any $b \in L$,
+the \emph{fraction} $b/a$ is defined as $b \cdot a^{-1}$.
+\end{definition}
+```
+
+:::lemma_ "lem.commring.fraction-eq-iff" (parent := "commutative_rings_fractions") (lean := "AlgebraicCombinatorics.FPS.fraction_eq_iff")
+For an invertible element $`a` and elements $`b, c \in L`, we have
+$`b / a = c` if and only if $`b = c \cdot a`.
+:::
+
+```tex "lem.commring.fraction-eq-iff" (slot := statement)
+\begin{lemma}
+\label{lem.commring.fraction-eq-iff}
+\lean{AlgebraicCombinatorics.FPS.fraction_eq_iff}
+\leanhelper
+\leanok
+For an invertible element $a$ and elements $b, c \in L$, we have $b / a = c$ if and only if
+$b = c \cdot a$.
+\end{lemma}
+```
+
+:::proof "lem.commring.fraction-eq-iff"
+Multiply both sides by $`a`, or by $`a^{-1}`, and use
+$`a \cdot a^{-1} = 1`.
+:::
+
+```tex "lem.commring.fraction-eq-iff" (slot := proof)
+\begin{proof}
+\leanok
+Multiply both sides by $a$ (or $a^{-1}$) and use $a \cdot a^{-1} = 1$.
+\end{proof}
+```
+
+:::lemma_ "lem.commring.unit-zpow-neg" (parent := "commutative_rings_fractions") (lean := "AlgebraicCombinatorics.FPS.unit_zpow_neg")
+For an invertible element $`a` and a natural number $`n`, we have
+$`a^{-n} = (a^{-1})^n`.
+This defines negative integer powers.
+:::
+
+```tex "lem.commring.unit-zpow-neg" (slot := statement)
+\begin{lemma}
+\label{lem.commring.unit-zpow-neg}
+\lean{AlgebraicCombinatorics.FPS.unit_zpow_neg}
+\leanhelper
+\leanok
+For an invertible element $a$ and a natural number $n$, we have $a^{-n} = (a^{-1})^n$.
+This defines negative integer powers.
+\end{lemma}
+```
+
+:::proof "lem.commring.unit-zpow-neg"
+By the definition of integer powers on units.
+:::
+
+```tex "lem.commring.unit-zpow-neg" (slot := proof)
+\begin{proof}
+\leanok
+By the definition of integer powers on units.
+\end{proof}
+```
+
+:::lemma_ "lem.commring.unit-zpow-add" (parent := "commutative_rings_fractions") (lean := "AlgebraicCombinatorics.FPS.unit_zpow_add")
+For an invertible element $`a` and integers $`m, n \in \mathbb{Z}`, we have
+$`a^{m+n} = a^m \cdot a^n`.
+:::
+
+```tex "lem.commring.unit-zpow-add" (slot := statement)
+\begin{lemma}
+\label{lem.commring.unit-zpow-add}
+\lean{AlgebraicCombinatorics.FPS.unit_zpow_add}
+\leanhelper
+\leanok
+For an invertible element $a$ and integers $m, n \in \mathbb{Z}$, we have
+$a^{m+n} = a^m \cdot a^n$.
+\end{lemma}
+```
+
+:::proof "lem.commring.unit-zpow-add"
+Standard property of integer powers.
+:::
+
+```tex "lem.commring.unit-zpow-add" (slot := proof)
+\begin{proof}
+\leanok
+Standard property of integer powers.
+\end{proof}
+```
