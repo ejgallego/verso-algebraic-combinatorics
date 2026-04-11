@@ -583,3 +583,329 @@ $I$). Since we have proved this for each $n\in\mathbb{N}$, we thus conclude
 that the family $\left(\mathbf{a}_{i}\right)_{i\in J}$ is summable.
 \end{proof}
 ```
+
+:::theorem "prop.fps.summable-sums-rule" (parent := "fps_summable_families") (lean := "AlgebraicCombinatorics.FPS.summableFPS_fubini")
+Sums of summable families of FPSs satisfy the usual rules for sums, such as
+the breaking-apart rule
+$`\sum_{i\in S}a_{s}=\sum_{i\in X}a_{s}+\sum_{i\in Y}a_{s}` when a set
+$`S` is the union of two disjoint sets $`X` and $`Y`.
+Again, the only caveat is about interchange of summation signs: the equality
+$$`\sum_{i\in I}\ \ \sum_{j\in J}\mathbf{a}_{i,j}
+=\sum_{j\in J}\ \ \sum_{i\in I}\mathbf{a}_{i,j}`
+holds when the family
+$`\left(\mathbf{a}_{i,j}\right)_{\left(i,j\right)\in I\times J}` is summable,
+that is, when for each $`n\in\mathbb{N}`, all but finitely many pairs
+$`\left(i,j\right)\in I\times J` satisfy
+$`\left[x^{n}\right]\mathbf{a}_{i,j}=0`; it does not generally hold if we
+merely assume that the sums
+$`\sum_{i\in I}\ \ \sum_{j\in J}\mathbf{a}_{i,j}` and
+$`\sum_{j\in J}\ \ \sum_{i\in I}\mathbf{a}_{i,j}` are summable.
+:::
+
+```tex "prop.fps.summable-sums-rule" (slot := statement)
+\begin{proposition}
+\label{prop.fps.summable-sums-rule}
+\lean{AlgebraicCombinatorics.FPS.summableFPS_fubini}
+\leantarget
+\leanok
+Sums of summable families of FPSs satisfy
+the usual rules for sums (such as the breaking-apart rule $\sum_{i\in S}%
+a_{s}=\sum_{i\in X}a_{s}+\sum_{i\in Y}a_{s}$ when a set $S$ is the union of
+two disjoint sets $X$ and $Y$). See \cite[Proposition 7.2.11]{19s} for
+details. Again, the only \textbf{caveat} is about interchange
+of summation signs: The equality
+\[
+\sum_{i\in I}\ \ \sum_{j\in J}\mathbf{a}_{i,j}=\sum_{j\in J}\ \ \sum_{i\in
+I}\mathbf{a}_{i,j}
+\]
+holds when the family $\left(\mathbf{a}_{i,j}\right)_{\left(i,j\right)
+\in I\times J}$ is summable (i.e., when for each $n\in\mathbb{N}$, all but
+finitely many \textbf{pairs} $\left(i,j\right) \in I\times J$ satisfy
+$\left[x^{n}\right]\mathbf{a}_{i,j}=0$); it does not generally hold if we
+merely assume that the sums $\sum_{i\in I}\ \ \sum_{j\in J}\mathbf{a}_{i,j}$
+and $\sum_{j\in J}\ \ \sum_{i\in I}\mathbf{a}_{i,j}$ are summable.
+\end{proposition}
+```
+
+:::proof "prop.fps.summable-sums-rule"
+The proof is tedious, since there are many rules to check, but fairly
+straightforward: the idea is always to focus on a single coefficient and then
+reduce the infinite sums to finite sums.
+
+For example, consider the discrete Fubini rule, which says that
+$$`\sum_{i\in I}\ \ \sum_{j\in J}\mathbf{a}_{i,j}
+=\sum_{\left(i,j\right)\in I\times J}\mathbf{a}_{i,j}
+=\sum_{j\in J}\ \ \sum_{i\in I}\mathbf{a}_{i,j}`
+whenever
+$`\left(\mathbf{a}_{i,j}\right)_{\left(i,j\right)\in I\times J}` is a
+summable family of FPSs. In order to prove this rule, fix such a summable
+family. It is easy to see that the families
+$`\left(\mathbf{a}_{i,j}\right)_{j\in J}` for all $`i\in I` are summable as
+well, as are the families
+$`\left(\mathbf{a}_{i,j}\right)_{i\in I}` for all $`j\in J`, and the families
+$`\left(\sum_{j\in J}\mathbf{a}_{i,j}\right)_{i\in I}` and
+$`\left(\sum_{i\in I}\mathbf{a}_{i,j}\right)_{j\in J}`.
+
+To verify the Fubini identity, it suffices to check that
+$$`\left[x^{n}\right]\left(\sum_{i\in I}\ \ \sum_{j\in J}\mathbf{a}_{i,j}\right)
+=\left[x^{n}\right]\left(\sum_{\left(i,j\right)\in I\times J}\mathbf{a}_{i,j}\right)
+=\left[x^{n}\right]\left(\sum_{j\in J}\ \ \sum_{i\in I}\mathbf{a}_{i,j}\right)`
+for each $`n\in\mathbb{N}`. Fix $`n\in\mathbb{N}`; then
+$`\left[x^{n}\right]\left(\mathbf{a}_{i,j}\right)=0` for all but finitely many
+$`\left(i,j\right)\in I\times J`, since the family is summable. That is, the
+set of all pairs $`\left(i,j\right)\in I\times J` satisfying
+$`\left[x^{n}\right]\left(\mathbf{a}_{i,j}\right)\neq0` is finite. Hence, the
+set $`I^{\prime}` of the first entries and the set $`J^{\prime}` of the second
+entries of all these pairs are also finite. The three sums reduce to finite
+sums over $`I^{\prime}\times J^{\prime}`, which are equal by the usual Fubini
+rule for finite sums.
+:::
+
+```tex "prop.fps.summable-sums-rule" (slot := proof)
+\begin{proof}
+The proof is tedious
+(as there are many rules to check), but fairly straightforward (the idea is
+always to focus on a single coefficient, and then to reduce the infinite sums
+to finite sums). For example, consider the discrete Fubini
+rule, which says that
+\[
+\sum_{i\in I}\ \ \sum_{j\in J}\mathbf{a}_{i,j}=\sum_{\left(i,j\right) \in
+I\times J}\mathbf{a}_{i,j}=\sum_{j\in J}\ \ \sum_{i\in I}\mathbf{a}_{i,j}
+\]
+whenever $\left(\mathbf{a}_{i,j}\right)_{\left(i,j\right) \in I\times
+J}$ is a summable family of FPSs. In order to prove this rule, we fix a
+summable family $\left(\mathbf{a}_{i,j}\right)_{\left(i,j\right) \in
+I\times J}$ of FPSs. It is easy to see that the families $\left(
+\mathbf{a}_{i,j}\right)_{j\in J}$ for all $i\in I$ are summable as well, as
+are the families $\left(\mathbf{a}_{i,j}\right)_{i\in I}$ for all $j\in
+J$, and the families $\left(\sum_{j\in J}\mathbf{a}_{i,j}\right)_{i\in I}$
+and $\left(\sum_{i\in I}\mathbf{a}_{i,j}\right)_{j\in J}$.
+
+To verify the Fubini identity, it suffices to check that
+\[
+\left[x^{n}\right]\left(\sum_{i\in I}\ \ \sum_{j\in J}\mathbf{a}%
+_{i,j}\right) = \left[x^{n}\right]\left(\sum_{\left(i,j\right) \in
+I\times J}\mathbf{a}_{i,j}\right) = \left[x^{n}\right]\left(\sum_{j\in
+J}\ \ \sum_{i\in I}\mathbf{a}_{i,j}\right)
+\]
+for each $n\in\mathbb{N}$. Fix $n\in\mathbb{N}$; then, we have $\left[
+x^{n}\right]\left(\mathbf{a}_{i,j}\right) =0$ for all but finitely many
+$\left(i,j\right) \in I\times J$ (since the family $\left(\mathbf{a}%
+_{i,j}\right)_{\left(i,j\right) \in I\times J}$ is summable). That is,
+the set of all pairs $\left(i,j\right) \in I\times J$ satisfying $\left[
+x^{n}\right]\left(\mathbf{a}_{i,j}\right) \neq0$ is finite. Hence, the
+set $I^{\prime}$ of the first entries and the set $J^{\prime}$ of the second entries
+of all these pairs are also finite. The three sums reduce to finite sums over
+$I^{\prime}\times J^{\prime}$, which are equal by the usual Fubini rule for finite sums.
+See \cite[proof of Proposition 7.2.11]{19s} for more details.
+\end{proof}
+```
+
+:::group "fps_x_powers"
+The indeterminate x and its powers.
+:::
+
+```tex
+\subsection{The indeterminate $x$ and powers}
+```
+
+:::definition "def.fps.x" (parent := "fps_x_powers") (lean := "AlgebraicCombinatorics.FPS.X_coeff_one, AlgebraicCombinatorics.FPS.X_coeff_ne_one")
+Let $`x` denote the FPS $`\left(0,1,0,0,0,\ldots\right)`.
+In other words, let $`x` denote the FPS with
+$`\left[x^{1}\right]x=1` and $`\left[x^{i}\right]x=0` for all $`i\neq1`.
+:::
+
+```tex "def.fps.x" (slot := statement)
+\begin{definition}
+\label{def.fps.x}
+\lean{AlgebraicCombinatorics.FPS.X_coeff_one, AlgebraicCombinatorics.FPS.X_coeff_ne_one}
+\leantarget
+\leanok
+Let $x$ denote the FPS $\left(0,1,0,0,0,\ldots\right)$.
+In other words, let $x$ denote the FPS with $\left[x^{1}\right]x=1$ and
+$\left[x^{i}\right]x=0$ for all $i\neq1$.
+\end{definition}
+```
+
+:::lemma_ "lem.fps.xa" (parent := "fps_x_powers") (lean := "AlgebraicCombinatorics.FPS.X_mul_shift, AlgebraicCombinatorics.FPS.X_mul_coeff_zero, AlgebraicCombinatorics.FPS.coeff_X_mul")
+Let $`\mathbf{a}=\left(a_{0},a_{1},a_{2},\ldots\right)` be an FPS.
+Then
+$`x\cdot\mathbf{a}=\left(0,a_{0},a_{1},a_{2},\ldots\right)`.
+:::
+
+```tex "lem.fps.xa" (slot := statement)
+\begin{lemma}
+\label{lem.fps.xa}
+\lean{AlgebraicCombinatorics.FPS.X_mul_shift, AlgebraicCombinatorics.FPS.X_mul_coeff_zero, AlgebraicCombinatorics.FPS.coeff_X_mul}
+\leantarget
+\leanok
+Let $\mathbf{a}=\left(a_{0},a_{1},a_{2},\ldots\right)$
+be an FPS. Then, $x\cdot\mathbf{a}=\left(0,a_{0},a_{1},a_{2},\ldots\right)$.
+\end{lemma}
+```
+
+:::proof "lem.fps.xa"
+If $`n` is a positive integer, then
+$$`\left[x^{n}\right]\left(x\cdot\mathbf{a}\right)
+=\sum_{i=0}^{n}\left[x^{i}\right]x\cdot a_{n-i}
+=\underbrace{\left[x^{0}\right]x}_{=0}\cdot a_{n}
++\underbrace{\left[x^{1}\right]x}_{=1}\cdot a_{n-1}
++\sum_{i=2}^{n}\underbrace{\left[x^{i}\right]x}_{=0}\cdot a_{n-i}
+=a_{n-1}.`
+
+A similar argument for $`n=0` yields
+$`\left[x^{0}\right]\left(x\cdot\mathbf{a}\right)=0`.
+Thus, for each $`n\in\mathbb{N}`,
+$$`\left[x^{n}\right]\left(x\cdot\mathbf{a}\right)=
+\begin{cases}
+a_{n-1}, & \text{if }n>0;\\
+0, & \text{if }n=0.
+\end{cases}`
+In other words,
+$`x\cdot\mathbf{a}=\left(0,a_{0},a_{1},a_{2},\ldots\right)`.
+:::
+
+```tex "lem.fps.xa" (slot := proof)
+\begin{proof}
+\leanok
+If $n$ is a positive integer, then
+\begin{align*}
+\left[x^{n}\right]\left(x\cdot\mathbf{a}\right) & =\sum_{i=0}%
+^{n}\left[x^{i}\right]x\cdot a_{n-i}\\
+& =\underbrace{\left[x^{0}\right]x}_{=0}\cdot\,a_{n-0}+\underbrace{\left[x^{1}\right]x}%
+_{=1}\cdot\,a_{n-1}+\sum_{i=2}^{n}\underbrace{\left[x^{i}\right]
+x}_{\substack{=0\\\text{(since }i\geq2>1\text{)}}}\cdot\,a_{n-i}\\
+& =a_{n-1}.
+\end{align*}
+A similar argument for $n=0$ yields $\left[x^{0}\right]\left(x\cdot\mathbf{a}\right)=0$.
+Thus, for each $n\in\mathbb{N}$,
+\[
+\left[x^{n}\right]\left(x\cdot\mathbf{a}\right) =
+\begin{cases}
+a_{n-1}, & \text{if }n>0;\\
+0, & \text{if }n=0.
+\end{cases}
+\]
+In other words, $x\cdot\mathbf{a}=\left(0,a_{0},a_{1},a_{2},\ldots\right)$.
+\end{proof}
+```
+
+:::theorem "prop.fps.xk" (parent := "fps_x_powers") (lean := "AlgebraicCombinatorics.FPS.X_pow_coeff")
+We have
+$$`x^{k}=\left(\underbrace{0,0,\ldots,0}_{k\text{ times}},1,0,0,0,\ldots\right)
+\qquad\text{for each }k\in\mathbb{N}.`
+:::
+
+```tex "prop.fps.xk" (slot := statement)
+\begin{proposition}
+\label{prop.fps.xk}
+\lean{AlgebraicCombinatorics.FPS.X_pow_coeff}
+\leantarget
+\leanok
+We have
+\[
+x^{k}=\left(\underbrace{0,0,\ldots,0}_{k\text{ times}},1,0,0,0,\ldots
+\right) \ \ \ \ \ \ \ \ \ \ \text{for each }k\in\mathbb{N}.
+\]
+\end{proposition}
+```
+
+:::proof "prop.fps.xk"
+We induct on $`k`.
+
+_Induction base:_ We have
+$`x^{0}=\underline{1}=\left(1,0,0,0,0,\ldots\right)
+=\left(\underbrace{0,0,\ldots,0}_{0\text{ times}},1,0,0,0,\ldots\right)`.
+
+_Induction step:_ Let $`m\in\mathbb{N}` and assume the proposition holds for
+$`k=m`. Then
+$`x^{m}=\left(\underbrace{0,0,\ldots,0}_{m\text{ times}},1,0,0,0,\ldots\right)`.
+Applying the previous lemma to $`\mathbf{a}=x^{m}` yields
+$$`x\cdot x^{m}
+=\left(0,\underbrace{0,0,\ldots,0}_{m\text{ times}},1,0,0,0,\ldots\right)
+=\left(\underbrace{0,0,\ldots,0}_{m+1\text{ times}},1,0,0,0,\ldots\right).`
+Since $`x\cdot x^{m}=x^{m+1}`, this completes the induction step.
+:::
+
+```tex "prop.fps.xk" (slot := proof)
+\begin{proof}
+We induct on $k$.
+
+\textit{Induction base:} We have $x^{0}=\underline{1}=\left(1,0,0,0,0,\ldots
+\right) = \left(\underbrace{0,0,\ldots,0}_{0\text{ times}},1,0,0,0,\ldots
+\right)$.
+
+\textit{Induction step:} Let $m\in\mathbb{N}$. Assume that Proposition
+\ref{prop.fps.xk} holds for $k=m$. We have $x^{m}=\left(\underbrace{0,0,\ldots,0}_{m\text{ times}%
+},1,0,0,0,\ldots\right)$. Thus, Lemma \ref{lem.fps.xa} (applied to $\mathbf{a}=x^{m}$) yields
+\[
+x\cdot x^{m}=\left(0,\underbrace{0,0,\ldots,0}_{m\text{ times}%
+},1,0,0,0,\ldots\right) = \left(\underbrace{0,0,\ldots,0}_{m+1\text{ times}%
+},1,0,0,0,\ldots\right).
+\]
+Since $x\cdot x^{m}=x^{m+1}$, this completes the induction step.
+\end{proof}
+```
+
+:::corollary "cor.fps.sumakxk" (parent := "fps_x_powers") (lean := "AlgebraicCombinatorics.FPS.fps_eq_tsum_coeff, AlgebraicCombinatorics.FPS.summableFPS_monomial_family")
+Any FPS
+$`\left(a_{0},a_{1},a_{2},\ldots\right)\in K\left[\left[x\right]\right]`
+satisfies
+$$`\left(a_{0},a_{1},a_{2},\ldots\right)
+= a_{0}+a_{1}x+a_{2}x^{2}+a_{3}x^{3}+\cdots
+= \sum_{n\in\mathbb{N}}a_{n}x^{n}.`
+In particular, the right hand side is well-defined, that is, the family
+$`\left(a_{n}x^{n}\right)_{n\in\mathbb{N}}` is summable.
+:::
+
+```tex "cor.fps.sumakxk" (slot := statement)
+\begin{corollary}
+\label{cor.fps.sumakxk}
+\lean{AlgebraicCombinatorics.FPS.fps_eq_tsum_coeff, AlgebraicCombinatorics.FPS.summableFPS_monomial_family}
+\leantarget
+\leanok
+Any FPS $\left(a_{0},a_{1},a_{2},\ldots\right) \in
+K\left[\left[x\right]\right]$ satisfies
+\[
+\left(a_{0},a_{1},a_{2},\ldots\right) = a_{0}+a_{1}x+a_{2}x^{2}+a_{3}%
+x^{3}+\cdots = \sum_{n\in\mathbb{N}}a_{n}x^{n}.
+\]
+In particular, the right hand side here is well-defined, i.e., the family
+$\left(a_{n}x^{n}\right)_{n\in\mathbb{N}}$ is summable.
+\end{corollary}
+```
+
+:::proof "cor.fps.sumakxk"
+By the previous proposition, we have
+$$`a_{0}+a_{1}x+a_{2}x^{2}+a_{3}x^{3}+\cdots
+= a_{0}\left(1,0,0,0,\ldots\right)
++ a_{1}\left(0,1,0,0,\ldots\right)
++ a_{2}\left(0,0,1,0,\ldots\right)
++ a_{3}\left(0,0,0,1,\ldots\right)+\cdots`
+and hence
+$$`= \left(a_{0},0,0,0,\ldots\right)
++ \left(0,a_{1},0,0,\ldots\right)
++ \left(0,0,a_{2},0,\ldots\right)
++ \left(0,0,0,a_{3},\ldots\right)+\cdots
+=\left(a_{0},a_{1},a_{2},a_{3},\ldots\right).`
+:::
+
+```tex "cor.fps.sumakxk" (slot := proof)
+\begin{proof}
+By Proposition \ref{prop.fps.xk}, we have
+\begin{align*}
+& a_{0}+a_{1}x+a_{2}x^{2}+a_{3}x^{3}+\cdots\\
+& =\ \ \ \ a_{0}\left(1,0,0,0,\ldots\right) \\
+& \ \ \ \ +a_{1}\left(0,1,0,0,\ldots\right) \\
+& \ \ \ \ +a_{2}\left(0,0,1,0,\ldots\right) \\
+& \ \ \ \ +a_{3}\left(0,0,0,1,\ldots\right) \\
+& \ \ \ \ +\cdots\\
+& =\ \ \ \ \left(a_{0},0,0,0,\ldots\right) \\
+& \ \ \ \ +\left(0,a_{1},0,0,\ldots\right) \\
+& \ \ \ \ +\left(0,0,a_{2},0,\ldots\right) \\
+& \ \ \ \ +\left(0,0,0,a_{3},\ldots\right) \\
+& \ \ \ \ +\cdots\\
+& =\left(a_{0},a_{1},a_{2},a_{3},\ldots\right).
+\end{align*}
+\end{proof}
+```

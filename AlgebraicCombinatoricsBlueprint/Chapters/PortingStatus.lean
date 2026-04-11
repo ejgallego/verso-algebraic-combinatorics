@@ -29,6 +29,6 @@ The current direct-port work now covers all of `chapter_notations.tex` in
 `NotationsExamples`, from the opening prose through the auxiliary
 generating-function results. `CommutativeRings` is now started through the
 `Fractions and integer powers` subsection. `FPSDefinition` is now started
-through the opening summable-families material. The remaining source chapters
-are still pending first-pass Verso transcription.
+through the `x`-powers material. The remaining source chapters are still
+pending first-pass Verso transcription.
 :::
