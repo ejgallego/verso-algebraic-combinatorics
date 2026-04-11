@@ -899,3 +899,111 @@ Combining, $\operatorname{Exp}$ and
 $\operatorname{Log}$ are mutually inverse bijections.
 \end{proof}
 ```
+
+:::group "exp_log_group_helpers"
+Auxiliary lemmas used to put group structures on the `Exp` and `Log` domains.
+:::
+
+```tex
+\subsection{Helpers for the group structure}
+```
+
+:::lemma_ "lem.fps.sub-one-mem-PS0" (parent := "exp_log_group_helpers") (lean := "PowerSeries.sub_one_mem_PowerSeries₀")
+If $`f \in K\llbracket x \rrbracket_1`, that is, if $`[x^0]f = 1`, then
+$`f - 1 \in K\llbracket x \rrbracket_0`, that is, $`[x^0](f-1) = 0`.
+:::
+
+```tex "lem.fps.sub-one-mem-PS0" (slot := statement)
+\begin{lemma}[$f - 1 \in K\llbracket x \rrbracket_0$ when $f \in K\llbracket x \rrbracket_1$]
+\label{lem.fps.sub-one-mem-PS0}
+\lean{PowerSeries.sub_one_mem_PowerSeries₀}
+\leanhelper
+\leanok
+If $f \in K\llbracket x \rrbracket_1$ (i.e., $[x^0]f = 1$),
+then $f - 1 \in K\llbracket x \rrbracket_0$ (i.e., $[x^0](f-1) = 0$).
+\end{lemma}
+```
+
+:::proof "lem.fps.sub-one-mem-PS0"
+$`\left[x^0\right](f-1)=\left[x^0\right]f-1=1-1=0`.
+:::
+
+```tex "lem.fps.sub-one-mem-PS0" (slot := proof)
+\begin{proof}
+\leanok
+$[x^0](f - 1) = [x^0]f - 1 = 1 - 1 = 0$.
+\end{proof}
+```
+
+:::lemma_ "lem.fps.ode-uniqueness-mul-self" (parent := "exp_log_group_helpers") (lean := "PowerSeries.eq_of_derivative_eq_mul_self")
+Let $`h_1,h_2,g \in K\llbracket x \rrbracket`.
+If $`h_1' = h_1 \cdot g` and $`h_2' = h_2 \cdot g` and
+$`[x^0]h_1 = [x^0]h_2`, then $`h_1 = h_2`.
+:::
+
+```tex "lem.fps.ode-uniqueness-mul-self" (slot := statement)
+\begin{lemma}[ODE uniqueness: $h' = h \cdot g$]
+\label{lem.fps.ode-uniqueness-mul-self}
+\lean{PowerSeries.eq_of_derivative_eq_mul_self}
+\leanhelper
+\leanok
+Let $h_1, h_2, g \in K\llbracket x \rrbracket$.
+If $h_1' = h_1 \cdot g$ and $h_2' = h_2 \cdot g$
+and $[x^0] h_1 = [x^0] h_2$, then $h_1 = h_2$.
+\end{lemma}
+```
+
+:::proof "lem.fps.ode-uniqueness-mul-self"
+Use strong induction on the coefficient index. The differential equation gives
+$`\left[x^{n+1}\right]h \cdot (n+1) = \left[x^n\right](h\cdot g)`, and the
+right-hand side only depends on coefficients of $`h` of index at most $`n`.
+By induction these lower coefficients agree for $`h_1` and $`h_2`, and then
+the $`\mathbb{Q}`-algebra structure lets us cancel $`n+1`.
+:::
+
+```tex "lem.fps.ode-uniqueness-mul-self" (slot := proof)
+\begin{proof}
+By strong induction on the coefficient index. The ODE gives
+$[x^{n+1}] h \cdot (n+1) = [x^n](h \cdot g)$; the right side is a
+convolution involving only coefficients of $h$ of index $\le n$,
+which agree by induction hypothesis. Cancelling $n+1$ uses the
+$\mathbb{Q}$-algebra structure.
+\end{proof}
+```
+
+:::lemma_ "lem.fps.Exp-zero-Log-one" (parent := "exp_log_group_helpers") (lean := "PowerSeries.Exp_zero, PowerSeries.Log_one")
+The map $`\operatorname{Exp}` sends
+$`0 \in K\llbracket x \rrbracket_0` to
+$`1 \in K\llbracket x \rrbracket_1`, and
+$`\operatorname{Log}` sends $`1` to $`0`.
+:::
+
+```tex "lem.fps.Exp-zero-Log-one" (slot := statement)
+\begin{lemma}[$\operatorname{Exp}(0) = 1$ and $\operatorname{Log}(1) = 0$]
+\label{lem.fps.Exp-zero-Log-one}
+\lean{PowerSeries.Exp_zero, PowerSeries.Log_one}
+\leanhelper
+\leanok
+The map $\operatorname{Exp}$ sends $0 \in K\llbracket x \rrbracket_0$
+to $1 \in K\llbracket x \rrbracket_1$, and $\operatorname{Log}$
+sends $1$ to $0$.
+\end{lemma}
+```
+
+:::proof "lem.fps.Exp-zero-Log-one"
+$`\operatorname{Exp}(0)=\exp\circ 0 = 1`, because substituting $`0` picks out
+the constant term of $`\exp`, which is $`1`.
+Likewise,
+$`\operatorname{Log}(1)=\overline{\log}\circ (1-1)=\overline{\log}\circ 0=0`,
+because the constant term of $`\overline{\log}` is $`0`.
+:::
+
+```tex "lem.fps.Exp-zero-Log-one" (slot := proof)
+\begin{proof}
+\leanok
+$\operatorname{Exp}(0) = \exp \circ 0 = 1$ (since $[x^0]\exp = 1$ and
+substituting $0$ picks out the constant term).
+$\operatorname{Log}(1) = \overline{\log} \circ (1 - 1) = \overline{\log} \circ 0 = 0$
+(since $[x^0]\overline{\log} = 0$).
+\end{proof}
+```
