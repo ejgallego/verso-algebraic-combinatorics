@@ -668,3 +668,107 @@ This follows from the scalar multiplication rule (Lemma~\ref{lem.fps.deriv.rules
 since $C(c) \cdot f = c \cdot f$ in the power series ring.
 \end{proof}
 ```
+
+:::lemma_ "lem.fps.deriv.rules.d" (parent := "derivative_rules") (lean := "AlgebraicCombinatorics.FPS.derivative_mul")
+We have $`\left(fg\right)' = f'g + fg'` for any FPSs $`f,g`. This is the
+Leibniz rule.
+:::
+
+```tex "lem.fps.deriv.rules.d" (slot := statement)
+\begin{lemma}[Theorem~\ref{thm.fps.deriv.rules} \textbf{(d)}]
+\label{lem.fps.deriv.rules.d}
+\lean{AlgebraicCombinatorics.FPS.derivative_mul}
+\leanhelper
+\leanok
+We have $\left(  fg\right)  ^{\prime}=f^{\prime}g+fg^{\prime}$
+for any $f,g\in K\left[  \left[  x\right]  \right]  $. (This is known as the
+\emph{Leibniz rule}.)
+\end{lemma}
+```
+
+:::proof "lem.fps.deriv.rules.d"
+This is Exercise 5 (c) in `19s-mt3s` and Proposition 0.2 (c) in `logexp`.
+:::
+
+```tex "lem.fps.deriv.rules.d" (slot := proof)
+\begin{proof}
+\leanok
+This is \cite[Exercise 5 \textbf{(c)}]{19s-mt3s} and
+\cite[Proposition 0.2 \textbf{(c)}]{logexp}.
+\end{proof}
+```
+
+:::lemma_ "lem.fps.deriv.rules.e" (parent := "derivative_rules") (lean := "AlgebraicCombinatorics.FPS.derivative_div")
+If $`f,g\in K\left[\left[x\right]\right]` are two FPSs such that $`g` is
+invertible, then
+$`\left(\dfrac{f}{g}\right)' = \dfrac{f'g-fg'}{g^2}`. This is the quotient
+rule.
+:::
+
+```tex "lem.fps.deriv.rules.e" (slot := statement)
+\begin{lemma}[Theorem~\ref{thm.fps.deriv.rules} \textbf{(e)}]
+\label{lem.fps.deriv.rules.e}
+\lean{AlgebraicCombinatorics.FPS.derivative_div}
+\leanhelper
+\leanok
+If $f,g\in K\left[  \left[  x\right]  \right]  $ are two FPSs
+such that $g$ is invertible, then%
+\[
+\left(  \dfrac{f}{g}\right)  ^{\prime}=\dfrac{f^{\prime}g-fg^{\prime}}{g^{2}%
+}.
+\]
+(This is known as the \emph{quotient rule}.)
+\end{lemma}
+```
+
+:::proof "lem.fps.deriv.rules.e"
+Apply the product rule to $`\dfrac{f}{g}\cdot g = f`. This gives
+$`f' = \left(\dfrac{f}{g}\right)'\cdot g + \dfrac{f}{g}\cdot g'`. Solving for
+$`\left(\dfrac{f}{g}\right)'` yields the stated formula.
+:::
+
+```tex "lem.fps.deriv.rules.e" (slot := proof)
+\begin{proof}
+Let $f,g\in K\left[  \left[  x\right]  \right]  $ be two FPSs
+such that $g$ is invertible. Then, Theorem \ref{thm.fps.deriv.rules}
+\textbf{(d)} (applied to $\dfrac{f}{g}$ instead of $f$) yields $\left(
+\dfrac{f}{g}\cdot g\right)  ^{\prime}=\left(  \dfrac{f}{g}\right)  ^{\prime
+}\cdot g+\dfrac{f}{g}\cdot g^{\prime}$. In view of $\dfrac{f}{g}\cdot g=f$,
+this rewrites as $f^{\prime}=\left(  \dfrac{f}{g}\right)  ^{\prime}\cdot
+g+\dfrac{f}{g}\cdot g^{\prime}$. Solving this for $\left(  \dfrac{f}%
+{g}\right)  ^{\prime}$, we find $\left(  \dfrac{f}{g}\right)  ^{\prime}%
+=\dfrac{f^{\prime}g-fg^{\prime}}{g^{2}}$.
+\end{proof}
+```
+
+:::lemma_ "lem.fps.deriv.rules.f" (parent := "derivative_rules") (lean := "AlgebraicCombinatorics.FPS.derivative_pow'")
+If $`g\in K\left[\left[x\right]\right]` is an FPS, then
+$`\left(g^n\right)' = ng'g^{n-1}` for any $`n\in\mathbb{N}`, where the
+expression on the right is understood as $`0` if $`n=0`.
+:::
+
+```tex "lem.fps.deriv.rules.f" (slot := statement)
+\begin{lemma}[Theorem~\ref{thm.fps.deriv.rules} \textbf{(f)}]
+\label{lem.fps.deriv.rules.f}
+\lean{AlgebraicCombinatorics.FPS.derivative_pow'}
+\leanhelper
+\leanok
+If $g\in K\left[  \left[  x\right]  \right]  $ is an FPS, then
+$\left(  g^{n}\right)  ^{\prime}=ng^{\prime}g^{n-1}$ for any $n\in\mathbb{N}$
+(where the expression $ng^{\prime}g^{n-1}$ is to be understood as $0$ if
+$n=0$).
+\end{lemma}
+```
+
+:::proof "lem.fps.deriv.rules.f"
+Induct on $`n`, using the Leibniz rule in the induction step and the fact that
+$`1' = 0` in the base case.
+:::
+
+```tex "lem.fps.deriv.rules.f" (slot := proof)
+\begin{proof}
+\leanok
+This follows by induction on $n$, using part \textbf{(d)} (in the
+induction step) and $1^{\prime}=0$ (in the induction base).
+\end{proof}
+```
