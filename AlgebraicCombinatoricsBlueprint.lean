@@ -9,6 +9,7 @@ import AlgebraicCombinatoricsBlueprint.Chapters.CommutativeRings
 import AlgebraicCombinatoricsBlueprint.Chapters.FPSDefinition
 import AlgebraicCombinatoricsBlueprint.Chapters.DividingFPS
 import AlgebraicCombinatoricsBlueprint.Chapters.Polynomials
+import AlgebraicCombinatoricsBlueprint.Chapters.Substitution
 
 open Verso.Genre
 open Verso.Genre.Manual
@@ -26,6 +27,7 @@ checkout.
 {include 0 AlgebraicCombinatoricsBlueprint.Chapters.FPSDefinition}
 {include 0 AlgebraicCombinatoricsBlueprint.Chapters.DividingFPS}
 {include 0 AlgebraicCombinatoricsBlueprint.Chapters.Polynomials}
+{include 0 AlgebraicCombinatoricsBlueprint.Chapters.Substitution}
 
 {blueprint_graph}
 {blueprint_summary}
