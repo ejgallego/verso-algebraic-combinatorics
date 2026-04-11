@@ -1007,3 +1007,214 @@ $\operatorname{Log}(1) = \overline{\log} \circ (1 - 1) = \overline{\log} \circ 0
 (since $[x^0]\overline{\log} = 0$).
 \end{proof}
 ```
+
+:::group "exp_log_group_structure"
+How `Exp` turns addition into multiplication, and `Log` does the reverse.
+:::
+
+```tex
+\subsection{Addition to multiplication}
+```
+
+:::lemma_ "lem.fps.Exp-Log-additive" (parent := "exp_log_group_structure") (lean := "PowerSeries.Exp_add, PowerSeries.Log_mul")
+*(a)* For any
+$`f,g\in K\left[\left[x\right]\right]_0`, we have
+$$`\operatorname{Exp}(f+g)=\operatorname{Exp}f\cdot \operatorname{Exp}g.`
+
+*(b)* For any
+$`f,g\in K\left[\left[x\right]\right]_1`, we have
+$$`\operatorname{Log}(fg)=\operatorname{Log}f+\operatorname{Log}g.`
+:::
+
+```tex "lem.fps.Exp-Log-additive" (slot := statement)
+\begin{lemma}
+\label{lem.fps.Exp-Log-additive}
+\lean{PowerSeries.Exp_add, PowerSeries.Log_mul}
+\leantarget
+\leanok
+\textbf{(a)} For any $f,g\in K\left[\left[
+x\right]\right]_{0}$, we have
+\[
+\operatorname{Exp}\left(f+g\right)=\operatorname{Exp}f\cdot
+\operatorname{Exp}g.
+\]
+
+\textbf{(b)} For any $f,g\in K\left[\left[x\right]\right]_{1}$, we
+have
+\[
+\operatorname{Log}\left(fg\right)=\operatorname{Log}
+f+\operatorname{Log}g.
+\]
+\end{lemma}
+```
+
+:::proof "lem.fps.Exp-Log-additive"
+*(a)* For $`f,g\in K\left[\left[x\right]\right]_0`, the formal series
+definitions give
+$`\operatorname{Exp}f=\sum_{n\in\mathbb{N}}\dfrac{1}{n!}f^n`,
+$`\operatorname{Exp}g=\sum_{n\in\mathbb{N}}\dfrac{1}{n!}g^n`,
+and
+$`\operatorname{Exp}(f+g)=\sum_{n\in\mathbb{N}}\dfrac{1}{n!}(f+g)^n`.
+Expanding with the binomial formula and rearranging gives exactly the product
+$`\operatorname{Exp}f\cdot \operatorname{Exp}g`.
+
+*(b)* This follows from part *(a)* because $`\operatorname{Log}` is inverse to
+$`\operatorname{Exp}`. Setting
+$`u=\operatorname{Log}f` and $`v=\operatorname{Log}g`, part *(a)* yields
+$`\operatorname{Exp}(u+v)=\operatorname{Exp}u\cdot\operatorname{Exp}v`; then
+apply $`\operatorname{Log}` to both sides.
+:::
+
+```tex "lem.fps.Exp-Log-additive" (slot := proof)
+\begin{proof}
+\textbf{(a)} Let $f,g\in K\left[\left[x\right]\right]_{0}$. Thus, $\left[
+x^{0}\right]f=0$ and $\left[x^{0}\right]g=0$. By the definition of $\operatorname{Exp}$, we have
+\[
+\operatorname{Exp}f=\exp\circ f=\sum_{n\in\mathbb{N}
+}\dfrac{1}{n!}f^{n}.
+\]
+Similarly, $\operatorname{Exp}g=\sum_{n\in\mathbb{N}}\dfrac{1}{n!}g^{n}$
+and
+$\operatorname{Exp}\left(f+g\right)=\sum_{n\in\mathbb{N}}\dfrac{1}
+{n!}\left(f+g\right)^{n}$.
+
+Now, the latter equality becomes
+\begin{align*}
+\operatorname{Exp}\left(f+g\right) &  =\sum_{n\in\mathbb{N}}\dfrac{1}
+{n!}\sum\limits_{k=0}
+^{n}\dbinom{n}{k}f^{k}g^{n-k}
+=\sum_{k\in\mathbb{N}}\ \ \sum\limits_{\ell
+\in\mathbb{N}}\dfrac{1}{k!\ell!}f^{k}g^{\ell}.
+\end{align*}
+Comparing this with
+$\operatorname{Exp}f\cdot\operatorname{Exp}g
+=\sum_{k\in\mathbb{N}}\ \ \sum_{\ell\in
+\mathbb{N}}\dfrac{1}{k!\ell!}f^{k}g^{\ell}$,
+we obtain $\operatorname{Exp}\left(f+g\right)=\operatorname{Exp}
+f\cdot\operatorname{Exp}g$.
+
+(In the Lean formalization, this is proved via ODE uniqueness:
+both sides satisfy the ODE $h^{\prime} = h \cdot (f^{\prime} + g^{\prime})$ with the same initial condition.)
+
+\textbf{(b)} This follows from part \textbf{(a)}, since we know that
+$\operatorname{Log}$ is inverse to $\operatorname{Exp}$. Setting
+$u=\operatorname{Log}f$ and $v=\operatorname{Log}g$, part \textbf{(a)}
+gives $\operatorname{Exp}\left(u+v\right)=\operatorname{Exp}u\cdot\operatorname{Exp}v$,
+and applying $\operatorname{Log}$ (using Lemma \ref{lem.fps.Exp-Log-maps-inv}) yields
+$\operatorname{Log}\left(fg\right)=\operatorname{Log}f+\operatorname{Log}g$.
+\end{proof}
+```
+
+:::theorem "prop.fps.Exp-Log-groups" (parent := "exp_log_group_structure") (lean := "PowerSeries.PowerSeries₀.addSubgroup, PowerSeries.PowerSeries₁.subgroup")
+*(a)* The subset
+$`K\left[\left[x\right]\right]_0` of $`K\left[\left[x\right]\right]` is closed
+under addition and subtraction and contains $`0`, so it forms a group
+$`\left(K\left[\left[x\right]\right]_0,+,0\right)`.
+
+*(b)* The subset
+$`K\left[\left[x\right]\right]_1` of $`K\left[\left[x\right]\right]` is closed
+under multiplication and division and contains $`1`, so it forms a group
+$`\left(K\left[\left[x\right]\right]_1,\cdot,1\right)`.
+:::
+
+```tex "prop.fps.Exp-Log-groups" (slot := statement)
+\begin{proposition}
+\label{prop.fps.Exp-Log-groups}
+\lean{PowerSeries.PowerSeries₀.addSubgroup, PowerSeries.PowerSeries₁.subgroup}
+\leantarget
+\leanok
+\textbf{(a)} The subset $K\left[\left[
+x\right]\right]_{0}$ of $K\left[\left[x\right]\right]$ is closed
+under addition and subtraction and contains $0$, and thus forms a group
+$\left(K\left[\left[x\right]\right]_{0},+,0\right)$. \medskip
+
+\textbf{(b)} The subset $K\left[\left[x\right]\right]_{1}$ of
+$K\left[\left[x\right]\right]$ is closed under multiplication and
+division and contains $1$, and thus forms a group $\left(K\left[\left[
+x\right]\right]_{1},\cdot,1\right)$.
+\end{proposition}
+```
+
+:::proof "prop.fps.Exp-Log-groups"
+*(a)* The zero series belongs to
+$`K\left[\left[x\right]\right]_0`, and if
+$`f,g\in K\left[\left[x\right]\right]_0`, then the constant term of both
+$`f+g` and $`f-g` is again $`0`.
+
+*(b)* Any element of
+$`K\left[\left[x\right]\right]_1` is invertible because its constant term is
+$`1`. The set is closed under multiplication because constant terms multiply,
+and it is closed under division because inverses stay in the same set.
+:::
+
+```tex "prop.fps.Exp-Log-groups" (slot := proof)
+\begin{proof}
+\textbf{(a)} It is clear
+that the set $K\left[\left[x\right]\right]_{0}$ contains the FPS $0$
+(since $\left[x^{0}\right]0=0$). If $f,g\in K\left[\left[x\right]\right]_{0}$, then
+$\left[x^{0}\right]f=0$ and $\left[x^{0}\right]g=0$, and therefore
+$f+g\in K\left[\left[x\right]\right]_{0}$ (since
+$\left[x^{0}\right]\left(
+f+g\right)=0+0=0$) and $f-g\in K\left[\left[x\right]\right]
+_{0}$ (by a similar argument).
+
+\textbf{(b)} Any $a\in K\left[\left[
+x\right]\right]_{1}$ is invertible
+in $K\left[\left[x\right]\right]$ (since $\left[x^{0}\right]a=1$ is invertible in $K$).
+Next, $K\left[\left[x\right]\right]_{1}$ is closed under
+multiplication: if $f,g\in K\left[\left[x\right]\right]_{1}$,
+then $\left[x^{0}\right]f=1$ and $\left[x^{0}\right]g=1$, and
+therefore $\left[x^{0}\right]\left(
+fg\right)=1\cdot 1=1$.
+Similarly, $K\left[\left[x\right]\right]_{1}$ is closed
+under division.
+\end{proof}
+```
+
+:::theorem "thm.fps.Exp-Log-group-iso" (parent := "exp_log_group_structure") (lean := "PowerSeries.Exp_Log_groupIso")
+The maps
+$$`\operatorname{Exp}:\left(K\left[\left[x\right]\right]_{0},+,0\right)
+\rightarrow\left(K\left[\left[x\right]\right]_{1},\cdot,1\right)`
+and
+$$`\operatorname{Log}:\left(K\left[\left[x\right]\right]_{1},\cdot,1\right)
+\rightarrow\left(K\left[\left[x\right]\right]_{0},+,0\right)`
+are mutually inverse group isomorphisms.
+:::
+
+```tex "thm.fps.Exp-Log-group-iso" (slot := statement)
+\begin{theorem}
+\label{thm.fps.Exp-Log-group-iso}
+\lean{PowerSeries.Exp_Log_groupIso}
+\leantarget
+\leanok
+The maps
+\[
+\operatorname{Exp}:\left(K\left[\left[x\right]\right]_{0}
+,+,0\right)\rightarrow\left(K\left[\left[x\right]\right]_{1}
+,\cdot,1\right)
+\]
+and
+\[
+\operatorname{Log}:\left(K\left[\left[x\right]\right]_{1}
+,\cdot,1\right)\rightarrow\left(K\left[\left[x\right]\right]
+_{0},+,0\right)
+\]
+are mutually inverse group isomorphisms.
+\end{theorem}
+```
+
+:::proof "thm.fps.Exp-Log-group-iso"
+The additive/multiplicative compatibility lemma shows that the two maps are
+group homomorphisms, and the inverse-map lemma shows that they are mutually
+inverse. Therefore they are mutually inverse group isomorphisms.
+:::
+
+```tex "thm.fps.Exp-Log-group-iso" (slot := proof)
+\begin{proof}
+Lemma
+\ref{lem.fps.Exp-Log-additive} yields that these two maps are group
+homomorphisms. Lemma \ref{lem.fps.Exp-Log-maps-inv}
+shows that they are mutually inverse. Combining these results, we conclude
+that these two maps are mutually inverse group isomorphisms.
+\end{proof}
+```
