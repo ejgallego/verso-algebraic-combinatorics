@@ -254,3 +254,336 @@ By Lemma~\ref{lem.fps.pol.coe-toPolynomial}, both sides have the same image
 under $\iota$, and $\iota$ is injective.
 \end{proof}
 ```
+
+:::group "polynomials_subring"
+Closure of polynomial FPSs under the ring and module operations.
+:::
+
+```tex
+\subsection{Polynomials form a subring of power series}
+```
+
+:::lemma_ "lem.fps.pol.zero" (parent := "polynomials_subring") (lean := "FPS.isPolynomial_zero")
+The zero power series $`\underline{0}` is a polynomial.
+:::
+
+```tex "lem.fps.pol.zero" (slot := statement)
+\begin{lemma}
+\label{lem.fps.pol.zero}
+\lean{FPS.isPolynomial_zero}
+\leanhelper
+\leanok
+The zero power series $\underline{0}$ is a polynomial.
+\end{lemma}
+```
+
+:::proof "lem.fps.pol.zero"
+All coefficients of $`\underline{0}` are $`0`, so the set of indices of
+nonzero coefficients is empty, hence finite.
+:::
+
+```tex "lem.fps.pol.zero" (slot := proof)
+\begin{proof}
+\leanok
+All coefficients of $\underline{0}$ are $0$, so the set of nonzero-coefficient
+indices is empty, hence finite.
+\end{proof}
+```
+
+:::lemma_ "lem.fps.pol.one" (parent := "polynomials_subring") (lean := "FPS.isPolynomial_one")
+The unity $`\underline{1}` is a polynomial.
+:::
+
+```tex "lem.fps.pol.one" (slot := statement)
+\begin{lemma}
+\label{lem.fps.pol.one}
+\lean{FPS.isPolynomial_one}
+\leanhelper
+\leanok
+The unity $\underline{1}$ is a polynomial.
+\end{lemma}
+```
+
+:::proof "lem.fps.pol.one"
+The unity $`\underline{1}` equals the image of $`1\in K[X]` under the
+canonical embedding.
+:::
+
+```tex "lem.fps.pol.one" (slot := proof)
+\begin{proof}
+\leanok
+The unity $\underline{1}$ equals the image of $1\in K[X]$ under the canonical
+embedding.
+\end{proof}
+```
+
+:::lemma_ "lem.fps.pol.add" (parent := "polynomials_subring") (lean := "FPS.isPolynomial_add")
+The sum of two polynomial power series is a polynomial.
+:::
+
+```tex "lem.fps.pol.add" (slot := statement)
+\begin{lemma}
+\label{lem.fps.pol.add}
+\lean{FPS.isPolynomial_add}
+\leanhelper
+\leanok
+The sum of two polynomial power series is a polynomial.
+\end{lemma}
+```
+
+:::proof "lem.fps.pol.add"
+If $`f` and $`g` are polynomials, then the set of indices where $`f+g` has a
+nonzero coefficient is contained in the union of the corresponding sets for
+$`f` and $`g`. A finite union of finite sets is finite.
+:::
+
+```tex "lem.fps.pol.add" (slot := proof)
+\begin{proof}
+\leanok
+If $f$ and $g$ are polynomials, then the set of indices where $(f+g)$ has a
+nonzero coefficient is contained in the union of the corresponding sets for
+$f$ and $g$. A finite union of finite sets is finite.
+\end{proof}
+```
+
+:::lemma_ "lem.fps.pol.neg" (parent := "polynomials_subring") (lean := "FPS.isPolynomial_neg")
+The negation of a polynomial power series is a polynomial.
+:::
+
+```tex "lem.fps.pol.neg" (slot := statement)
+\begin{lemma}
+\label{lem.fps.pol.neg}
+\lean{FPS.isPolynomial_neg}
+\leanhelper
+\leanok
+The negation of a polynomial power series is a polynomial.
+\end{lemma}
+```
+
+:::proof "lem.fps.pol.neg"
+Negation does not change which coefficients are nonzero.
+:::
+
+```tex "lem.fps.pol.neg" (slot := proof)
+\begin{proof}
+\leanok
+Negation does not change which coefficients are nonzero.
+\end{proof}
+```
+
+:::lemma_ "lem.fps.pol.sub" (parent := "polynomials_subring") (lean := "FPS.isPolynomial_sub")
+The difference of two polynomial power series is a polynomial.
+:::
+
+```tex "lem.fps.pol.sub" (slot := statement)
+\begin{lemma}
+\label{lem.fps.pol.sub}
+\lean{FPS.isPolynomial_sub}
+\leanhelper
+\leanok
+The difference of two polynomial power series is a polynomial.
+\end{lemma}
+```
+
+:::proof "lem.fps.pol.sub"
+Write $`f-g=f+(-g)` and use the previous two closure lemmas.
+:::
+
+```tex "lem.fps.pol.sub" (slot := proof)
+\begin{proof}
+\leanok
+Write $f-g=f+(-g)$ and apply Lemma~\ref{lem.fps.pol.add} and
+Lemma~\ref{lem.fps.pol.neg}.
+\end{proof}
+```
+
+:::lemma_ "lem.fps.pol.mul" (parent := "polynomials_subring") (lean := "FPS.isPolynomial_mul")
+The product of two polynomial power series is a polynomial.
+:::
+
+```tex "lem.fps.pol.mul" (slot := statement)
+\begin{lemma}
+\label{lem.fps.pol.mul}
+\lean{FPS.isPolynomial_mul}
+\leanhelper
+\leanok
+The product of two polynomial power series is a polynomial.
+\end{lemma}
+```
+
+:::proof "lem.fps.pol.mul"
+Let $`a,b\in K[x]`. Since $`a` is a polynomial, there exists a finite subset
+$`I\subseteq\mathbb{N}` such that $`\left[x^{i}\right]a=0` for all
+$`i\in\mathbb{N}\setminus I`. Similarly, there exists a finite subset
+$`J\subseteq\mathbb{N}` such that $`\left[x^{j}\right]b=0` for all
+$`j\in\mathbb{N}\setminus J`.
+
+Let
+$`S=\left\{ i+j \mid i\in I\text{ and }j\in J\right\}`. This set is finite.
+For any $`n\in\mathbb{N}\setminus S`, we have
+$$`\left[x^{n}\right](ab)
+=\sum_{i=0}^{n}\left[x^{i}\right]a\cdot \left[x^{n-i}\right]b = 0,`
+because for each $`i\in\{0,1,\ldots,n\}`, letting $`j=n-i`, we cannot have
+both $`i\in I` and $`j\in J`; otherwise $`n=i+j` would belong to $`S`.
+Hence every summand is $`0`.
+
+Thus all but finitely many coefficients of $`ab` vanish, so $`ab\in K[x]`.
+:::
+
+```tex "lem.fps.pol.mul" (slot := proof)
+\begin{proof}
+\leanok
+Let $a,b\in K\left[  x\right]  $. Since $a$ is a polynomial, there exists a finite
+subset $I$ of $\mathbb{N}$ such that
+$\left[  x^{i}\right]  a=0$ for all
+$i\in\mathbb{N}\setminus I$.
+Similarly, there exists a finite subset $J$ of
+$\mathbb{N}$ such that
+$\left[  x^{j}\right]  b=0$ for all
+$j\in\mathbb{N}\setminus J$.
+
+Let $S=\left\{
+i+j\ \mid\ i\in I\text{ and }j\in J\right\}$. This set $S$
+is again finite (since $I$ and $J$ are finite), and we have
+\[
+\left[  x^{n}\right]  \left(  ab\right)  =\sum_{i=0}^{n}\left[  x^{i}\right]
+a\cdot\left[  x^{n-i}\right]  b=0\text{ for all }n\in\mathbb{N}\setminus S,
+\]
+because for each $i\in\left\{  0,1,\ldots,n\right\}$, letting $j=n-i$, we cannot have both
+$i\in I$ and $j\in J$ (otherwise $n=i+j\in S$, contradicting
+$n\notin S$), so at least one of $\left[  x^{i}\right]  a$ and
+$\left[  x^{j}\right]  b$ is $0$, making each summand $0$.
+Thus, all but finitely many
+$n\in\mathbb{N}$ satisfy $\left[  x^{n}\right]  \left(  ab\right)  =0$, so $ab\in K\left[  x\right]  $.
+\end{proof}
+```
+
+:::lemma_ "lem.fps.pol.smul" (parent := "polynomials_subring") (lean := "FPS.isPolynomial_smul")
+Scalar multiplication of a polynomial power series by an element of $`K` is a
+polynomial.
+:::
+
+```tex "lem.fps.pol.smul" (slot := statement)
+\begin{lemma}
+\label{lem.fps.pol.smul}
+\lean{FPS.isPolynomial_smul}
+\leanhelper
+\leanok
+Scalar multiplication of a polynomial power series by an element of $K$ is a
+polynomial.
+\end{lemma}
+```
+
+:::proof "lem.fps.pol.smul"
+If $`\left[x^{n}\right]f=0`, then
+$`\left[x^{n}\right](cf)=c\cdot\left[x^{n}\right]f=0`. Thus the set of
+indices of nonzero coefficients of $`cf` is contained in that of $`f`, which
+is finite.
+:::
+
+```tex "lem.fps.pol.smul" (slot := proof)
+\begin{proof}
+\leanok
+If $\left[x^{n}\right]f=0$, then $\left[x^{n}\right](cf)=c\cdot
+\left[x^{n}\right]f=0$. So the nonzero-coefficient set of $cf$ is contained
+in that of $f$, which is finite.
+\end{proof}
+```
+
+:::theorem "thm.fps.pol.ring" (parent := "polynomials_subring") (lean := "FPS.polynomialSubalgebra, FPS.polynomialSubring, FPS.polynomialSubmodule")
+The set $`K[x]` is a subring of $`K\left[\left[x\right]\right]`; that is, it
+is closed under addition, subtraction, and multiplication, and it contains
+$`\underline{0}` and $`\underline{1}`. It is also a $`K`-submodule of
+$`K\left[\left[x\right]\right]`; that is, it is closed under addition and
+scaling by elements of $`K`.
+:::
+
+```tex "thm.fps.pol.ring" (slot := statement)
+\begin{theorem}
+\label{thm.fps.pol.ring}
+\lean{FPS.polynomialSubalgebra, FPS.polynomialSubring, FPS.polynomialSubmodule}
+\leantarget
+\leanok
+The set $K\left[  x\right]  $ is a subring of
+$K\left[  \left[  x\right]  \right]  $ (that is, it is closed under addition,
+subtraction and multiplication, and contains the zero $\underline{0}$ and the
+unity $\underline{1}$) and is a $K$-submodule of $K\left[  \left[  x\right]
+\right]  $ (that is, it is closed under addition and scaling by elements of
+$K$).
+\end{theorem}
+```
+
+:::proof "thm.fps.pol.ring"
+This is an immediate consequence of the preceding lemmas: polynomial FPSs
+contain $`\underline{0}` and $`\underline{1}`, are closed under addition,
+subtraction, and multiplication, and are also closed under scaling by
+elements of $`K`.
+:::
+
+```tex "thm.fps.pol.ring" (slot := proof)
+\begin{proof}
+Follows from the preceding lemmas: $K[x]$ contains $\underline{0}$
+(Lemma~\ref{lem.fps.pol.zero}) and $\underline{1}$
+(Lemma~\ref{lem.fps.pol.one}), is closed under addition
+(Lemma~\ref{lem.fps.pol.add}), multiplication (Lemma~\ref{lem.fps.pol.mul}),
+and scalar multiplication (Lemma~\ref{lem.fps.pol.smul}).
+\end{proof}
+```
+
+:::lemma_ "lem.fps.pol.X" (parent := "polynomials_subring") (lean := "FPS.isPolynomial_X")
+The polynomial $`x\in K\left[\left[x\right]\right]` is a polynomial.
+:::
+
+```tex "lem.fps.pol.X" (slot := statement)
+\begin{lemma}
+\label{lem.fps.pol.X}
+\lean{FPS.isPolynomial_X}
+\leanhelper
+\leanok
+The polynomial $x\in K\left[\left[x\right]\right]$ is a polynomial.
+\end{lemma}
+```
+
+:::proof "lem.fps.pol.X"
+The only nonzero coefficient of $`x` is the coefficient of $`x^1`, which is
+$`1`. Thus the set of indices of nonzero coefficients is contained in
+$`\{1\}`, which is finite.
+:::
+
+```tex "lem.fps.pol.X" (slot := proof)
+\begin{proof}
+\leanok
+The only nonzero coefficient of $x$ is the coefficient of $x^1$, which is $1$.
+Thus the set of nonzero-coefficient indices is contained in $\{1\}$, which is
+finite.
+\end{proof}
+```
+
+:::lemma_ "lem.fps.pol.C" (parent := "polynomials_subring") (lean := "FPS.isPolynomial_C")
+For any $`c\in K`, the constant FPS $`\underline{c}` is a polynomial.
+:::
+
+```tex "lem.fps.pol.C" (slot := statement)
+\begin{lemma}
+\label{lem.fps.pol.C}
+\lean{FPS.isPolynomial_C}
+\leanhelper
+\leanok
+For any $c\in K$, the constant FPS $\underline{c}$ is a polynomial.
+\end{lemma}
+```
+
+:::proof "lem.fps.pol.C"
+The only possibly nonzero coefficient of $`\underline{c}` is the coefficient
+of $`x^0`. Thus the set of indices of nonzero coefficients is contained in
+$`\{0\}`, which is finite.
+:::
+
+```tex "lem.fps.pol.C" (slot := proof)
+\begin{proof}
+\leanok
+The only possibly nonzero coefficient of $\underline{c}$ is the coefficient of
+$x^0$. Thus the set of nonzero-coefficient indices is contained in $\{0\}$,
+which is finite.
+\end{proof}
+```
