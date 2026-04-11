@@ -587,3 +587,98 @@ $x^0$. Thus the set of nonzero-coefficient indices is contained in $\{0\}$,
 which is finite.
 \end{proof}
 ```
+
+:::group "polynomials_ring_reminders"
+Ring and algebra reminders used before polynomial evaluation.
+:::
+
+```tex
+\subsection{Reminders on rings and $K$-algebras}
+```
+
+:::definition "def.alg.ring" (parent := "polynomials_ring_reminders") (lean := "FPS.ring_add_assoc, FPS.ring_add_comm, FPS.ring_add_zero, FPS.ring_zero_add, FPS.ring_add_neg, FPS.ring_mul_assoc, FPS.ring_left_distrib, FPS.ring_right_distrib, FPS.ring_mul_one, FPS.ring_one_mul, FPS.ring_mul_zero, FPS.ring_zero_mul")
+The notion of a _ring_, also known as a _noncommutative ring_, is defined in
+exactly the same way as the notion of a commutative ring from the earlier
+chapter, except that the commutativity-of-multiplication axiom is removed.
+:::
+
+```tex "def.alg.ring" (slot := statement)
+\begin{definition}
+\label{def.alg.ring}
+\lean{FPS.ring_add_assoc, FPS.ring_add_comm, FPS.ring_add_zero, FPS.ring_zero_add, FPS.ring_add_neg, FPS.ring_mul_assoc, FPS.ring_left_distrib, FPS.ring_right_distrib, FPS.ring_mul_one, FPS.ring_one_mul, FPS.ring_mul_zero, FPS.ring_zero_mul}
+\leantarget
+\leanok
+The notion of a \emph{ring} (also known as a \emph{noncommutative ring}) is
+defined in the exact same way as we defined the notion of a commutative ring in
+Definition~\ref{def.alg.commring}, except that the ``Commutativity of
+multiplication'' axiom is removed.
+\end{definition}
+```
+
+:::definition "def.alg.Kalg" (parent := "polynomials_ring_reminders") (lean := "FPS.kalg_add_comm, FPS.kalg_add_assoc, FPS.kalg_add_zero, FPS.kalg_mul_assoc, FPS.kalg_left_distrib, FPS.kalg_right_distrib, FPS.kalg_mul_one, FPS.kalg_one_mul, FPS.kalg_smul_assoc, FPS.kalg_smul_add, FPS.kalg_add_smul, FPS.kalg_one_smul, FPS.kalg_zero_smul, FPS.kalg_smul_zero, FPS.kalg_smul_mul_assoc, FPS.kalg_mul_smul_comm, FPS.kalg_smul_mul_eq_mul_smul")
+A $`K`-algebra is a set $`A` equipped with four maps
+$$`\begin{aligned}
+\oplus &  :A\times A\rightarrow A,\\
+\ominus &  :A\times A\rightarrow A,\\
+\odot &  :A\times A\rightarrow A,\\
+\rightharpoonup &  :K\times A\rightarrow A
+\end{aligned}`$$
+and two elements $`\overrightarrow{0}\in A` and $`\overrightarrow{1}\in A`
+satisfying the following properties:
+
+1. The set $`A`, equipped with the maps $`\oplus`, $`\ominus`, and $`\odot`
+   and the two elements $`\overrightarrow{0}` and $`\overrightarrow{1}`, is a
+   ring.
+2. The set $`A`, equipped with the maps $`\oplus`, $`\ominus`, and
+   $`\rightharpoonup` and the element $`\overrightarrow{0}`, is a $`K`-module.
+3. We have
+   $$`\lambda\rightharpoonup\left(a\odot b\right)
+   =\left(\lambda\rightharpoonup a\right)\odot b
+   =a\odot\left(\lambda\rightharpoonup b\right)`$$
+   for all $`\lambda\in K` and $`a,b\in A`.
+
+Thus, in a nutshell, a $`K`-algebra is a set $`A` that is simultaneously a
+ring and a $`K`-module, with the property that the ring $`A` and the
+$`K`-module $`A` have the same addition, the same subtraction, and the same
+zero, and satisfy the compatibility property above.
+:::
+
+```tex "def.alg.Kalg" (slot := statement)
+\begin{definition}
+\label{def.alg.Kalg}
+\lean{FPS.kalg_add_comm, FPS.kalg_add_assoc, FPS.kalg_add_zero, FPS.kalg_mul_assoc, FPS.kalg_left_distrib, FPS.kalg_right_distrib, FPS.kalg_mul_one, FPS.kalg_one_mul, FPS.kalg_smul_assoc, FPS.kalg_smul_add, FPS.kalg_add_smul, FPS.kalg_one_smul, FPS.kalg_zero_smul, FPS.kalg_smul_zero, FPS.kalg_smul_mul_assoc, FPS.kalg_mul_smul_comm, FPS.kalg_smul_mul_eq_mul_smul}
+\leantarget
+\leanok
+A $K$\emph{-algebra} is a set $A$ equipped with four maps%
+\begin{align*}
+\oplus &  :A\times A\rightarrow A,\\
+\ominus &  :A\times A\rightarrow A,\\
+\odot &  :A\times A\rightarrow A,\\
+\rightharpoonup &  :K\times A\rightarrow A
+\end{align*}
+and two elements $\overrightarrow{0}\in A$ and $\overrightarrow{1}\in A$
+satisfying the following properties:
+
+\begin{enumerate}
+\item The set $A$, equipped with the maps $\oplus$, $\ominus$ and $\odot$ and
+the two elements $\overrightarrow{0}$ and $\overrightarrow{1}$, is a
+(noncommutative) ring.
+
+\item The set $A$, equipped with the maps $\oplus$, $\ominus$ and
+$\rightharpoonup$ and the element $\overrightarrow{0}$, is a $K$-module.
+
+\item We have%
+\begin{equation}
+\lambda\rightharpoonup\left(  a\odot b\right)  =\left(  \lambda\rightharpoonup
+a\right)  \odot b=a\odot\left(  \lambda\rightharpoonup b\right)
+\label{eq.def.alg.Kalg.scaleinv}%
+\end{equation}
+for all $\lambda\in K$ and $a,b\in A$.
+\end{enumerate}
+
+(Thus, in a nutshell, a $K$-algebra is a set $A$ that is simultaneously a ring
+and a $K$-module, with the property that the ring $A$ and the $K$-module $A$
+have the same addition, the same subtraction and the same zero, and satisfy
+the additional compatibility property (\ref{eq.def.alg.Kalg.scaleinv}).)
+\end{definition}
+```
