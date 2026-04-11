@@ -28,6 +28,6 @@ than maintained as free-form prose.
 The current direct-port work now covers all of `chapter_notations.tex` in
 `NotationsExamples`, from the opening prose through the auxiliary
 generating-function results. `CommutativeRings` is now started through the
-commutative-ring definition and the first standard identities. The remaining
-source chapters are still pending first-pass Verso transcription.
+`Finite sums and products` subsection. The remaining source chapters are still
+pending first-pass Verso transcription.
 :::

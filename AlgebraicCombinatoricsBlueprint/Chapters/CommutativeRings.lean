@@ -408,3 +408,124 @@ Write $`a - b = a + (-b)` and apply the binomial theorem.
 Write $a - b = a + (-b)$ and apply Theorem~\ref{thm.commring.binomial}.
 \end{proof}
 ```
+
+:::group "commutative_rings_finite_sums_products"
+Finite sums and products in commutative rings.
+:::
+
+```tex
+\subsection{Finite sums and products}
+```
+
+:::lemma_ "lem.commring.sum-disjoint" (parent := "commutative_rings_finite_sums_products") (lean := "AlgebraicCombinatorics.FPS.sum_disjoint_union")
+Let $`K` be a commutative ring. Let $`S` be a finite type, and let
+$`X, Y` be disjoint finite subsets of $`S`. For any family
+$`(a_s)_{s \in S}` of elements of $`K`, we have
+$`\sum_{s\in X\cup Y}a_{s}=\sum_{s\in X}a_{s}+\sum_{s\in Y}a_{s}`.
+:::
+
+```tex "lem.commring.sum-disjoint" (slot := statement)
+\begin{lemma}
+\label{lem.commring.sum-disjoint}
+\lean{AlgebraicCombinatorics.FPS.sum_disjoint_union}
+\leanhelper
+\leanok
+Let $K$ be a commutative ring. Let $S$ be a finite type, and let
+$X, Y$ be disjoint finite subsets of $S$. For any family $(a_s)_{s \in S}$
+of elements of $K$, we have
+$\sum_{s\in X\cup Y}a_{s}=\sum_{s\in X}a_{s}+\sum_{s\in Y}a_{s}$.
+\end{lemma}
+```
+
+:::proof "lem.commring.sum-disjoint"
+Standard.
+:::
+
+```tex "lem.commring.sum-disjoint" (slot := proof)
+\begin{proof}
+\leanok
+Standard.
+\end{proof}
+```
+
+:::lemma_ "lem.commring.sum-add" (parent := "commutative_rings_finite_sums_products") (lean := "AlgebraicCombinatorics.FPS.sum_add_distrib'")
+Let $`K` be a commutative ring. Let $`T` be a finite set and
+$`(a_s)_{s\in T}`, $`(b_s)_{s\in T}` be two families of elements of $`K`.
+Then
+$`\sum_{s\in T}\left(  a_{s}+b_{s}\right)  =\sum_{s\in T}a_{s}+\sum_{s\in T}b_{s}`.
+:::
+
+```tex "lem.commring.sum-add" (slot := statement)
+\begin{lemma}
+\label{lem.commring.sum-add}
+\lean{AlgebraicCombinatorics.FPS.sum_add_distrib'}
+\leanhelper
+\leanok
+Let $K$ be a commutative ring. Let $T$ be a finite set and $(a_s)_{s\in T}$, $(b_s)_{s\in T}$
+be two families of elements of $K$. Then
+$\sum_{s\in T}\left(  a_{s}+b_{s}\right)  =\sum_{s\in T}a_{s}+\sum_{s\in T}b_{s}$.
+\end{lemma}
+```
+
+:::proof "lem.commring.sum-add"
+Standard.
+:::
+
+```tex "lem.commring.sum-add" (slot := proof)
+\begin{proof}
+\leanok
+Standard.
+\end{proof}
+```
+
+:::lemma_ "lem.commring.sum-empty" (parent := "commutative_rings_finite_sums_products") (lean := "AlgebraicCombinatorics.FPS.sum_empty")
+Let $`K` be a commutative ring. If $`S=\varnothing`, then
+$`\sum_{s\in S}a_{s}=0`.
+:::
+
+```tex "lem.commring.sum-empty" (slot := statement)
+\begin{lemma}
+\label{lem.commring.sum-empty}
+\lean{AlgebraicCombinatorics.FPS.sum_empty}
+\leanhelper
+\leanok
+Let $K$ be a commutative ring. If $S=\varnothing$, then $\sum_{s\in S}a_{s}=0$.
+\end{lemma}
+```
+
+:::proof "lem.commring.sum-empty"
+By definition.
+:::
+
+```tex "lem.commring.sum-empty" (slot := proof)
+\begin{proof}
+\leanok
+By definition.
+\end{proof}
+```
+
+:::lemma_ "lem.commring.prod-empty" (parent := "commutative_rings_finite_sums_products") (lean := "AlgebraicCombinatorics.FPS.prod_empty")
+Let $`K` be a commutative ring. If $`S=\varnothing`, then
+$`\prod_{s\in S}a_{s}=1`.
+:::
+
+```tex "lem.commring.prod-empty" (slot := statement)
+\begin{lemma}
+\label{lem.commring.prod-empty}
+\lean{AlgebraicCombinatorics.FPS.prod_empty}
+\leanhelper
+\leanok
+Let $K$ be a commutative ring. If $S=\varnothing$, then $\prod_{s\in S}a_{s}=1$.
+\end{lemma}
+```
+
+:::proof "lem.commring.prod-empty"
+By definition.
+:::
+
+```tex "lem.commring.prod-empty" (slot := proof)
+\begin{proof}
+\leanok
+By definition.
+\end{proof}
+```
