@@ -1522,3 +1522,117 @@ f^{-1}\right)=0$. In other words, $\operatorname{loder}\left(
 f^{-1}\right)=-\operatorname{loder}f$.
 \end{proof}
 ```
+
+:::group "exp_log_infinite_families"
+Summable and multipliable families for `Exp` and `Log`.
+:::
+
+```tex
+\subsection{Summable and multipliable families}
+```
+
+:::definition "def.fps.summable-multipliable" (parent := "exp_log_infinite_families") (lean := "PowerSeries.SummableFPS₀, PowerSeries.MultipliableFPS₁, PowerSeries.summableFPS₀Sum, PowerSeries.multipliableFPS₁Prod")
+A family $`(f_i)_{i\in I}` of FPSs in
+$`K\llbracket x\rrbracket_0` is _summable_ if for each coefficient index
+$`n`, only finitely many $`\left[x^n\right](f_i)` are nonzero.
+
+A family $`(f_i)_{i\in I}` of FPSs in
+$`K\llbracket x\rrbracket_1` is _multipliable_ if for each coefficient index
+$`n`, all but finitely many $`f_i` satisfy
+$`\left[x^k\right](f_i-1)=0` for all $`1\le k\le n`.
+
+For summable families, the coefficient-wise sum
+$`\sum_{i\in I} f_i` belongs to $`K\llbracket x\rrbracket_0`.
+For multipliable families, the product
+$`\prod_{i\in I} f_i` belongs to $`K\llbracket x\rrbracket_1`.
+:::
+
+```tex "def.fps.summable-multipliable" (slot := statement)
+\begin{definition}[Summable and multipliable families]
+\label{def.fps.summable-multipliable}
+\lean{PowerSeries.SummableFPS₀, PowerSeries.MultipliableFPS₁, PowerSeries.summableFPS₀Sum, PowerSeries.multipliableFPS₁Prod}
+\leanhelper
+\leanok
+A family $(f_i)_{i \in I}$ of FPSs in $K\llbracket x \rrbracket_0$
+is \emph{summable} if for each coefficient index $n$, only finitely many
+$[x^n](f_i)$ are nonzero.
+
+A family $(f_i)_{i \in I}$ of FPSs in $K\llbracket x \rrbracket_1$
+is \emph{multipliable} if for each coefficient index $n$, all but finitely many
+$f_i$ satisfy $[x^k](f_i - 1) = 0$ for all $1 \le k \le n$.
+
+For summable families, the coefficient-wise sum $\sum_{i \in I} f_i$
+belongs to $K\llbracket x \rrbracket_0$.
+For multipliable families, the product $\prod_{i \in I} f_i$
+belongs to $K\llbracket x \rrbracket_1$.
+\end{definition}
+```
+
+:::proof "def.fps.summable-multipliable"
+For the sum, each $`f_i` has constant coefficient $`0`, so the sum also has
+constant coefficient $`0`.
+For the product, the constant coefficient of
+$`\prod_i f_i` is the product of the constant coefficients
+$`\prod_i \left[x^0\right](f_i)=\prod_i 1=1`.
+:::
+
+```tex "def.fps.summable-multipliable" (slot := proof)
+\begin{proof}
+For the sum: the constant coefficient of each $f_i$ is $0$, so the sum
+of constant coefficients is $0$.
+For the product: the constant coefficient of $\prod f_i$ is $\prod [x^0](f_i) = \prod 1 = 1$.
+\end{proof}
+```
+
+:::group "exp_log_infinite_products"
+The first infinite-family consequence: `Log` sends multipliable families to summable ones.
+:::
+
+```tex
+\subsection{Exp and Log for infinite products and sums}
+```
+
+:::lemma_ "lem.fps.Log-summable" (parent := "exp_log_infinite_products") (lean := "PowerSeries.Log_summable_of_multipliable")
+If $`(f_i)_{i\in I}` is a multipliable family in
+$`K\llbracket x\rrbracket_1`, then
+$`(\operatorname{Log} f_i)_{i\in I}` is a summable family in
+$`K\llbracket x\rrbracket_0`; in other words, for each coefficient index
+$`n`, only finitely many $`\left[\operatorname{Log} f_i\right]_n` are
+nonzero.
+:::
+
+```tex "lem.fps.Log-summable" (slot := statement)
+\begin{lemma}[Summability of $\operatorname{Log}$-images]
+\label{lem.fps.Log-summable}
+\lean{PowerSeries.Log_summable_of_multipliable}
+\leanhelper
+\leanok
+If $(f_i)_{i \in I}$ is a multipliable family in
+$K\llbracket x \rrbracket_1$, then $(\operatorname{Log} f_i)_{i \in I}$
+is a summable family in $K\llbracket x \rrbracket_0$
+(meaning that for each coefficient index $n$, only finitely many
+$[\operatorname{Log} f_i]_n$ are nonzero).
+\end{lemma}
+```
+
+:::proof "lem.fps.Log-summable"
+Fix $`n`. Let $`M` be an $`x^n`-approximator for the product family.
+If $`i\notin M`, then the approximator property gives
+$`\left[x^k\right](f_i)=0` for $`1\le k\le n`, hence also
+$`\left[(f_i-1)\right]_k=0` for $`0\le k\le n`.
+Substituting into $`\overline{\log}` then shows that
+$`\left[\operatorname{Log} f_i\right]_n=0`.
+Thus the set of indices with nonzero $`n`-th coefficient is contained in
+$`M`, so it is finite.
+:::
+
+```tex "lem.fps.Log-summable" (slot := proof)
+\begin{proof}
+For each $n$, let $M$ be an $x^n$-approximator for the product family.
+If $i \notin M$, then $[x^k](f_i) = 0$ for $1 \le k \le n$
+(by the approximator property).
+This forces $[(f_i - 1)]_k = 0$ for $0 \le k \le n$,
+and a substitution argument shows $[\operatorname{Log} f_i]_n = 0$.
+Hence the set of $i$ with nonzero $n$-th coefficient is contained in $M$.
+\end{proof}
+```
