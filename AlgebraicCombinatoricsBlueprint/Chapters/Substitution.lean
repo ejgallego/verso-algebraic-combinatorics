@@ -699,3 +699,320 @@ If $i = j$, then $\delta_{i,j} = 1$ by definition.
 Conversely, if $i \neq j$, then $\delta_{i,j} = 0 \neq 1$ (since $K$ is nontrivial).
 \end{proof}
 ```
+
+:::group "substitution_rules"
+The basic algebraic rules satisfied by substitution of power series.
+:::
+
+```tex
+\subsection{Laws of substitution}
+```
+
+:::theorem "prop.fps.subs.rules" (parent := "substitution_rules") (lean := "AlgebraicCombinatorics.fps_subs_add, AlgebraicCombinatorics.fps_subs_mul, AlgebraicCombinatorics.fps_subs_div, AlgebraicCombinatorics.fps_subs_pow, AlgebraicCombinatorics.fps_subs_assoc_constCoeff, AlgebraicCombinatorics.fps_subs_assoc, AlgebraicCombinatorics.fps_subs_const, AlgebraicCombinatorics.fps_subs_X_left, AlgebraicCombinatorics.fps_subs_X_right, AlgebraicCombinatorics.fps_subs_sum, AlgebraicCombinatorics.fps_subs_summable, AlgebraicCombinatorics.fps_subs_summableFPSSum")
+Composition of FPSs satisfies the rules one expects:
+
+*(a)* If $`f_1,f_2,g\in K[[x]]` satisfy $`\left[x^0\right]g = 0`, then
+$`(f_1+f_2)\circ g = f_1\circ g + f_2\circ g`.
+
+*(b)* If $`f_1,f_2,g\in K[[x]]` satisfy $`\left[x^0\right]g = 0`, then
+$`(f_1\cdot f_2)\circ g = (f_1\circ g)\cdot (f_2\circ g)`.
+
+*(c)* If $`f_1,f_2,g\in K[[x]]` satisfy $`\left[x^0\right]g = 0`, then
+$`\dfrac{f_1}{f_2}\circ g = \dfrac{f_1\circ g}{f_2\circ g}` as long as
+$`f_2` is invertible. In particular, $`f_2\circ g` is automatically invertible
+under these assumptions.
+
+*(d)* If $`f,g\in K[[x]]` satisfy $`\left[x^0\right]g = 0`, then
+$`f^k\circ g = (f\circ g)^k` for each $`k\in\mathbb{N}`.
+
+*(e)* If $`f,g,h\in K[[x]]` satisfy
+$`\left[x^0\right]g = 0` and $`\left[x^0\right]h = 0`, then
+$`\left[x^0\right](g\circ h) = 0` and
+$`(f\circ g)\circ h = f\circ (g\circ h)`.
+
+*(f)* We have $`\underline{a}\circ g = \underline{a}` for each $`a\in K` and
+$`g\in K[[x]]`.
+
+*(g)* We have $`x\circ g = g\circ x = g` for each $`g\in K[[x]]`.
+
+*(h)* If $`(f_i)_{i\in I}` is a summable family of FPSs, and if
+$`g\in K[[x]]` satisfies $`\left[x^0\right]g = 0`, then the family
+$`(f_i\circ g)_{i\in I}` is summable as well and
+$`\left(\sum_{i\in I} f_i\right)\circ g = \sum_{i\in I} f_i\circ g`.
+:::
+
+```tex "prop.fps.subs.rules" (slot := statement)
+\begin{proposition}
+\label{prop.fps.subs.rules}
+\lean{AlgebraicCombinatorics.fps_subs_add, AlgebraicCombinatorics.fps_subs_mul, AlgebraicCombinatorics.fps_subs_div, AlgebraicCombinatorics.fps_subs_pow, AlgebraicCombinatorics.fps_subs_assoc_constCoeff, AlgebraicCombinatorics.fps_subs_assoc, AlgebraicCombinatorics.fps_subs_const, AlgebraicCombinatorics.fps_subs_X_left, AlgebraicCombinatorics.fps_subs_X_right, AlgebraicCombinatorics.fps_subs_sum, AlgebraicCombinatorics.fps_subs_summable, AlgebraicCombinatorics.fps_subs_summableFPSSum}
+\leantarget
+\leanok
+Composition of FPSs satisfies the rules you would expect it to satisfy:
+
+\textbf{(a)} If $f_1, f_2, g \in K[[x]]$ satisfy $[x^0]g = 0$, then
+$(f_1 + f_2) \circ g = f_1 \circ g + f_2 \circ g$.
+
+\textbf{(b)} If $f_1, f_2, g \in K[[x]]$ satisfy $[x^0]g = 0$, then
+$(f_1 \cdot f_2) \circ g = (f_1 \circ g) \cdot (f_2 \circ g)$.
+
+\textbf{(c)} If $f_1, f_2, g \in K[[x]]$ satisfy $[x^0]g = 0$, then
+$\dfrac{f_1}{f_2} \circ g = \dfrac{f_1 \circ g}{f_2 \circ g}$, as long as
+$f_2$ is invertible. (In particular, $f_2 \circ g$ is automatically invertible
+under these assumptions.)
+
+\textbf{(d)} If $f, g \in K[[x]]$ satisfy $[x^0]g = 0$, then
+$f^k \circ g = (f \circ g)^k$ for each $k \in \mathbb{N}$.
+
+\textbf{(e)} If $f, g, h \in K[[x]]$ satisfy $[x^0]g = 0$ and $[x^0]h = 0$,
+then $[x^0](g \circ h) = 0$ and $(f \circ g) \circ h = f \circ (g \circ h)$.
+
+\textbf{(f)} We have $\underline{a} \circ g = \underline{a}$ for each $a \in K$
+and $g \in K[[x]]$.
+
+\textbf{(g)} We have $x \circ g = g \circ x = g$ for each $g \in K[[x]]$.
+
+\textbf{(h)} If $(f_i)_{i \in I} \in K[[x]]^I$ is a summable family of FPSs,
+and if $g \in K[[x]]$ is an FPS satisfying $[x^0]g = 0$, then the family
+$(f_i \circ g)_{i \in I} \in K[[x]]^I$ is summable as well and we have
+$(\sum_{i \in I} f_i) \circ g = \sum_{i \in I} f_i \circ g$.
+\end{proposition}
+```
+
+:::proof "prop.fps.subs.rules"
+*(a)* Write $`f_1 = \sum_{n\in\mathbb{N}} f_{1,n}x^n` and
+$`f_2 = \sum_{n\in\mathbb{N}} f_{2,n}x^n`. Then
+$`f_1+f_2 = \sum_{n\in\mathbb{N}} (f_{1,n}+f_{2,n})x^n`, so
+$$`(f_1+f_2)[g]
+= \sum_{n\in\mathbb{N}} (f_{1,n}+f_{2,n})g^n
+= \sum_{n\in\mathbb{N}} f_{1,n}g^n + \sum_{n\in\mathbb{N}} f_{2,n}g^n
+= f_1[g] + f_2[g].`$$
+
+*(f)* We have
+$`\underline{a} = \sum_{n\in\mathbb{N}} a\delta_{n,0}x^n`. Hence
+$`\underline{a}[g] = \sum_{n\in\mathbb{N}} a\delta_{n,0}g^n
+= a\cdot 1 + 0 = \underline{a}`.
+
+*(g)* We have $`x = \sum_{n\in\mathbb{N}} \delta_{n,1}x^n`, so
+$`x[g] = \sum_{n\in\mathbb{N}} \delta_{n,1}g^n = g^1 = g`. Also, writing
+$`g = \sum_{n\in\mathbb{N}} g_n x^n`, we get
+$`g[x] = \sum_{n\in\mathbb{N}} g_n x^n = g`.
+
+*(b)* Write $`f_1 = \sum_{i\in\mathbb{N}} f_{1,i}x^i` and
+$`f_2 = \sum_{j\in\mathbb{N}} f_{2,j}x^j`. Then
+$$`f_1[g]\cdot f_2[g]
+= \left(\sum_{i\in\mathbb{N}} f_{1,i}g^i\right)
+   \left(\sum_{j\in\mathbb{N}} f_{2,j}g^j\right)
+= \sum_{n\in\mathbb{N}}
+   \left(\sum_{\substack{(i,j)\in\mathbb{N}^2;\\ i+j=n}} f_{1,i}f_{2,j}\right)g^n.`$$
+The same computation with $`g` replaced by $`x` gives
+$`f_1\cdot f_2 = \sum_{n\in\mathbb{N}} c_n x^n`, where
+$`c_n = \sum_{\substack{(i,j)\in\mathbb{N}^2;\\ i+j=n}} f_{1,i}f_{2,j}`.
+Thus
+$`(f_1\cdot f_2)[g] = \sum_{n\in\mathbb{N}} c_n g^n = f_1[g]\cdot f_2[g]`.
+
+The interchange of infinite summation signs is justified because the family
+$`(f_{1,i}f_{2,j}g^{i+j})_{(i,j)\in\mathbb{N}^2}` is summable: for any
+$`m\in\mathbb{N}` and any pair with $`m < i+j`, the coefficient
+$`\left[x^m\right](g^{i+j}) = 0` by the well-definedness proposition, part
+*(a)*.
+
+*(c)* Assume $`f_2` is invertible. By part *(b)* applied to $`f_2^{-1}`,
+$`(f_2^{-1}\cdot f_2)\circ g = (f_2^{-1}\circ g)\cdot (f_2\circ g)`, so
+$`(f_2^{-1}\circ g)\cdot (f_2\circ g) = \underline{1}\circ g = \underline{1}`
+by part *(f)*. Hence $`f_2\circ g` is invertible. Then part *(b)* applied to
+$`f_1/f_2` gives
+$`(f_1/f_2\cdot f_2)\circ g = (f_1/f_2\circ g)\cdot (f_2\circ g)`, that is,
+$`f_1\circ g = (f_1/f_2\circ g)\cdot (f_2\circ g)`. Dividing by
+$`f_2\circ g` yields the claim.
+
+*(d)* Induct on $`k`. The base case is
+$`f^0\circ g = \underline{1}\circ g = \underline{1} = (f\circ g)^0` by part
+*(f)*. For the induction step,
+$`f^{m+1}\circ g = (f\cdot f^m)\circ g = (f\circ g)\cdot (f^m\circ g)
+= (f\circ g)\cdot (f\circ g)^m = (f\circ g)^{m+1}` by part *(b)*.
+
+*(h)* First, we show that $`(f_i\circ g)_{i\in I}` is summable. Since
+$`(f_i)_{i\in I}` is summable, for each $`n\in\mathbb{N}` there is a finite
+subset $`I_n\subseteq I` such that $`\left[x^n\right]f_i = 0` for all
+$`i\in I\setminus I_n`. For any
+$`i\in I\setminus (I_0\cup I_1\cup \cdots \cup I_n)`, the first $`n+1`
+coefficients of $`f_i` are all $`0`, so the previous lemma gives
+$`\left[x^n\right](f_i\circ g) = 0`. Thus the family
+$`(f_i\circ g)_{i\in I}` is summable.
+
+The equality
+$`\left(\sum_{i\in I} f_i\right)\circ g = \sum_{i\in I} f_i\circ g` follows by
+writing each $`f_i = \sum_{n\in\mathbb{N}} f_{i,n}x^n` and interchanging
+summation signs, justified by summability of the family
+$`(f_{i,n}g^n)_{(i,n)\in I\times\mathbb{N}}`.
+
+*(e)* Write $`g = \sum_{n\in\mathbb{N}} g_n x^n`. The well-definedness
+proposition, part *(c)* applied to $`g` and $`h`, gives
+$`\left[x^0\right](g\circ h) = g_0 = \left[x^0\right]g = 0`.
+
+For associativity,
+$`f\circ g = \sum_{n\in\mathbb{N}} f_n g^n`, and the family
+$`(f_n g^n)_{n\in\mathbb{N}}` is summable by the well-definedness proposition,
+part *(b)*. By part *(h)*,
+$$`(f\circ g)\circ h
+= \left(\sum_{n\in\mathbb{N}} f_n g^n\right)\circ h
+= \sum_{n\in\mathbb{N}} (f_n g^n)\circ h.`$$
+By parts *(b)*, *(d)*, and *(f)*,
+$`(f_n g^n)\circ h = (\underline{f_n}\cdot g^n)\circ h
+= (\underline{f_n}\circ h)\cdot (g^n\circ h)
+= \underline{f_n}\cdot (g\circ h)^n
+= f_n (g\circ h)^n`. Therefore
+$`(f\circ g)\circ h = \sum_{n\in\mathbb{N}} f_n (g\circ h)^n
+= f\circ (g\circ h)`.
+:::
+
+```tex "prop.fps.subs.rules" (slot := proof)
+\begin{proof}
+\textbf{(a)} Write $f_1 = \sum_{n \in \mathbb{N}} f_{1,n} x^n$ and
+$f_2 = \sum_{n \in \mathbb{N}} f_{2,n} x^n$. Then
+$f_1 + f_2 = \sum_{n \in \mathbb{N}} (f_{1,n} + f_{2,n}) x^n$, so
+\[
+(f_1 + f_2)[g] = \sum_{n \in \mathbb{N}} (f_{1,n} + f_{2,n}) g^n
+= \sum_{n \in \mathbb{N}} f_{1,n} g^n + \sum_{n \in \mathbb{N}} f_{2,n} g^n
+= f_1[g] + f_2[g].
+\]
+
+\textbf{(f)} We have $\underline{a} = \sum_{n \in \mathbb{N}} a \delta_{n,0} x^n$.
+Hence $\underline{a}[g] = \sum_{n \in \mathbb{N}} a \delta_{n,0} g^n
+= a \cdot 1 + 0 = \underline{a}$.
+
+\textbf{(g)} We have $x = \sum_{n \in \mathbb{N}} \delta_{n,1} x^n$, so
+$x[g] = \sum_{n \in \mathbb{N}} \delta_{n,1} g^n = g^1 = g$. Also,
+writing $g = \sum_{n \in \mathbb{N}} g_n x^n$, we get
+$g[x] = \sum_{n \in \mathbb{N}} g_n x^n = g$.
+
+\textbf{(b)} Write $f_1 = \sum_{i \in \mathbb{N}} f_{1,i} x^i$ and
+$f_2 = \sum_{j \in \mathbb{N}} f_{2,j} x^j$. Then
+\[
+f_1[g] \cdot f_2[g]
+= \left(\sum_{i \in \mathbb{N}} f_{1,i} g^i\right)
+  \left(\sum_{j \in \mathbb{N}} f_{2,j} g^j\right)
+= \sum_{n \in \mathbb{N}} \left(\sum_{\substack{(i,j) \in \mathbb{N}^2; \\ i+j=n}} f_{1,i} f_{2,j}\right) g^n.
+\]
+The same computation with $g$ replaced by $x$ gives
+$f_1 \cdot f_2 = \sum_{n \in \mathbb{N}} c_n x^n$ where
+$c_n = \sum_{\substack{(i,j) \in \mathbb{N}^2; \\ i+j=n}} f_{1,i} f_{2,j}$.
+Thus $(f_1 \cdot f_2)[g] = \sum_{n \in \mathbb{N}} c_n g^n = f_1[g] \cdot f_2[g]$.
+
+The interchange of infinite summation signs (discrete Fubini) is justified because
+the family $(f_{1,i} f_{2,j} g^{i+j})_{(i,j) \in \mathbb{N}^2}$ is summable:
+for any $m \in \mathbb{N}$ and any $(i,j)$ with $m < i+j$, we have
+$[x^m](g^{i+j}) = 0$ by Proposition~\ref{prop.fps.subs.wd} \textbf{(a)}.
+
+\textbf{(c)} Assume $f_2$ is invertible. By part \textbf{(b)} applied to $f_2^{-1}$,
+$(f_2^{-1} \cdot f_2) \circ g = (f_2^{-1} \circ g) \cdot (f_2 \circ g)$, so
+$(f_2^{-1} \circ g) \cdot (f_2 \circ g) = \underline{1} \circ g = \underline{1}$
+by part \textbf{(f)}. Hence $f_2 \circ g$ is invertible. Then by part
+\textbf{(b)} applied to $f_1/f_2$,
+$(f_1/f_2 \cdot f_2) \circ g = (f_1/f_2 \circ g) \cdot (f_2 \circ g)$, i.e.,
+$f_1 \circ g = (f_1/f_2 \circ g) \cdot (f_2 \circ g)$. Dividing by $f_2 \circ g$
+gives $f_1/f_2 \circ g = (f_1 \circ g)/(f_2 \circ g)$.
+
+\textbf{(d)} By induction on $k$. Base case: $f^0 \circ g = \underline{1} \circ g
+= \underline{1} = (f \circ g)^0$ by part \textbf{(f)}. Induction step:
+$f^{m+1} \circ g = (f \cdot f^m) \circ g = (f \circ g) \cdot (f^m \circ g)
+= (f \circ g) \cdot (f \circ g)^m = (f \circ g)^{m+1}$ by part \textbf{(b)}.
+
+\textbf{(h)} First, we show $(f_i \circ g)_{i \in I}$ is summable. Since
+$(f_i)_{i \in I}$ is summable, for each $n \in \mathbb{N}$ there is a finite
+$I_n \subseteq I$ such that $[x^n] f_i = 0$ for all $i \in I \setminus I_n$.
+For $i \in I \setminus (I_0 \cup I_1 \cup \cdots \cup I_n)$, the first $n+1$
+coefficients of $f_i$ are all $0$, so by Lemma~\ref{lem.fps.fg-coeffs-0},
+$[x^n](f_i \circ g) = 0$. Thus the family $(f_i \circ g)_{i \in I}$ is summable.
+
+The equality $(\sum_{i \in I} f_i) \circ g = \sum_{i \in I} f_i \circ g$ follows by
+writing each $f_i = \sum_{n \in \mathbb{N}} f_{i,n} x^n$ and interchanging
+summation signs (justified by summability of the family
+$(f_{i,n} g^n)_{(i,n) \in I \times \mathbb{N}}$).
+
+\textbf{(e)} Write $g = \sum_{n \in \mathbb{N}} g_n x^n$. By
+Proposition~\ref{prop.fps.subs.wd} \textbf{(c)} (applied to $g, h$),
+$[x^0](g \circ h) = g_0 = [x^0]g = 0$.
+
+For associativity: $f \circ g = \sum_{n \in \mathbb{N}} f_n g^n$, and the
+family $(f_n g^n)_{n \in \mathbb{N}}$ is summable by
+Proposition~\ref{prop.fps.subs.wd} \textbf{(b)}. By part \textbf{(h)},
+\[
+(f \circ g) \circ h
+= \left(\sum_{n \in \mathbb{N}} f_n g^n\right) \circ h
+= \sum_{n \in \mathbb{N}} (f_n g^n) \circ h.
+\]
+By parts \textbf{(b)}, \textbf{(d)}, and \textbf{(f)},
+$(f_n g^n) \circ h = (\underline{f_n} \cdot g^n) \circ h
+= (\underline{f_n} \circ h) \cdot (g^n \circ h)
+= \underline{f_n} \cdot (g \circ h)^n
+= f_n (g \circ h)^n$.
+Hence $(f \circ g) \circ h = \sum_{n \in \mathbb{N}} f_n (g \circ h)^n
+= f \circ (g \circ h)$.
+\end{proof}
+```
+
+:::group "substitution_fibonacci_example"
+Example: substitution applied to the Fibonacci generating function.
+:::
+
+```tex
+\subsection{Example: Fibonacci generating function}
+```
+
+:::definition "def.fps.geometric-series" (parent := "substitution_fibonacci_example") (lean := "AlgebraicCombinatorics.geometricSeries")
+The _geometric series_ is the FPS
+$`\dfrac{1}{1-x} = (1-x)^{-1}\in K[[x]]`, where $`K` is a field.
+:::
+
+```tex "def.fps.geometric-series" (slot := statement)
+\begin{definition}
+\label{def.fps.geometric-series}
+\lean{AlgebraicCombinatorics.geometricSeries}
+\leanhelper
+\leanok
+The \emph{geometric series} is the FPS $\frac{1}{1-x} = (1-x)^{-1} \in K[[x]]$
+(where $K$ is a field).
+\end{definition}
+```
+
+:::lemma_ "lem.fps.geometric-subst-fibonacci" (parent := "substitution_fibonacci_example") (lean := "AlgebraicCombinatorics.fps_geometric_subst_fibonacci")
+Substituting $`x+x^2` into the geometric series $`\dfrac{1}{1-x}` yields the
+generating function for shifted Fibonacci numbers:
+$$`\frac{1}{1-x}\Big[x+x^2\Big] = \frac{1}{1-x-x^2}.`
+:::
+
+```tex "lem.fps.geometric-subst-fibonacci" (slot := statement)
+\begin{lemma}
+\label{lem.fps.geometric-subst-fibonacci}
+\lean{AlgebraicCombinatorics.fps_geometric_subst_fibonacci}
+\leanhelper
+\leanok
+Substituting $x + x^2$ into the geometric series $\frac{1}{1-x}$ yields
+the generating function for shifted Fibonacci numbers:
+\[
+\frac{1}{1-x}\Big[x + x^2\Big] = \frac{1}{1 - x - x^2}.
+\]
+\end{lemma}
+```
+
+:::proof "lem.fps.geometric-subst-fibonacci"
+By the substitution-rules proposition, part *(c)*, substitution preserves
+inverses when the original FPS has invertible constant coefficient. Since
+$`\left[x^0\right](1-x) = 1 \neq 0`, we have
+$`\dfrac{1}{1-x}[x+x^2] = \dfrac{1}{(1-x)[x+x^2]}`.
+Now
+$`(1-x)[x+x^2] = 1-(x+x^2) = 1-x-x^2` by linearity of substitution, so the
+result follows.
+:::
+
+```tex "lem.fps.geometric-subst-fibonacci" (slot := proof)
+\begin{proof}
+By Proposition~\ref{prop.fps.subs.rules} \textbf{(c)}, substitution preserves
+inverses when the original has invertible constant coefficient. Since
+$[x^0](1-x) = 1 \neq 0$, we have
+$\frac{1}{1-x}\big[x+x^2\big] = \frac{1}{(1-x)[x+x^2]}$. Now
+$(1-x)[x+x^2] = 1 - (x+x^2) = 1 - x - x^2$ by the linearity of substitution,
+so the result follows.
+\end{proof}
+```
