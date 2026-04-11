@@ -662,3 +662,154 @@ Now, $\overline{\exp}=\exp-1=\exp+\,\underline{-1}$. Hence,
 This completes the proof.
 \end{proof}
 ```
+
+:::group "exp_log_maps"
+The `Exp` and `Log` maps between series with constant term `0` and `1`.
+:::
+
+```tex
+\subsection{The exponential and the logarithm of an FPS}
+```
+
+:::definition "def.fps.Exp-Log-maps" (parent := "exp_log_maps") (lean := "PowerSeries.PowerSeries₀, PowerSeries.PowerSeries₁, PowerSeries.Exp, PowerSeries.Log")
+*(a)* Let $`K\left[\left[x\right]\right]_0` denote the set of all FPSs
+$`f\in K\left[\left[x\right]\right]` with $`\left[x^0\right]f=0`.
+
+*(b)* Let $`K\left[\left[x\right]\right]_1` denote the set of all FPSs
+$`f\in K\left[\left[x\right]\right]` with $`\left[x^0\right]f=1`.
+
+*(c)* Define two maps
+$`\operatorname{Exp}:K\left[\left[x\right]\right]_0\to K\left[\left[x\right]\right]_1`,
+$`g\mapsto \exp\circ g`,
+and
+$`\operatorname{Log}:K\left[\left[x\right]\right]_1\to K\left[\left[x\right]\right]_0`,
+$`f\mapsto \overline{\log}\circ (f-1)`.
+These are well-defined by the following lemma.
+:::
+
+```tex "def.fps.Exp-Log-maps" (slot := statement)
+\begin{definition}
+\label{def.fps.Exp-Log-maps}
+\lean{PowerSeries.PowerSeries₀, PowerSeries.PowerSeries₁, PowerSeries.Exp, PowerSeries.Log}
+\leantarget
+\leanok
+\textbf{(a)} We let $K\left[\left[x\right]
+\right]_{0}$ denote the set of all FPSs $f\in K\left[\left[x\right]
+\right]$ with $\left[x^{0}\right]f=0$. \medskip
+
+\textbf{(b)} We let $K\left[\left[x\right]\right]_{1}$ denote the set
+of all FPSs $f\in K\left[\left[x\right]\right]$ with $\left[
+x^{0}\right]f=1$. \medskip
+
+\textbf{(c)} We define two maps
+\begin{align*}
+\operatorname{Exp}:K\left[\left[x\right]\right]_{0} &  \rightarrow
+K\left[\left[x\right]\right]_{1},\\
+g &  \mapsto\exp\circ g
+\end{align*}
+and
+\begin{align*}
+\operatorname{Log}:K\left[\left[x\right]\right]_{1} &  \rightarrow
+K\left[\left[x\right]\right]_{0},\\
+f &  \mapsto\overline{\log}\circ\left(f-1\right).
+\end{align*}
+(These two maps are well-defined according to parts \textbf{(c)} and
+\textbf{(d)} of Lemma \ref{lem.fps.Exp-Log-maps-wd} below.)
+\end{definition}
+```
+
+:::lemma_ "lem.fps.Exp-Log-maps-wd" (parent := "exp_log_maps") (lean := "PowerSeries.PowerSeries₀.subst_mem, PowerSeries.PowerSeries₁.subst_mem, PowerSeries.exp_subst_mem_PowerSeries₁, PowerSeries.logbar_subst_sub_one_mem_PowerSeries₀")
+*(a)* For any $`f,g\in K\left[\left[x\right]\right]_0`, we have
+$`f\circ g\in K\left[\left[x\right]\right]_0`.
+
+*(b)* For any $`f\in K\left[\left[x\right]\right]_1` and
+$`g\in K\left[\left[x\right]\right]_0`, we have
+$`f\circ g\in K\left[\left[x\right]\right]_1`.
+
+*(c)* For any $`g\in K\left[\left[x\right]\right]_0`, we have
+$`\exp\circ g\in K\left[\left[x\right]\right]_1`.
+
+*(d)* For any $`f\in K\left[\left[x\right]\right]_1`, we have
+$`f-1\in K\left[\left[x\right]\right]_0` and
+$`\overline{\log}\circ (f-1)\in K\left[\left[x\right]\right]_0`.
+:::
+
+```tex "lem.fps.Exp-Log-maps-wd" (slot := statement)
+\begin{lemma}
+\label{lem.fps.Exp-Log-maps-wd}
+\lean{PowerSeries.PowerSeries₀.subst_mem, PowerSeries.PowerSeries₁.subst_mem, PowerSeries.exp_subst_mem_PowerSeries₁, PowerSeries.logbar_subst_sub_one_mem_PowerSeries₀}
+\leantarget
+\leanok
+\textbf{(a)} For any $f,g\in K\left[\left[
+x\right]\right]_{0}$, we have $f\circ g\in K\left[\left[x\right]
+\right]_{0}$. \medskip
+
+\textbf{(b)} For any $f\in K\left[\left[x\right]\right]_{1}$ and $g\in
+K\left[\left[x\right]\right]_{0}$, we have $f\circ g\in K\left[
+\left[x\right]\right]_{1}$. \medskip
+
+\textbf{(c)} For any $g\in K\left[\left[x\right]\right]_{0}$, we have
+$\exp\circ g\in K\left[\left[x\right]\right]_{1}$. \medskip
+
+\textbf{(d)} For any $f\in K\left[\left[x\right]\right]_{1}$, we have
+$f-1\in K\left[\left[x\right]\right]_{0}$ and $\overline{\log}
+\circ\left(f-1\right)\in K\left[\left[x\right]\right]_{0}$.
+\end{lemma}
+```
+
+:::proof "lem.fps.Exp-Log-maps-wd"
+*(a)* If $`f,g\in K\left[\left[x\right]\right]_0`, then
+$`\left[x^0\right]f=0` and $`\left[x^0\right]g=0`. The constant-term
+composition lemma gives
+$`\left[x^0\right](f\circ g)=\left[x^0\right]f=0`, so
+$`f\circ g\in K\left[\left[x\right]\right]_0`.
+
+*(b)* The same argument shows that if $`\left[x^0\right]f=1` and
+$`\left[x^0\right]g=0`, then
+$`\left[x^0\right](f\circ g)=\left[x^0\right]f=1`, so
+$`f\circ g\in K\left[\left[x\right]\right]_1`.
+
+*(c)* Since
+$`\exp=\sum_{n\in\mathbb{N}}\dfrac{1}{n!}x^n`, we have $`\left[x^0\right]\exp=1`,
+so $`\exp\in K\left[\left[x\right]\right]_1`. Part *(b)* then gives
+$`\exp\circ g\in K\left[\left[x\right]\right]_1`.
+
+*(d)* If $`f\in K\left[\left[x\right]\right]_1`, then
+$`\left[x^0\right](f-1)=\left[x^0\right]f-\left[x^0\right]1=1-1=0`, so
+$`f-1\in K\left[\left[x\right]\right]_0`. Also,
+$`\left[x^0\right]\overline{\log}=0`, so
+$`\overline{\log}\in K\left[\left[x\right]\right]_0`. Applying part *(a)* to
+$`\overline{\log}` and $`f-1` yields
+$`\overline{\log}\circ (f-1)\in K\left[\left[x\right]\right]_0`.
+:::
+
+```tex "lem.fps.Exp-Log-maps-wd" (slot := proof)
+\begin{proof}
+\textbf{(a)} Let $f,g\in
+K\left[\left[x\right]\right]_{0}$. Then $\left[
+x^{0}\right]f=0$ and $\left[x^{0}\right]g=0$. Hence, Lemma
+\ref{lem.fps.compos-cst-term-0} yields $\left[x^{0}\right]\left(f\circ
+g\right)=\left[x^{0}\right]f=0$. In other words, $f\circ g\in K\left[
+\left[x\right]\right]_{0}$.
+
+\textbf{(b)} This is analogous to the proof of part \textbf{(a)}.
+
+\textbf{(c)} Let $g\in K\left[\left[x\right]\right]_{0}$. From
+$\exp=\sum_{n\in\mathbb{N}}\dfrac{1}{n!}x^{n}$, we obtain $\left[
+x^{0}\right]\exp=1$, so that $\exp\in K\left[\left[
+x\right]\right]_{1}$. Hence, part
+\textbf{(b)} (applied to $f=\exp$) yields $\exp\circ g\in K\left[\left[
+x\right]\right]_{1}$.
+
+\textbf{(d)} Let $f\in K\left[\left[x\right]\right]_{1}$. Thus,
+$\left[x^{0}\right]f=1$. Now,
+$\left[x^{0}\right]\left(f-1\right)=\left[x^{0}\right]
+f-\left[x^{0}\right]1=1-1=0$, so that $f-1\in
+K\left[\left[x\right]\right]_{0}$. Furthermore, $\left[x^{0}\right]
+\overline{\log}=0$ and thus $\overline{\log}\in K\left[\left[
+x\right]\right]_{0}$. Hence, part
+\textbf{(a)} (applied to $\overline{\log}$ and $f-1$ instead of $f$ and $g$)
+yields $\overline{\log}\circ\left(f-1\right)\in K\left[\left[x\right]
+\right]_{0}$.
+\end{proof}
+```
