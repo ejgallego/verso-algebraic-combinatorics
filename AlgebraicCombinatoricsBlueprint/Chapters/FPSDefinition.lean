@@ -432,3 +432,154 @@ In the Lean formalization, the commutative ring and module structures are
 provided by Mathlib's existing instances on power series.
 \end{proof}
 ```
+
+:::lemma_ "lem.fps.coeff_mul_range" (parent := "fps_ring_structure") (lean := "AlgebraicCombinatorics.FPS.coeff_mul_fps'")
+The product formula can be written as a sum over a range:
+$$`\left[x^{n}\right]\left(\mathbf{ab}\right)
+= \sum_{i=0}^{n}\left[x^{i}\right]\mathbf{a}\cdot\left[x^{n-i}\right]\mathbf{b}.`
+:::
+
+```tex "lem.fps.coeff_mul_range" (slot := statement)
+\begin{lemma}
+\label{lem.fps.coeff_mul_range}
+\lean{AlgebraicCombinatorics.FPS.coeff_mul_fps'}
+\leanhelper
+\leanok
+The product formula can be written as a sum over a range:
+\[
+\left[x^{n}\right]\left(\mathbf{ab}\right)
+= \sum_{i=0}^{n}\left[x^{i}\right]\mathbf{a}\cdot\left[x^{n-i}\right]\mathbf{b}.
+\]
+\end{lemma}
+```
+
+:::proof "lem.fps.coeff_mul_range"
+This rewrites the antidiagonal sum from the product definition as a range sum
+using the bijection $`(i, n-i) \leftrightarrow i \in \{0, \ldots, n\}`.
+:::
+
+```tex "lem.fps.coeff_mul_range" (slot := proof)
+\begin{proof}
+This rewrites the antidiagonal sum from Definition~\ref{def.fps.ops}
+as a range sum using the bijection $(i, n-i) \leftrightarrow i \in \{0, \ldots, n\}$.
+\end{proof}
+```
+
+:::group "fps_summable_families"
+Essentially finite sums and summable families of formal power series.
+:::
+
+```tex
+\subsection{Essentially finite sums and summable families}
+```
+
+:::definition "def.infsum.essfin" (parent := "fps_summable_families") (lean := "AlgebraicCombinatorics.FPS.EssentiallyFinite")
+*(a)* A family $`\left(a_{i}\right)_{i\in I}\in K^{I}` of elements of
+$`K` is said to be _essentially finite_ if all but finitely many
+$`i\in I` satisfy $`a_{i}=0`, in other words, if the set
+$`\left\{i\in I\mid a_{i}\neq0\right\}` is finite.
+
+*(b)* Let $`\left(a_{i}\right)_{i\in I}\in K^{I}` be an essentially finite
+family of elements of $`K`. Then the infinite sum $`\sum_{i\in I}a_{i}` is
+defined to equal the finite sum
+$`\sum_{\substack{i\in I;\\a_{i}\neq0}}a_{i}`. Such an infinite sum is said
+to be _essentially finite_.
+:::
+
+```tex "def.infsum.essfin" (slot := statement)
+\begin{definition}
+\label{def.infsum.essfin}
+\lean{AlgebraicCombinatorics.FPS.EssentiallyFinite}
+\leantarget
+\leanok
+\textbf{(a)} A family $\left(a_{i}\right)_{i\in I}\in K^{I}$
+of elements of $K$ is said to be \emph{essentially finite} if all
+but finitely many $i\in I$ satisfy $a_{i}=0$ (in other words, if the set
+$\left\{i\in I\ \mid\ a_{i}\neq0\right\}$ is finite). \medskip
+
+\textbf{(b)} Let $\left(a_{i}\right)_{i\in I}\in K^{I}$ be an essentially
+finite family of elements of $K$. Then, the infinite sum $\sum_{i\in I}a_{i}$
+is defined to equal the finite sum $\sum_{\substack{i\in I;\\a_{i}\neq0}}a_{i}$.
+Such an infinite sum is said to be \emph{essentially finite}.
+\end{definition}
+```
+
+:::definition "def.fps.summable" (parent := "fps_summable_families") (lean := "AlgebraicCombinatorics.FPS.SummableFPS, AlgebraicCombinatorics.FPS.summableFPSSum")
+A possibly infinite family $`\left(\mathbf{a}_{i}\right)_{i\in I}` of FPSs is
+said to be _summable_, or _entrywise essentially finite_, if
+$$`\text{for each }n\in\mathbb{N}\text{, all but finitely many }i\in I\text{ satisfy }\left[x^{n}\right]\mathbf{a}_{i}=0.`
+In this case, the sum $`\sum_{i\in I}\mathbf{a}_{i}` is defined to be the FPS
+with
+$$`\left[x^{n}\right]\left(\sum_{i\in I}\mathbf{a}_{i}\right)
+=\underbrace{\sum_{i\in I}\left[x^{n}\right]\mathbf{a}_{i}}_{\substack{\text{an essentially}\\\text{finite sum}}}
+\qquad \text{for all }n\in\mathbb{N}.`
+:::
+
+```tex "def.fps.summable" (slot := statement)
+\begin{definition}
+\label{def.fps.summable}
+\lean{AlgebraicCombinatorics.FPS.SummableFPS, AlgebraicCombinatorics.FPS.summableFPSSum}
+\leantarget
+\leanok
+A (possibly infinite) family $\left(\mathbf{a}_{i}\right)_{i\in I}$
+of FPSs is said to be \emph{summable} (or \emph{entrywise essentially finite})
+if
+\[
+\text{for each }n\in\mathbb{N}\text{, all but finitely many }i\in I\text{
+satisfy }\left[x^{n}\right]\mathbf{a}_{i}=0.
+\]
+In this case, the sum $\sum_{i\in I}\mathbf{a}_{i}$ is defined to be the FPS
+with
+\[
+\left[x^{n}\right]\left(\sum_{i\in I}\mathbf{a}_{i}\right)
+=\underbrace{\sum_{i\in I}\left[x^{n}\right]\mathbf{a}_{i}}%
+_{\substack{\text{an essentially}\\\text{finite sum}}}
+\ \ \ \ \ \ \ \ \ \ \text{for all }n\in\mathbb{N}\text{.}
+\]
+\end{definition}
+```
+
+:::theorem "prop.fps.summable.sub" (parent := "fps_summable_families") (lean := "AlgebraicCombinatorics.FPS.summableFPS_subfamily")
+Let $`\left(\mathbf{a}_{i}\right)_{i\in I}` be a summable family of FPSs.
+Then any subfamily of $`\left(\mathbf{a}_{i}\right)_{i\in I}` is summable as
+well.
+:::
+
+```tex "prop.fps.summable.sub" (slot := statement)
+\begin{proposition}
+\label{prop.fps.summable.sub}
+\lean{AlgebraicCombinatorics.FPS.summableFPS_subfamily}
+\leantarget
+\leanok
+Let $\left(\mathbf{a}_{i}\right)_{i\in I}$ be
+a summable family of FPSs. Then, any subfamily of $\left(\mathbf{a}%
+_{i}\right)_{i\in I}$ is summable as well.
+\end{proposition}
+```
+
+:::proof "prop.fps.summable.sub"
+Let $`J` be a subset of $`I`. We must prove that the subfamily
+$`\left(\mathbf{a}_{i}\right)_{i\in J}` is summable.
+
+Let $`n\in\mathbb{N}`. Then all but finitely many $`i\in I` satisfy
+$`\left[x^{n}\right]\mathbf{a}_{i}=0`, since
+$`\left(\mathbf{a}_{i}\right)_{i\in I}` is summable. Hence all but finitely
+many $`i\in J` satisfy $`\left[x^{n}\right]\mathbf{a}_{i}=0`, since $`J` is a
+subset of $`I`. Since we have proved this for each $`n\in\mathbb{N}`, we
+conclude that the family $`\left(\mathbf{a}_{i}\right)_{i\in J}` is summable.
+:::
+
+```tex "prop.fps.summable.sub" (slot := proof)
+\begin{proof}
+\leanok
+Let $J$ be a subset of $I$.
+We must prove that the subfamily $\left(\mathbf{a}_{i}\right)_{i\in J}$ is summable.
+
+Let $n\in\mathbb{N}$. Then, all but finitely many $i\in I$ satisfy $\left[
+x^{n}\right]\mathbf{a}_{i}=0$ (since the family $\left(\mathbf{a}%
+_{i}\right)_{i\in I}$ is summable). Hence, all but finitely many $i\in J$
+satisfy $\left[x^{n}\right]\mathbf{a}_{i}=0$ (since $J$ is a subset of
+$I$). Since we have proved this for each $n\in\mathbb{N}$, we thus conclude
+that the family $\left(\mathbf{a}_{i}\right)_{i\in J}$ is summable.
+\end{proof}
+```
