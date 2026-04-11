@@ -102,3 +102,179 @@ is a field). Hence, Corollary~\ref{cor.fps.invertible.field} follows from
 Proposition~\ref{prop.fps.invertible}.
 \end{proof}
 ```
+
+:::group "fps_inverse_coefficients"
+Coefficient formulas for inverses of formal power series.
+:::
+
+```tex
+\subsection{Coefficient formulas for inverses}
+```
+
+:::lemma_ "lem.fps.inv-coeff-zero" (parent := "fps_inverse_coefficients") (lean := "AlgebraicCombinatorics.fps_inv_coeff_zero")
+Assume that $`K` is a field. Let $`f\in K[[x]]`. Then the constant term of
+$`f^{-1}` equals the inverse of the constant term of $`f`:
+$$`\left[x^{0}\right]f^{-1} = \left(\left[x^{0}\right]f\right)^{-1}.`
+:::
+
+```tex "lem.fps.inv-coeff-zero" (slot := statement)
+\begin{lemma}
+\label{lem.fps.inv-coeff-zero}
+\lean{AlgebraicCombinatorics.fps_inv_coeff_zero}
+\leanhelper
+\leanok
+Assume that $K$ is a field. Let $f\in K[[x]]$. Then the constant term of $f^{-1}$
+equals the inverse of the constant term of $f$:
+\[
+\left[x^{0}\right]f^{-1} = \left(\left[x^{0}\right]f\right)^{-1}.
+\]
+\end{lemma}
+```
+
+:::proof "lem.fps.inv-coeff-zero"
+Direct consequence of the definition of the inverse of an FPS.
+:::
+
+```tex "lem.fps.inv-coeff-zero" (slot := proof)
+\begin{proof}
+Direct consequence of the definition of the inverse of an FPS.
+\end{proof}
+```
+
+:::lemma_ "lem.fps.inv-coeff-succ" (parent := "fps_inverse_coefficients") (lean := "AlgebraicCombinatorics.fps_inv_coeff_succ")
+Assume that $`K` is a field. Let $`f\in K[[x]]`. For each $`n\in\mathbb{N}`,
+$$`\left[x^{n+1}\right]f^{-1}
+= -\left(\left[x^{0}\right]f\right)^{-1}\sum_{k=0}^{n}\left[x^{k+1}\right]f\cdot
+\left[x^{n-k}\right]f^{-1}.`
+This recurrence allows computing the coefficients of $`f^{-1}` one by one.
+:::
+
+```tex "lem.fps.inv-coeff-succ" (slot := statement)
+\begin{lemma}
+\label{lem.fps.inv-coeff-succ}
+\lean{AlgebraicCombinatorics.fps_inv_coeff_succ}
+\leanhelper
+\leanok
+Assume that $K$ is a field. Let $f\in K[[x]]$. For each $n\in\mathbb{N}$,
+\[
+\left[x^{n+1}\right]f^{-1}
+= -\left(\left[x^{0}\right]f\right)^{-1}\sum_{k=0}^{n}\left[x^{k+1}\right]f\cdot
+\left[x^{n-k}\right]f^{-1}.
+\]
+This recurrence allows computing the coefficients of $f^{-1}$ one by one.
+\end{lemma}
+```
+
+:::proof "lem.fps.inv-coeff-succ"
+This follows from the recurrence relation for the coefficients of $`f^{-1}`
+obtained by expanding the equation $`f\cdot f^{-1}=1` and solving for
+$`\left[x^{n+1}\right]f^{-1}`.
+:::
+
+```tex "lem.fps.inv-coeff-succ" (slot := proof)
+\begin{proof}
+Follows from the recurrence relation for the coefficients of $f^{-1}$ obtained
+by expanding the equation $f\cdot f^{-1}=1$ and solving for $[x^{n+1}]f^{-1}$.
+\end{proof}
+```
+
+:::lemma_ "lem.fps.isUnit-inv-eq-inv" (parent := "fps_inverse_coefficients") (lean := "AlgebraicCombinatorics.fps_isUnit_inv_eq_inv")
+Assume that $`K` is a field. Let $`f\in K[[x]]` be an invertible FPS.
+Then the inverse of $`f` obtained from the invertibility proof equals
+$`f^{-1}`, the inverse as defined in the power series ring.
+:::
+
+```tex "lem.fps.isUnit-inv-eq-inv" (slot := statement)
+\begin{lemma}
+\label{lem.fps.isUnit-inv-eq-inv}
+\lean{AlgebraicCombinatorics.fps_isUnit_inv_eq_inv}
+\leanhelper
+\leanok
+Assume that $K$ is a field. Let $f\in K[[x]]$ be an invertible FPS.
+Then the inverse of $f$ obtained from the invertibility proof equals
+$f^{-1}$ (the inverse as defined in the power series ring).
+\end{lemma}
+```
+
+:::proof "lem.fps.isUnit-inv-eq-inv"
+Both satisfy $`f\cdot g = 1`, and inverses are unique.
+:::
+
+```tex "lem.fps.isUnit-inv-eq-inv" (slot := proof)
+\begin{proof}
+\leanok
+Both satisfy $f\cdot g = 1$, and inverses are unique
+(Theorem~\ref{thm.commring.inverse-uni}).
+\end{proof}
+```
+
+:::lemma_ "lem.fps.inv-coeff-zero-isUnit" (parent := "fps_inverse_coefficients") (lean := "AlgebraicCombinatorics.fps_inv_coeff_zero_isUnit")
+Assume that $`K` is a field. Let $`f\in K[[x]]` be an invertible FPS. Then
+$$`\left[x^{0}\right]f^{-1} = \left(\left[x^{0}\right]f\right)^{-1}.`
+:::
+
+```tex "lem.fps.inv-coeff-zero-isUnit" (slot := statement)
+\begin{lemma}
+\label{lem.fps.inv-coeff-zero-isUnit}
+\lean{AlgebraicCombinatorics.fps_inv_coeff_zero_isUnit}
+\leanhelper
+\leanok
+Assume that $K$ is a field. Let $f\in K[[x]]$ be an invertible FPS. Then
+\[
+\left[x^{0}\right]f^{-1} = \left(\left[x^{0}\right]f\right)^{-1}.
+\]
+\end{lemma}
+```
+
+:::proof "lem.fps.inv-coeff-zero-isUnit"
+By the previous lemma, the inverse obtained from the invertibility proof equals
+$`f^{-1}`, so the result follows from the lemma on the constant term of the
+inverse.
+:::
+
+```tex "lem.fps.inv-coeff-zero-isUnit" (slot := proof)
+\begin{proof}
+\leanok
+By Lemma~\ref{lem.fps.isUnit-inv-eq-inv}, the inverse obtained from
+the invertibility proof equals $f^{-1}$,
+so the result follows from Lemma~\ref{lem.fps.inv-coeff-zero}.
+\end{proof}
+```
+
+:::lemma_ "lem.fps.inv-coeff-succ-isUnit" (parent := "fps_inverse_coefficients") (lean := "AlgebraicCombinatorics.fps_inv_coeff_succ_isUnit")
+Assume that $`K` is a field. Let $`f\in K[[x]]` be an invertible FPS. For
+each $`n\in\mathbb{N}`,
+$$`\left[x^{n+1}\right]f^{-1}
+= -\left(\left[x^{0}\right]f\right)^{-1}\sum_{k=0}^{n}\left[x^{k+1}\right]f\cdot
+\left[x^{n-k}\right]f^{-1}.`
+:::
+
+```tex "lem.fps.inv-coeff-succ-isUnit" (slot := statement)
+\begin{lemma}
+\label{lem.fps.inv-coeff-succ-isUnit}
+\lean{AlgebraicCombinatorics.fps_inv_coeff_succ_isUnit}
+\leanhelper
+\leanok
+Assume that $K$ is a field. Let $f\in K[[x]]$ be an invertible FPS. For each
+$n\in\mathbb{N}$,
+\[
+\left[x^{n+1}\right]f^{-1}
+= -\left(\left[x^{0}\right]f\right)^{-1}\sum_{k=0}^{n}\left[x^{k+1}\right]f\cdot
+\left[x^{n-k}\right]f^{-1}.
+\]
+\end{lemma}
+```
+
+:::proof "lem.fps.inv-coeff-succ-isUnit"
+By the previous lemma, the inverse obtained from the invertibility proof equals
+$`f^{-1}`, so the result follows from the recurrence lemma for inverse
+coefficients.
+:::
+
+```tex "lem.fps.inv-coeff-succ-isUnit" (slot := proof)
+\begin{proof}
+By Lemma~\ref{lem.fps.isUnit-inv-eq-inv}, the inverse obtained from
+the invertibility proof equals $f^{-1}$,
+so the result follows from Lemma~\ref{lem.fps.inv-coeff-succ}.
+\end{proof}
+```
