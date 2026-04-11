@@ -920,112 +920,10 @@ Helper lemmas from the formalization.
 \subsection{Helper lemmas from the formalization}
 ```
 
-:::lemma_ "lem.fps.ext" (parent := "fps_helper_lemmas") (lean := "AlgebraicCombinatorics.FPS.fps_ext_iff")
-Two FPSs $`f` and $`g` are equal if and only if
-$`\left[x^{n}\right]f = \left[x^{n}\right]g` for all $`n\in\mathbb{N}`.
-:::
-
-```tex "lem.fps.ext" (slot := statement)
-\begin{lemma}
-\label{lem.fps.ext}
-\lean{AlgebraicCombinatorics.FPS.fps_ext_iff}
-\leanhelper
-\leanok
-Two FPSs $f$ and $g$ are equal if and only if $\left[x^{n}\right]f = \left[x^{n}\right]g$
-for all $n\in\mathbb{N}$.
-\end{lemma}
-```
-
-:::proof "lem.fps.ext"
-Immediate from the definition of FPS as a sequence.
-:::
-
-```tex "lem.fps.ext" (slot := proof)
-\begin{proof}
-\leanok
-Immediate from the definition of FPS as a sequence.
-\end{proof}
-```
-
-:::lemma_ "lem.fps.coeff.zero.mul" (parent := "fps_helper_lemmas") (lean := "AlgebraicCombinatorics.FPS.coeff_zero_mul_fps")
-For any
-$`\mathbf{a},\mathbf{b}\in K\left[\left[x\right]\right]`, we have
-$`\left[x^{0}\right]\left(\mathbf{ab}\right) = \left[x^{0}\right]
-\mathbf{a}\cdot\left[x^{0}\right]\mathbf{b}`.
-That is, the constant term of a product is the product of the constant terms.
-:::
-
-```tex "lem.fps.coeff.zero.mul" (slot := statement)
-\begin{lemma}
-\label{lem.fps.coeff.zero.mul}
-\lean{AlgebraicCombinatorics.FPS.coeff_zero_mul_fps}
-\leanhelper
-\leanok
-For any $\mathbf{a},\mathbf{b}\in K\left[\left[x\right]\right]$, we have
-$\left[x^{0}\right]\left(\mathbf{ab}\right) = \left[x^{0}\right]
-\mathbf{a}\cdot\left[x^{0}\right]\mathbf{b}$.
-That is, the constant term of a product is the product of the constant terms.
-\end{lemma}
-```
-
-:::proof "lem.fps.coeff.zero.mul"
-This follows from the product formula with $`n=0`:
-$`\left[x^{0}\right](\mathbf{ab}) = \sum_{i=0}^{0}
-\left[x^{i}\right]\mathbf{a}\cdot\left[x^{0-i}\right]\mathbf{b}
-= \left[x^{0}\right]\mathbf{a}\cdot\left[x^{0}\right]\mathbf{b}`.
-:::
-
-```tex "lem.fps.coeff.zero.mul" (slot := proof)
-\begin{proof}
-\leanok
-Follows from the product formula with $n=0$: $\left[x^{0}\right](\mathbf{ab}) = \sum_{i=0}^{0} \left[x^{i}\right]\mathbf{a}\cdot\left[x^{0-i}\right]\mathbf{b} = \left[x^{0}\right]\mathbf{a}\cdot\left[x^{0}\right]\mathbf{b}$.
-\end{proof}
-```
-
-:::lemma_ "lem.fps.xk.mul.shift" (parent := "fps_helper_lemmas") (lean := "AlgebraicCombinatorics.FPS.coeff_X_pow_mul")
-For any $`k\in\mathbb{N}` and any FPS $`\mathbf{a}`,
-$$`\left[x^{n}\right]\left(x^{k}\cdot\mathbf{a}\right) =
-\begin{cases}
-0, & \text{if }n<k;\\
-\left[x^{n-k}\right]\mathbf{a}, & \text{if }n\geq k.
-\end{cases}`
-That is, multiplication by $`x^{k}` shifts coefficients by $`k` positions.
-:::
-
-```tex "lem.fps.xk.mul.shift" (slot := statement)
-\begin{lemma}
-\label{lem.fps.xk.mul.shift}
-\lean{AlgebraicCombinatorics.FPS.coeff_X_pow_mul}
-\leanhelper
-\leanok
-For any $k\in\mathbb{N}$ and any FPS $\mathbf{a}$,
-\[
-\left[x^{n}\right]\left(x^{k}\cdot\mathbf{a}\right) =
-\begin{cases}
-0, & \text{if }n<k;\\
-\left[x^{n-k}\right]\mathbf{a}, & \text{if }n\geq k.
-\end{cases}
-\]
-That is, multiplication by $x^{k}$ shifts coefficients by $k$ positions.
-\end{lemma}
-```
-
-:::proof "lem.fps.xk.mul.shift"
-By induction on $`k`, using the lemma on multiplication by $`x` for the
-induction step.
-:::
-
-```tex "lem.fps.xk.mul.shift" (slot := proof)
-\begin{proof}
-\leanok
-By induction on $k$, using Lemma \ref{lem.fps.xa} for the induction step.
-\end{proof}
-```
-
 :::lemma_ "lem.fps.summable.add" (parent := "fps_helper_lemmas") (lean := "AlgebraicCombinatorics.FPS.summableFPS_add")
 If $`\left(\mathbf{a}_{i}\right)_{i\in I}` and
-$`\left(\mathbf{b}_{i}\right)_{i\in I}` are summable families of FPSs, then so
-is $`\left(\mathbf{a}_{i}+\mathbf{b}_{i}\right)_{i\in I}`.
+$`\left(\mathbf{b}_{i}\right)_{i\in I}` are summable families of FPSs, then
+so is $`\left(\mathbf{a}_{i}+\mathbf{b}_{i}\right)_{i\in I}`.
 :::
 
 ```tex "lem.fps.summable.add" (slot := statement)
@@ -1075,8 +973,8 @@ then so is $\left(-\mathbf{a}_{i}\right)_{i\in I}$.
 ```
 
 :::proof "lem.fps.summable.neg"
-For each $`n`, $`\left[x^{n}\right](-\mathbf{a}_{i})
-=-\left[x^{n}\right]\mathbf{a}_{i}`, so
+For each $`n`,
+$`\left[x^{n}\right](-\mathbf{a}_{i})=-\left[x^{n}\right]\mathbf{a}_{i}`, so
 $`\{i \mid \left[x^{n}\right](-\mathbf{a}_{i})\neq 0\}
 = \{i \mid \left[x^{n}\right]\mathbf{a}_{i}\neq 0\}`.
 :::
@@ -1156,8 +1054,8 @@ The difference of two essentially finite families is essentially finite.
 ```
 
 :::proof "lem.fps.essfin.sub"
-Write $`a_i - b_i = a_i + (-b_i)` and apply the previous addition and negation
-lemmas.
+Write $`a_i - b_i = a_i + (-b_i)` and apply the previous essentially finite
+addition and negation lemmas.
 :::
 
 ```tex "lem.fps.essfin.sub" (slot := proof)
@@ -1370,7 +1268,7 @@ The Chu--Vandermonde identity.
 ```
 
 :::theorem "prop.binom.vandermonde.NN" (parent := "fps_vandermonde") (lean := "AlgebraicCombinatorics.FPS.vandermonde_nat")
-Let $`a,b\in\mathbb{N}` and let $`n\in\mathbb{N}`. Then
+Let $`a,b\in\mathbb{N}`, and let $`n\in\mathbb{N}`. Then
 $$`\binom{a+b}{n}=\sum_{k=0}^{n}\binom{a}{k}\binom{b}{n-k}.`
 :::
 
