@@ -1636,3 +1636,147 @@ and a substitution argument shows $[\operatorname{Log} f_i]_n = 0$.
 Hence the set of $i$ with nonzero $n$-th coefficient is contained in $M$.
 \end{proof}
 ```
+
+:::theorem "prop.fps.Exp-Log-infprod" (parent := "exp_log_infinite_products") (lean := "PowerSeries.Log_tprod")
+If $`(f_i)_{i \in I}` is a multipliable family in
+$`K\llbracket x \rrbracket_1`, then
+$$`\operatorname{Log}\Bigl(\prod_{i \in I} f_i\Bigr)
+= \sum_{i \in I} \operatorname{Log}(f_i),`
+where the right-hand side is the coefficient-wise sum, well-defined by the
+previous lemma.
+:::
+
+```tex "prop.fps.Exp-Log-infprod" (slot := statement)
+\begin{proposition}[$\operatorname{Log}$ of infinite product]
+\label{prop.fps.Exp-Log-infprod}
+\lean{PowerSeries.Log_tprod}
+\leanhelper
+\leanok
+If $(f_i)_{i \in I}$ is a multipliable family in
+$K\llbracket x \rrbracket_1$, then
+\[
+\operatorname{Log}\Bigl(\prod_{i \in I} f_i\Bigr)
+= \sum_{i \in I} \operatorname{Log}(f_i),
+\]
+where the right side is the coefficient-wise sum
+(which is well-defined by Lemma~\ref{lem.fps.Log-summable}).
+\end{proposition}
+```
+
+:::proof "prop.fps.Exp-Log-infprod"
+For each coefficient index $`n`, choose an $`x^n`-approximator $`M`.
+The finite version of the statement says that
+$`\operatorname{Log}\left(\prod_{i\in M} f_i\right)
+= \sum_{i\in M} \operatorname{Log}(f_i)`.
+Now the $`n`-th coefficient of the infinite product agrees with that of the
+finite product over $`M`, and the $`n`-th coefficient of the infinite sum is
+already the finite sum over $`M`, since
+$`\left[\operatorname{Log} f_i\right]_n=0` for $`i\notin M`.
+Comparing coefficients yields the proposition.
+:::
+
+```tex "prop.fps.Exp-Log-infprod" (slot := proof)
+\begin{proof}
+\leanok
+For each $n$, choose an $x^n$-approximator $M$.
+By the finite version ($\operatorname{Log}$ of a finite product
+equals the sum of $\operatorname{Log}$s, which follows from
+Lemma~\ref{lem.fps.Exp-Log-additive}(b) by induction), we have
+$\operatorname{Log}(\prod_{i \in M} f_i) = \sum_{i \in M} \operatorname{Log}(f_i)$.
+The $n$-th coefficient of the infinite product agrees with that of
+the finite product over $M$, and the $n$-th coefficient of the sum
+is the finite sum over $M$ (since $[\operatorname{Log} f_i]_n = 0$
+for $i \notin M$). A coefficient comparison argument completes the proof.
+\end{proof}
+```
+
+:::lemma_ "lem.fps.Exp-multipliable" (parent := "exp_log_infinite_products") (lean := "PowerSeries.Exp_multipliable_of_summable")
+If $`(g_i)_{i \in I}` is a summable family in
+$`K\llbracket x \rrbracket_0`, then
+$`(\operatorname{Exp} g_i)_{i \in I}` is a multipliable family in
+$`K\llbracket x \rrbracket_1`.
+:::
+
+```tex "lem.fps.Exp-multipliable" (slot := statement)
+\begin{lemma}[Multipliability of $\operatorname{Exp}$-images]
+\label{lem.fps.Exp-multipliable}
+\lean{PowerSeries.Exp_multipliable_of_summable}
+\leanhelper
+\leanok
+If $(g_i)_{i \in I}$ is a summable family in
+$K\llbracket x \rrbracket_0$, then $(\operatorname{Exp} g_i)_{i \in I}$
+is a multipliable family in $K\llbracket x \rrbracket_1$.
+\end{lemma}
+```
+
+:::proof "lem.fps.Exp-multipliable"
+Since
+$`\operatorname{Exp}(g_i) = 1 + \overline{\exp}\circ g_i`,
+the family has the form $`(1+h_i)` where
+$`h_i=\overline{\exp}\circ g_i`.
+If $`\left[x^k\right](g_i)=0` for all $`k\le n`, then the substitution
+preserves the vanishing of these low-order terms, so
+$`\left[x^n\right](\overline{\exp}\circ g_i)=0`.
+The summability of $`(g_i)` therefore implies the required multipliability of
+$`(1+h_i)`.
+:::
+
+```tex "lem.fps.Exp-multipliable" (slot := proof)
+\begin{proof}
+\leanok
+Since $\operatorname{Exp}(g_i) = 1 + \overline{\exp} \circ g_i$,
+the family is of the form $(1 + h_i)$ where $h_i = \overline{\exp} \circ g_i$.
+The key observation is that if $[x^k](g_i) = 0$ for all $k \le n$,
+then $[x^n](\overline{\exp} \circ g_i) = 0$ as well
+(since $\overline{\exp}$ has constant term $0$, so the substitution
+preserves vanishing of low-order terms).
+The summability of $(g_i)$ then implies the multipliability of
+$(1 + h_i)$.
+\end{proof}
+```
+
+:::theorem "prop.fps.Exp-Log-infsum" (parent := "exp_log_infinite_products") (lean := "PowerSeries.Exp_sum")
+If $`(g_i)_{i \in I}` is a summable family in
+$`K\llbracket x \rrbracket_0`, then
+$$`\operatorname{Exp}\Bigl(\sum_{i \in I} g_i\Bigr)
+= \prod_{i \in I} \operatorname{Exp}(g_i).`
+:::
+
+```tex "prop.fps.Exp-Log-infsum" (slot := statement)
+\begin{proposition}[$\operatorname{Exp}$ of infinite sum]
+\label{prop.fps.Exp-Log-infsum}
+\lean{PowerSeries.Exp_sum}
+\leanhelper
+\leanok
+If $(g_i)_{i \in I}$ is a summable family in
+$K\llbracket x \rrbracket_0$, then
+\[
+\operatorname{Exp}\Bigl(\sum_{i \in I} g_i\Bigr)
+= \prod_{i \in I} \operatorname{Exp}(g_i).
+\]
+\end{proposition}
+```
+
+:::proof "prop.fps.Exp-Log-infsum"
+Let $`f_i = \operatorname{Exp}(g_i)`.
+By the previous proposition,
+$`\operatorname{Log}\left(\prod_i f_i\right)
+= \sum_i \operatorname{Log}(f_i) = \sum_i g_i`,
+using
+$`\operatorname{Log}\circ \operatorname{Exp} = \mathrm{id}`.
+Applying $`\operatorname{Exp}` to both sides and using
+$`\operatorname{Exp}\circ \operatorname{Log} = \mathrm{id}` yields the
+result.
+:::
+
+```tex "prop.fps.Exp-Log-infsum" (slot := proof)
+\begin{proof}
+\leanok
+Let $f_i = \operatorname{Exp}(g_i)$.
+By Proposition~\ref{prop.fps.Exp-Log-infprod},
+$\operatorname{Log}(\prod f_i) = \sum \operatorname{Log}(f_i) = \sum g_i$
+(using $\operatorname{Log} \circ \operatorname{Exp} = \mathrm{id}$).
+Applying $\operatorname{Exp}$ to both sides and using
+$\operatorname{Exp} \circ \operatorname{Log} = \mathrm{id}$ yields the result.
+\end{proof}
+```
