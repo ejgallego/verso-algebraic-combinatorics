@@ -22,6 +22,4 @@ proposition = "theorem"
 [harness]
 native_warnings = false
 strict_external_code = true
-non_port_chapters = [
-  "AlgebraicCombinatoricsBlueprint/Chapters/PortingStatus.lean",
-]
+non_port_chapters = []
