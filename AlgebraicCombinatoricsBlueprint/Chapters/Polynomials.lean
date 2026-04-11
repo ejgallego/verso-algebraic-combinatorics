@@ -682,3 +682,140 @@ have the same addition, the same subtraction and the same zero, and satisfy
 the additional compatibility property (\ref{eq.def.alg.Kalg.scaleinv}).)
 \end{definition}
 ```
+
+:::group "polynomials_evaluation"
+Polynomial evaluation as substitution into an algebra.
+:::
+
+```tex
+\subsection{Evaluation aka substitution into polynomials}
+```
+
+:::definition "def.pol.subs" (parent := "polynomials_evaluation") (lean := "FPS.polyEval")
+Let $`f\in K[x]` be a polynomial, let $`A` be any $`K`-algebra, and let
+$`a\in A`. We define an element $`f[a]\in A` as follows.
+
+Write $`f` in the form
+$`f=\sum_{n\in\mathbb{N}} f_n x^n` with $`f_n\in K`; in other words,
+$`f_n=\left[x^n\right]f` for each $`n\in\mathbb{N}`. Then set
+$$`f[a] := \sum_{n\in\mathbb{N}} f_n a^n.`
+This sum is essentially finite because $`f` is a polynomial.
+
+The element $`f[a]` is also denoted by $`f\circ a` or $`f(a)`, and is called
+the _value_ of $`f` at $`a`, or the _evaluation_ of $`f` at $`a`, or the
+_result of substituting_ $`a` _for_ $`x` _in_ $`f`.
+:::
+
+```tex "def.pol.subs" (slot := statement)
+\begin{definition}
+\label{def.pol.subs}
+\lean{FPS.polyEval}
+\leantarget
+\leanok
+Let $f\in K\left[  x\right]  $ be a polynomial. Let $A$ be
+any $K$-algebra. Let $a\in A$ be any element. We then define an element
+$f\left[  a\right]  \in A$ as follows:
+
+Write $f$ in the form $f=\sum_{n\in\mathbb{N}}f_{n}x^{n}$ with $f_{0}%
+,f_{1},f_{2},\ldots\in K$. (That is, $f_{n}=\left[  x^{n}\right]  f$ for each
+$n\in\mathbb{N}$.) Then, set%
+\[
+f\left[  a\right]  :=\sum_{n\in\mathbb{N}}f_{n}a^{n}.
+\]
+(This sum is essentially finite, since $f$ is a polynomial.)
+
+The element $f\left[  a\right]  $ is also denoted by $f\circ a$ or by
+$f\left(  a\right)  $, and is called the \emph{value} of $f$ at $a$ (or the
+\emph{evaluation} of $f$ at $a$, or the \emph{result of substituting }$a$ for
+$x$ in $f$).
+\end{definition}
+```
+
+:::lemma_ "lem.pol.eval.def" (parent := "polynomials_evaluation") (lean := "FPS.eval_def")
+The evaluation $`f[a]` can be computed as
+$`f[a]=\sum_{n} f_n\cdot a^n`, where the sum ranges over all $`n` in the
+support of $`f`.
+:::
+
+```tex "lem.pol.eval.def" (slot := statement)
+\begin{lemma}
+\label{lem.pol.eval.def}
+\lean{FPS.eval_def}
+\leanhelper
+\leanok
+The evaluation $f\left[a\right]$ can be computed as
+$f\left[a\right]=\sum_{n}f_{n}\cdot a^{n}$,
+where the sum ranges over all $n$ in the support of $f$.
+\end{lemma}
+```
+
+:::proof "lem.pol.eval.def"
+Immediate from the definition.
+:::
+
+```tex "lem.pol.eval.def" (slot := proof)
+\begin{proof}
+\leanok
+Immediate from the definitions.
+\end{proof}
+```
+
+:::lemma_ "lem.pol.eval.finsum" (parent := "polynomials_evaluation") (lean := "FPS.eval_eq_finsum")
+The evaluation $`f[a]` equals
+$`\sum_{n\in \operatorname{supp}(f)} f_n\cdot a^n`, making the finiteness of
+the sum explicit.
+:::
+
+```tex "lem.pol.eval.finsum" (slot := statement)
+\begin{lemma}
+\label{lem.pol.eval.finsum}
+\lean{FPS.eval_eq_finsum}
+\leanhelper
+\leanok
+The evaluation $f\left[a\right]$ equals
+$\sum_{n\in\operatorname{supp}(f)}f_{n}\cdot a^{n}$,
+making the finiteness of the sum explicit.
+\end{lemma}
+```
+
+:::proof "lem.pol.eval.finsum"
+This follows from the definition by restricting the sum to the support.
+:::
+
+```tex "lem.pol.eval.finsum" (slot := proof)
+\begin{proof}
+\leanok
+This follows from the definition by restricting the sum to the support.
+\end{proof}
+```
+
+:::lemma_ "lem.pol.eval.sum-range" (parent := "polynomials_evaluation") (lean := "FPS.eval_eq_sum_range")
+The evaluation $`f[a]` equals
+$`\sum_{n=0}^{\deg f} f_n\cdot a^n`, where the sum is taken up to the degree
+of $`f`.
+:::
+
+```tex "lem.pol.eval.sum-range" (slot := statement)
+\begin{lemma}
+\label{lem.pol.eval.sum-range}
+\lean{FPS.eval_eq_sum_range}
+\leanhelper
+\leanok
+The evaluation $f\left[a\right]$ equals
+$\sum_{n=0}^{\deg f}f_{n}\cdot a^{n}$,
+where the sum is taken up to the degree of $f$.
+\end{lemma}
+```
+
+:::proof "lem.pol.eval.sum-range"
+Since all coefficients beyond the degree of $`f` are $`0`, extending or
+restricting the sum to this range does not change the result.
+:::
+
+```tex "lem.pol.eval.sum-range" (slot := proof)
+\begin{proof}
+\leanok
+Since all coefficients beyond the degree of $f$ are zero, extending or
+restricting the sum to this range does not change the result.
+\end{proof}
+```
