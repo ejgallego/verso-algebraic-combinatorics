@@ -264,3 +264,237 @@ The Leibniz rule for $(fg)'$ then shows $h'=0$.
 Since $[x^0]h = 0-0-0 = 0$ and $h'=0$, uniqueness gives $h=0$.
 \end{proof}
 ```
+
+:::group "non_integer_powers_exp_map"
+The exponential map on series with constant term zero.
+:::
+
+```tex
+\subsubsection{The Exp map}
+```
+
+:::definition "def.fps.fpsExp" (parent := "non_integer_powers_exp_map") (lean := "AlgebraicCombinatorics.FPS.fpsExp")
+For $`g\in K[[x]]_0`, define
+$$`\operatorname{Exp}(g) := \exp\circ g
+= \left(\sum_{n\in\mathbb{N}} \frac{x^n}{n!}\right)\circ g.`
+Since $`g` has constant term $`0`, the substitution is well-defined.
+:::
+
+```tex "def.fps.fpsExp" (slot := statement)
+\begin{definition}
+\label{def.fps.fpsExp}
+\lean{AlgebraicCombinatorics.FPS.fpsExp}
+\leanhelper
+\leanok
+For $g\in K[[x]]_0$ (FPS with constant term~$0$), we define
+\[
+\operatorname{Exp}(g) := \exp\circ\, g
+= \left(\sum_{n\in\mathbb{N}} \frac{x^n}{n!}\right)\circ g.
+\]
+Since $g$ has constant term~$0$, the substitution is well-defined.
+\end{definition}
+```
+
+:::lemma_ "lem.fps.fpsExp-zero" (parent := "non_integer_powers_exp_map") (lean := "AlgebraicCombinatorics.FPS.fpsExp_zero")
+$`\operatorname{Exp}(0)=1`.
+:::
+
+```tex "lem.fps.fpsExp-zero" (slot := statement)
+\begin{lemma}
+\label{lem.fps.fpsExp-zero}
+\lean{AlgebraicCombinatorics.FPS.fpsExp_zero}
+\leanhelper
+\leanok
+$\operatorname{Exp}(0)=1$.
+\end{lemma}
+```
+
+:::proof "lem.fps.fpsExp-zero"
+Only the $`m=0` term in the substitution sum is nonzero, so the value is
+$`1`.
+:::
+
+```tex "lem.fps.fpsExp-zero" (slot := proof)
+\begin{proof}
+\leanok
+Only the $m=0$ term in the substitution sum is nonzero, giving~$1$.
+\end{proof}
+```
+
+:::lemma_ "lem.fps.hasConstantTermOne-fpsExp" (parent := "non_integer_powers_exp_map") (lean := "AlgebraicCombinatorics.FPS.hasConstantTermOne_fpsExp")
+For $`g\in K[[x]]_0`, we have
+$`\operatorname{Exp}(g)\in K[[x]]_1`.
+:::
+
+```tex "lem.fps.hasConstantTermOne-fpsExp" (slot := statement)
+\begin{lemma}
+\label{lem.fps.hasConstantTermOne-fpsExp}
+\lean{AlgebraicCombinatorics.FPS.hasConstantTermOne_fpsExp}
+\leanhelper
+\leanok
+For $g\in K[[x]]_0$, we have $\operatorname{Exp}(g)\in K[[x]]_1$.
+\end{lemma}
+```
+
+:::proof "lem.fps.hasConstantTermOne-fpsExp"
+The constant term of $`\operatorname{Exp}(g)=\exp\circ g` is
+$`\left[x^0\right]\exp = 1/0! = 1`, since all higher powers of $`g`
+contribute $`0` to the constant term.
+:::
+
+```tex "lem.fps.hasConstantTermOne-fpsExp" (slot := proof)
+\begin{proof}
+\leanok
+The constant term of $\operatorname{Exp}(g) = \exp\circ g$ is $[x^0]\exp = 1/0! = 1$,
+since all higher powers of $g$ contribute~$0$ to the constant term.
+\end{proof}
+```
+
+:::theorem "thm.fps.fpsExp-add" (parent := "non_integer_powers_exp_map") (lean := "AlgebraicCombinatorics.FPS.fpsExp_add")
+For $`u,v\in K[[x]]_0`, we have
+$$`\operatorname{Exp}(u+v)=\operatorname{Exp}(u)\cdot\operatorname{Exp}(v).`
+:::
+
+```tex "thm.fps.fpsExp-add" (slot := statement)
+\begin{theorem}
+\label{thm.fps.fpsExp-add}
+\lean{AlgebraicCombinatorics.FPS.fpsExp_add}
+\leanhelper
+\leanok
+For $u,v\in K[[x]]_0$,
+\[
+\operatorname{Exp}(u+v) = \operatorname{Exp}(u)\cdot\operatorname{Exp}(v).
+\]
+\end{theorem}
+```
+
+:::proof "thm.fps.fpsExp-add"
+This is the multiplicativity of the exponential map for formal power series.
+:::
+
+```tex "thm.fps.fpsExp-add" (slot := proof)
+\begin{proof}
+\leanok
+Follows from the multiplicativity of the exponential map, established
+in Mathlib's Exp/Log theory for formal power series.
+\end{proof}
+```
+
+:::group "non_integer_powers_power_definition"
+Defining non-integer powers using `Exp` and `Log`.
+:::
+
+```tex
+\subsubsection{The power definition}
+```
+
+:::definition "def.fps.power-c" (parent := "non_integer_powers_power_definition") (lean := "AlgebraicCombinatorics.FPS.fpsPow")
+Assume that $`K` is a commutative $`\mathbb{Q}`-algebra.
+Let $`f\in K\left[\left[x\right]\right]_1` and $`c\in K`.
+Define an FPS
+$$`f^c := \operatorname{Exp}\left(c\operatorname{Log}f\right)
+\in K\left[\left[x\right]\right]_1.`
+:::
+
+```tex "def.fps.power-c" (slot := statement)
+\begin{definition}
+\label{def.fps.power-c}
+\lean{AlgebraicCombinatorics.FPS.fpsPow}
+\leantarget
+\leanok
+Assume that $K$ is a commutative $\mathbb{Q}$-algebra.
+Let $f\in K\left[  \left[  x\right]  \right]  _{1}$ and $c\in K$. Then, we
+define an FPS%
+\[
+f^{c}:=\operatorname{Exp}\left(  c\operatorname{Log}f\right)  \in K\left[
+\left[  x\right]  \right]  _{1}.
+\]
+\end{definition}
+```
+
+:::lemma_ "lem.fps.fpsPow-zero" (parent := "non_integer_powers_power_definition") (lean := "AlgebraicCombinatorics.FPS.fpsPow_zero")
+For any $`f\in K[[x]]`, we have $`f^0 = 1`.
+:::
+
+```tex "lem.fps.fpsPow-zero" (slot := statement)
+\begin{lemma}
+\label{lem.fps.fpsPow-zero}
+\lean{AlgebraicCombinatorics.FPS.fpsPow_zero}
+\leanhelper
+\leanok
+For any $f\in K[[x]]$, we have $f^0 = 1$.
+\end{lemma}
+```
+
+:::proof "lem.fps.fpsPow-zero"
+$`f^0=\operatorname{Exp}(0\cdot\operatorname{Log}f)=\operatorname{Exp}(0)=1`.
+:::
+
+```tex "lem.fps.fpsPow-zero" (slot := proof)
+\begin{proof}
+\leanok
+$f^0 = \operatorname{Exp}(0\cdot\operatorname{Log}f) = \operatorname{Exp}(0) = 1$.
+\end{proof}
+```
+
+:::lemma_ "lem.fps.hasConstantTermOne-fpsPow" (parent := "non_integer_powers_power_definition") (lean := "AlgebraicCombinatorics.FPS.hasConstantTermOne_fpsPow")
+For $`f\in K[[x]]_1` and $`c\in K`, we have
+$`f^c\in K[[x]]_1`.
+:::
+
+```tex "lem.fps.hasConstantTermOne-fpsPow" (slot := statement)
+\begin{lemma}
+\label{lem.fps.hasConstantTermOne-fpsPow}
+\lean{AlgebraicCombinatorics.FPS.hasConstantTermOne_fpsPow}
+\leanhelper
+\leanok
+For $f\in K[[x]]_1$ and $c\in K$, we have $f^c\in K[[x]]_1$.
+\end{lemma}
+```
+
+:::proof "lem.fps.hasConstantTermOne-fpsPow"
+Since $`\left[x^0\right]\operatorname{Log}f = 0`, we have
+$`\left[x^0\right](c\operatorname{Log}f)=0`, so
+$`\operatorname{Exp}(c\operatorname{Log}f)\in K[[x]]_1`.
+:::
+
+```tex "lem.fps.hasConstantTermOne-fpsPow" (slot := proof)
+\begin{proof}
+\leanok
+Since $[x^0]\operatorname{Log}f = 0$, we have $[x^0](c\operatorname{Log}f) = 0$,
+so $\operatorname{Exp}(c\operatorname{Log}f)\in K[[x]]_1$.
+\end{proof}
+```
+
+:::lemma_ "lem.fps.fpsPow-one" (parent := "non_integer_powers_power_definition") (lean := "AlgebraicCombinatorics.FPS.fpsPow_one")
+For $`f\in K[[x]]_1`, we have $`f^1 = f`.
+:::
+
+```tex "lem.fps.fpsPow-one" (slot := statement)
+\begin{lemma}
+\label{lem.fps.fpsPow-one}
+\lean{AlgebraicCombinatorics.FPS.fpsPow_one}
+\leanhelper
+\leanok
+For $f\in K[[x]]_1$, we have $f^1 = f$.
+\end{lemma}
+```
+
+:::proof "lem.fps.fpsPow-one"
+$`f^1=\operatorname{Exp}(1\cdot\operatorname{Log}f)=\operatorname{Exp}(\operatorname{Log}f)=f`,
+using that $`\operatorname{Exp}\circ\operatorname{Log}` is the identity on
+$`K[[x]]_1`.
+:::
+
+```tex "lem.fps.fpsPow-one" (slot := proof)
+\begin{proof}
+\leanok
+$f^1 = \operatorname{Exp}(1\cdot\operatorname{Log}f) = \operatorname{Exp}(\operatorname{Log}f) = f$,
+using the inverse property $\operatorname{Exp}\circ\operatorname{Log} = \operatorname{id}$
+on $K[[x]]_1$.
+The formal proof bridges the local definitions of $\operatorname{Log}$ and $\operatorname{Exp}$
+to Mathlib's Exp/Log framework
+(via Lemmas~\ref{lem.fps.fpsLog-eq-Log-val} and~\ref{lem.fps.fpsExp-eq-Exp-val})
+and then applies the inverse property.
+\end{proof}
+```
