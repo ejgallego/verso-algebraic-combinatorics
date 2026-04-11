@@ -772,3 +772,159 @@ This follows by induction on $n$, using part \textbf{(d)} (in the
 induction step) and $1^{\prime}=0$ (in the induction base).
 \end{proof}
 ```
+
+:::lemma_ "lem.fps.deriv.rules.g" (parent := "derivative_rules") (lean := "AlgebraicCombinatorics.FPS.derivative_comp")
+Given two FPSs $`f,g\in K\left[\left[x\right]\right]`, we have
+$`\left(f\circ g\right)' = \left(f'\circ g\right)\cdot g'` if $`f` is a
+polynomial or if $`\left[x^0\right]g = 0`. This is the chain rule.
+:::
+
+```tex "lem.fps.deriv.rules.g" (slot := statement)
+\begin{lemma}[Theorem~\ref{thm.fps.deriv.rules} \textbf{(g)}]
+\label{lem.fps.deriv.rules.g}
+\lean{AlgebraicCombinatorics.FPS.derivative_comp}
+\leanhelper
+\leanok
+Given two FPSs $f,g\in K\left[  \left[  x\right]  \right]  $, we
+have
+\[
+\left(  f\circ g\right)  ^{\prime}=\left(  f^{\prime}\circ g\right)  \cdot
+g^{\prime}%
+\]
+if $f$ is a polynomial or if $\left[  x^{0}\right]  g=0$. (This is known as
+the \emph{chain rule}.)
+\end{lemma}
+```
+
+:::proof "lem.fps.deriv.rules.g"
+Write $`f = \sum_{n\in\mathbb{N}} f_n x^n`. Then
+$`f[g] = \sum_{n\in\mathbb{N}} f_n g^n`, so differentiating termwise gives
+$`\left(f[g]\right)' = \sum_{n>0} f_n \left(g^n\right)'`.
+By the power rule this becomes
+$`\sum_{n>0} f_n n g' g^{n-1}`.
+
+On the other hand,
+$`f' = \sum_{n>0} n f_n x^{n-1}`, so substituting $`g` into $`f'` gives
+$`f'[g] = \sum_{n>0} n f_n g^{n-1}`. Multiplying by $`g'` yields the same sum
+as above, hence
+$`\left(f\circ g\right)' = \left(f'\circ g\right)\cdot g'`.
+:::
+
+```tex "lem.fps.deriv.rules.g" (slot := proof)
+\begin{proof}
+Let $f,g\in K\left[  \left[  x\right]  \right]  $ be two FPSs
+such that $f$ is a polynomial or $\left[  x^{0}\right]  g=0$. Write the FPS
+$f$ in the form $f=\sum_{n\in\mathbb{N}}f_{n}x^{n}$ with $f_{0},f_{1}%
+,f_{2},\ldots\in K$. Then, $f\left[  g\right]  =\sum_{n\in\mathbb{N}}%
+f_{n}g^{n}$. Hence,%
+\begin{align}
+\left(  f\left[  g\right]  \right)  ^{\prime}  &  =\left(  \sum_{n\in
+\mathbb{N}}f_{n}g^{n}\right)  ^{\prime}=\sum_{n\in\mathbb{N}}%
+\underbrace{\left(  f_{n}g^{n}\right)  ^{\prime}}_{\substack{=f_{n}\left(
+g^{n}\right)  ^{\prime}\\\text{(by part \textbf{(c)})}}}
+\ \ \ \ \ \ \ \ \ \ \left(  \text{by part \textbf{(b)}}\right) \nonumber\\
+&  =\sum_{n\in\mathbb{N}}f_{n}\left(  g^{n}\right)  ^{\prime}=f_{0}%
+\underbrace{\left(  g^{0}\right)  ^{\prime}}_{=1^{\prime}=0}+\sum_{n>0}%
+f_{n}\underbrace{\left(  g^{n}\right)  ^{\prime}}_{\substack{=ng^{\prime
+}g^{n-1}\\\text{(by part \textbf{(f)})}%
+}}=\sum_{n>0}f_{n} n g^{\prime} g^{n-1}. \label{pf.thm.fps.deriv.rules.g.3}%
+\end{align}
+
+On the other hand, from $f=\sum_{n\in\mathbb{N}}f_{n}x^{n}$, we obtain
+$f^{\prime}=\sum_{n>0}nf_{n}x^{n-1}=\sum_{m\in\mathbb{N}}\left(  m+1\right)
+f_{m+1}x^{m}$ (here, we have substituted $m+1$ for $n$ in the sum). Hence,
+\[
+f^{\prime}\left[  g\right]  =\sum_{m\in\mathbb{N}}\left(  m+1\right)
+f_{m+1}g^{m}=\sum_{n>0}nf_{n}g^{n-1}%
+\]
+(here, we have substituted $n-1$ for $m$ in the sum). Multiplying both sides
+of this equality by $g^{\prime}$, we find%
+\[
+f^{\prime}\left[  g\right]  \cdot g^{\prime}=\left(  \sum_{n>0}nf_{n}%
+g^{n-1}\right)  \cdot g^{\prime}=\sum_{n>0}nf_{n}g^{n-1}g^{\prime}.
+\]
+Comparing this with (\ref{pf.thm.fps.deriv.rules.g.3}), we find $\left(
+f\left[  g\right]  \right)  ^{\prime}=f^{\prime}\left[  g\right]  \cdot
+g^{\prime}$. In other words, $\left(  f\circ g\right)  ^{\prime}=\left(
+f^{\prime}\circ g\right)  \cdot g^{\prime}$ (since $f\circ g$ is a synonym for
+$f\left[  g\right]  $).
+\end{proof}
+```
+
+:::lemma_ "lem.fps.deriv.rules.h" (parent := "derivative_rules") (lean := "AlgebraicCombinatorics.FPS.derivative_eq_imp_diff_const")
+If $`K` is a $`\mathbb{Q}`-algebra, and if two FPSs
+$`f,g\in K\left[\left[x\right]\right]` satisfy $`f' = g'`, then $`f-g` is
+constant.
+:::
+
+```tex "lem.fps.deriv.rules.h" (slot := statement)
+\begin{lemma}[Theorem~\ref{thm.fps.deriv.rules} \textbf{(h)}]
+\label{lem.fps.deriv.rules.h}
+\lean{AlgebraicCombinatorics.FPS.derivative_eq_imp_diff_const}
+\leanhelper
+\leanok
+If $K$ is a $\mathbb{Q}$-algebra, and if two FPSs $f,g\in
+K\left[  \left[  x\right]  \right]  $ satisfy $f^{\prime}=g^{\prime}$, then
+$f-g$ is constant.
+\end{lemma}
+```
+
+:::proof "lem.fps.deriv.rules.h"
+Let $`n\ge 1`. Comparing coefficients at index $`n-1` in the equality
+$`f' = g'` yields
+$`n\cdot \left[x^n\right]f = n\cdot \left[x^n\right]g`.
+Since $`K` is a $`\mathbb{Q}`-algebra, we can divide by the positive integer
+$`n` and conclude $`\left[x^n\right]f = \left[x^n\right]g`. Thus every
+positive-degree coefficient of $`f-g` vanishes, so $`f-g` is constant.
+
+The assumption that $`K` is a $`\mathbb{Q}`-algebra is essential, because it
+allows division by positive integers.
+:::
+
+```tex "lem.fps.deriv.rules.h" (slot := proof)
+\begin{proof}
+\leanok
+The proof can be found in \cite[Lemma 0.3]{logexp}.
+Let $n \geq 1$. From $f^{\prime} = g^{\prime}$, comparing coefficients at index
+$n - 1$ yields $n \cdot [x^n]f = n \cdot [x^n]g$. Since $K$ is a $\mathbb{Q}$-algebra
+(hence torsion-free), we can divide by $n$ to conclude $[x^n]f = [x^n]g$,
+i.e., $[x^n](f - g) = 0$.
+
+Note that the condition that $K$ be a $\mathbb{Q}$-algebra is crucial, since
+it allows dividing by positive integers. (For example, if $K$ could be
+$\mathbb{Z}/2$, then we would easily get a counterexample, e.g., by taking
+$f=x^{2}$ and $g=0$.)
+\end{proof}
+```
+
+:::lemma_ "lem.fps.deriv.eq-of-deriv-eq-const-eq" (parent := "derivative_rules") (lean := "AlgebraicCombinatorics.FPS.eq_of_derivative_eq_of_constantCoeff_eq")
+If $`K` is a $`\mathbb{Q}`-algebra, and if two FPSs
+$`f,g\in K\left[\left[x\right]\right]` satisfy $`f' = g'` and
+$`\left[x^0\right]f = \left[x^0\right]g`, then $`f = g`.
+:::
+
+```tex "lem.fps.deriv.eq-of-deriv-eq-const-eq" (slot := statement)
+\begin{lemma}
+\label{lem.fps.deriv.eq-of-deriv-eq-const-eq}
+\lean{AlgebraicCombinatorics.FPS.eq_of_derivative_eq_of_constantCoeff_eq}
+\leanhelper
+\leanok
+If $K$ is a $\mathbb{Q}$-algebra, and if two FPSs $f,g\in
+K\left[  \left[  x\right]  \right]  $ satisfy $f^{\prime}=g^{\prime}$ and
+$[x^0]f = [x^0]g$, then $f = g$.
+\end{lemma}
+```
+
+:::proof "lem.fps.deriv.eq-of-deriv-eq-const-eq"
+By the previous lemma, $`f-g` is constant. Since
+$`\left[x^0\right](f-g) = \left[x^0\right]f - \left[x^0\right]g = 0`, this
+constant must be $`0`. Hence $`f-g=0`, so $`f=g`.
+:::
+
+```tex "lem.fps.deriv.eq-of-deriv-eq-const-eq" (slot := proof)
+\begin{proof}
+\leanok
+By Lemma~\ref{lem.fps.deriv.rules.h}, $f - g$ is constant. Since
+$[x^0](f - g) = [x^0]f - [x^0]g = 0$, we have $f - g = 0$, so $f = g$.
+\end{proof}
+```
