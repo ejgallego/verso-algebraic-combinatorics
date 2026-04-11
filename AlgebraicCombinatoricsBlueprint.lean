@@ -12,6 +12,7 @@ import AlgebraicCombinatoricsBlueprint.Chapters.Polynomials
 import AlgebraicCombinatoricsBlueprint.Chapters.Substitution
 import AlgebraicCombinatoricsBlueprint.Chapters.Derivatives
 import AlgebraicCombinatoricsBlueprint.Chapters.ExpLog
+import AlgebraicCombinatoricsBlueprint.Chapters.NonIntegerPowers
 
 open Verso.Genre
 open Verso.Genre.Manual
@@ -32,6 +33,7 @@ checkout.
 {include 0 AlgebraicCombinatoricsBlueprint.Chapters.Substitution}
 {include 0 AlgebraicCombinatoricsBlueprint.Chapters.Derivatives}
 {include 0 AlgebraicCombinatoricsBlueprint.Chapters.ExpLog}
+{include 0 AlgebraicCombinatoricsBlueprint.Chapters.NonIntegerPowers}
 
 {blueprint_graph}
 {blueprint_summary}

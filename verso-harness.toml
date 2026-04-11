@@ -14,6 +14,7 @@ default_chapters = [
   "AlgebraicCombinatoricsBlueprint/Chapters/Substitution.lean",
   "AlgebraicCombinatoricsBlueprint/Chapters/Derivatives.lean",
   "AlgebraicCombinatoricsBlueprint/Chapters/ExpLog.lean",
+  "AlgebraicCombinatoricsBlueprint/Chapters/NonIntegerPowers.lean",
 ]
 
 [lt.node_kinds]
