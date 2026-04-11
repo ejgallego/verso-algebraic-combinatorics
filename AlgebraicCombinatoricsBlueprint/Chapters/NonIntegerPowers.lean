@@ -618,3 +618,165 @@ and the inductive step uses $f^{n+1} = f^n\cdot f^1 = f^n\cdot f$
 (by the first rule of exponents and Lemma~\ref{lem.fps.fpsPow-one}).
 \end{proof}
 ```
+
+:::group "non_integer_powers_newton"
+The Newton binomial formula for arbitrary exponents.
+:::
+
+```tex
+\subsection{The Newton binomial formula for arbitrary exponents}
+```
+
+:::theorem "thm.fps.gen-newton" (parent := "non_integer_powers_newton") (lean := "AlgebraicCombinatorics.FPS.generalizedNewtonBinomial")
+Assume that $`K` is a commutative $`\mathbb{Q}`-algebra. Let $`c\in K`.
+Then
+$$`\left(1+x\right)^c=\sum_{k\in\mathbb{N}}\dbinom{c}{k}x^k.`
+:::
+
+```tex "thm.fps.gen-newton" (slot := statement)
+\begin{theorem}
+[Generalized Newton binomial formula]
+\label{thm.fps.gen-newton}
+\lean{AlgebraicCombinatorics.FPS.generalizedNewtonBinomial}
+\leantarget
+\leanok
+Assume that $K$
+is a commutative $\mathbb{Q}$-algebra. Let $c\in K$. Then,%
+\[
+\left(  1+x\right)  ^{c}=\sum_{k\in\mathbb{N}}\dbinom{c}{k}x^{k}.
+\]
+\end{theorem}
+```
+
+:::proof "thm.fps.gen-newton"
+The definition of $`\operatorname{Log}` gives
+$`\operatorname{Log}(1+x)=\overline{\log}\circ x=\overline{\log}`.
+Hence
+$$`(1+x)^c
+=\operatorname{Exp}(c\operatorname{Log}(1+x))
+=\operatorname{Exp}(c\,\overline{\log})
+=\exp\circ(c\,\overline{\log}).`
+Expanding this as a power series and collecting coefficients yields an
+expression for the coefficient of $`x^k` as a polynomial in $`c`.
+The usual binomial coefficient $`\dbinom{c}{k}` is also polynomial in $`c`.
+
+For natural numbers $`c=n`, the equality reduces to the ordinary Newton
+binomial formula, so these two polynomials agree on all natural numbers.
+By the polynomial identity trick, they are therefore equal for all
+$`c\in K`.
+:::
+
+```tex "thm.fps.gen-newton" (slot := proof)
+\begin{proof}
+The definition of $\operatorname{Log}$ yields
+$\operatorname{Log}(1+x) = \overline{\log}\circ x = \overline{\log}$.
+By Definition~\ref{def.fps.power-c}, we have
+\begin{align*}
+(1+x)^c &= \operatorname{Exp}(c\operatorname{Log}(1+x))
+= \operatorname{Exp}(c\,\overline{\log}) \\
+&= \exp\circ(c\,\overline{\log})
+= \sum_{m\in\mathbb{N}} \frac{1}{m!}\left(\sum_{n\geq 1}\frac{(-1)^{n-1}}{n}cx^n\right)^m.
+\end{align*}
+Expanding and collecting by powers of $x$, we obtain
+\[
+(1+x)^c = \sum_{k\in\mathbb{N}} \left(\sum_{(n_1,\ldots,n_m)\in\operatorname{Comp}(k)}
+\frac{1}{m!}\cdot\frac{(-1)^{n_1+\cdots+n_m-m}}{n_1 n_2\cdots n_m} c^m\right) x^k,
+\]
+where $\operatorname{Comp}(k)$ denotes the set of all compositions of~$k$.
+
+It remains to show that the coefficient of $x^k$ equals $\binom{c}{k}$.
+We use the \emph{polynomial identity trick}: for each $k\in\mathbb{N}$,
+both sides of the coefficient equality
+\[
+\sum_{(n_1,\ldots,n_m)\in\operatorname{Comp}(k)}
+\frac{1}{m!}\cdot\frac{(-1)^{n_1+\cdots+n_m-m}}{n_1\cdots n_m} c^m = \binom{c}{k}
+\]
+are polynomials in~$c$ with rational coefficients.
+(The left-hand side is a finite sum of ``rational number times a power of~$c$''
+expressions.
+The right-hand side is $\frac{c(c-1)(c-2)\cdots(c-k+1)}{k!}$.)
+
+For $c = n\in\mathbb{N}$, the equality holds by the standard Newton binomial
+formula (Theorem~\ref{thm.fps.newton-binom}), since both sides equal $\binom{n}{k}$.
+Since two polynomials with rational coefficients that agree on all natural
+numbers must be equal (having infinitely many common values), the equality
+holds for all $c\in K$.
+
+In the formal proof:
+\begin{itemize}
+\item The base case $k=0$: both sides equal~$1$.
+\item The inductive case $k=k'+1$: both the LHS and the RHS are expressed
+as evaluations of explicit polynomials over~$\mathbb{Q}$, mapped to~$K$.
+The LHS polynomial is built by expanding $\exp\circ(c\,\overline{\log})$
+as $\sum_{d\ge 0}\frac{1}{d!}(c\,\overline{\log})^d$;
+the scalar factoring $(c\,\overline{\log})^d = c^d\,\overline{\log}^d$
+uses Lemma~\ref{lem.fps.smul-pow-eq-pow-smul},
+and the truncation of the sum at $d=k$ uses the vanishing
+$[x^k](\overline{\log}^d)=0$ for $d>k$
+(Lemma~\ref{lem.fps.coeff-logSeries-pow-eq-zero}).
+The polynomial identity principle (Lemma~\ref{lem.fps.poly-eq-of-nat-eval-eq}) then
+shows these polynomials are equal, since they agree on all $n\in\mathbb{N}$.
+\end{itemize}
+\end{proof}
+```
+
+:::corollary "cor.fps.coeff-one-add-X-fpsPow" (parent := "non_integer_powers_newton") (lean := "AlgebraicCombinatorics.FPS.coeff_one_add_X_fpsPow")
+For any $`c\in K` and $`k\in\mathbb{N}`,
+$$`\left[x^k\right](1+x)^c=\dbinom{c}{k}.`
+:::
+
+```tex "cor.fps.coeff-one-add-X-fpsPow" (slot := statement)
+\begin{corollary}
+\label{cor.fps.coeff-one-add-X-fpsPow}
+\lean{AlgebraicCombinatorics.FPS.coeff_one_add_X_fpsPow}
+\leanhelper
+\leanok
+For any $c\in K$ and $k\in\mathbb{N}$,
+\[
+[x^k](1+x)^c = \binom{c}{k}.
+\]
+\end{corollary}
+```
+
+:::proof "cor.fps.coeff-one-add-X-fpsPow"
+Immediate from the generalized Newton formula by reading off coefficients.
+:::
+
+```tex "cor.fps.coeff-one-add-X-fpsPow" (slot := proof)
+\begin{proof}
+\leanok
+Immediate from Theorem~\ref{thm.fps.gen-newton} by reading off coefficients.
+\end{proof}
+```
+
+:::theorem "thm.fps.antiNewtonBinomial" (parent := "non_integer_powers_newton") (lean := "AlgebraicCombinatorics.FPS.antiNewtonBinomial")
+For any $`n\in K`,
+$$`(1+x)^{-n}=\sum_{i\in\mathbb{N}}(-1)^i\dbinom{n+i-1}{i}x^i.`
+:::
+
+```tex "thm.fps.antiNewtonBinomial" (slot := statement)
+\begin{theorem}
+\label{thm.fps.antiNewtonBinomial}
+\lean{AlgebraicCombinatorics.FPS.antiNewtonBinomial}
+\leanhelper
+\leanok
+For any $n\in K$,
+\[
+(1+x)^{-n} = \sum_{i\in\mathbb{N}} (-1)^i \binom{n+i-1}{i} x^i.
+\]
+\end{theorem}
+```
+
+:::proof "thm.fps.antiNewtonBinomial"
+Apply the generalized Newton formula with $`c=-n` and use the upper-negation
+identity
+$`\dbinom{-n}{i}=(-1)^i\dbinom{n+i-1}{i}`.
+:::
+
+```tex "thm.fps.antiNewtonBinomial" (slot := proof)
+\begin{proof}
+\leanok
+Apply Theorem~\ref{thm.fps.gen-newton} with $c=-n$ and use the upper negation
+identity $\binom{-n}{i} = (-1)^i\binom{n+i-1}{i}$.
+\end{proof}
+```
