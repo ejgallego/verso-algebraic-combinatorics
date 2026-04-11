@@ -628,20 +628,19 @@ and $\sum_{j\in J}\ \ \sum_{i\in I}\mathbf{a}_{i,j}$ are summable.
 ```
 
 :::proof "prop.fps.summable-sums-rule"
-The proof is tedious, since there are many rules to check, but fairly
-straightforward: the idea is always to focus on a single coefficient and then
-reduce the infinite sums to finite sums.
-
-For example, consider the discrete Fubini rule, which says that
+The proof is tedious, because there are many rules to check, but fairly
+straightforward: always focus on a single coefficient, and then reduce the
+infinite sums to finite sums. For example, consider the discrete Fubini rule,
+which says that
 $$`\sum_{i\in I}\ \ \sum_{j\in J}\mathbf{a}_{i,j}
 =\sum_{\left(i,j\right)\in I\times J}\mathbf{a}_{i,j}
 =\sum_{j\in J}\ \ \sum_{i\in I}\mathbf{a}_{i,j}`
-whenever
-$`\left(\mathbf{a}_{i,j}\right)_{\left(i,j\right)\in I\times J}` is a
-summable family of FPSs. In order to prove this rule, fix such a summable
-family. It is easy to see that the families
-$`\left(\mathbf{a}_{i,j}\right)_{j\in J}` for all $`i\in I` are summable as
-well, as are the families
+whenever $`\left(\mathbf{a}_{i,j}\right)_{\left(i,j\right)\in I\times J}` is
+a summable family of FPSs.
+
+To prove this rule, fix such a summable family. It is easy to see that the
+families $`\left(\mathbf{a}_{i,j}\right)_{j\in J}` for all $`i\in I` are
+summable as well, as are the families
 $`\left(\mathbf{a}_{i,j}\right)_{i\in I}` for all $`j\in J`, and the families
 $`\left(\sum_{j\in J}\mathbf{a}_{i,j}\right)_{i\in I}` and
 $`\left(\sum_{i\in I}\mathbf{a}_{i,j}\right)_{j\in J}`.
@@ -650,15 +649,17 @@ To verify the Fubini identity, it suffices to check that
 $$`\left[x^{n}\right]\left(\sum_{i\in I}\ \ \sum_{j\in J}\mathbf{a}_{i,j}\right)
 =\left[x^{n}\right]\left(\sum_{\left(i,j\right)\in I\times J}\mathbf{a}_{i,j}\right)
 =\left[x^{n}\right]\left(\sum_{j\in J}\ \ \sum_{i\in I}\mathbf{a}_{i,j}\right)`
-for each $`n\in\mathbb{N}`. Fix $`n\in\mathbb{N}`; then
+for each $`n\in\mathbb{N}`.
+
+Fix $`n\in\mathbb{N}`. Then
 $`\left[x^{n}\right]\left(\mathbf{a}_{i,j}\right)=0` for all but finitely many
-$`\left(i,j\right)\in I\times J`, since the family is summable. That is, the
-set of all pairs $`\left(i,j\right)\in I\times J` satisfying
-$`\left[x^{n}\right]\left(\mathbf{a}_{i,j}\right)\neq0` is finite. Hence, the
-set $`I^{\prime}` of the first entries and the set $`J^{\prime}` of the second
-entries of all these pairs are also finite. The three sums reduce to finite
-sums over $`I^{\prime}\times J^{\prime}`, which are equal by the usual Fubini
-rule for finite sums.
+$`\left(i,j\right)\in I\times J`, since the family is summable. Thus the set
+of all pairs $`\left(i,j\right)\in I\times J` satisfying
+$`\left[x^{n}\right]\left(\mathbf{a}_{i,j}\right)\neq0` is finite. Hence the
+set $`I^{\prime}` of first entries and the set $`J^{\prime}` of second entries
+of all these pairs are also finite. The three sums reduce to finite sums over
+$`I^{\prime}\times J^{\prime}`, which are equal by the usual Fubini rule for
+finite sums.
 :::
 
 ```tex "prop.fps.summable-sums-rule" (slot := proof)
@@ -700,6 +701,7 @@ $I^{\prime}\times J^{\prime}$, which are equal by the usual Fubini rule for fini
 See \cite[proof of Proposition 7.2.11]{19s} for more details.
 \end{proof}
 ```
+
 
 :::group "fps_x_powers"
 The indeterminate x and its powers.
@@ -907,5 +909,454 @@ By Proposition \ref{prop.fps.xk}, we have
 & \ \ \ \ +\cdots\\
 & =\left(a_{0},a_{1},a_{2},a_{3},\ldots\right).
 \end{align*}
+\end{proof}
+```
+
+:::group "fps_helper_lemmas"
+Helper lemmas from the formalization.
+:::
+
+```tex
+\subsection{Helper lemmas from the formalization}
+```
+
+:::lemma_ "lem.fps.ext" (parent := "fps_helper_lemmas") (lean := "AlgebraicCombinatorics.FPS.fps_ext_iff")
+Two FPSs $`f` and $`g` are equal if and only if
+$`\left[x^{n}\right]f = \left[x^{n}\right]g` for all $`n\in\mathbb{N}`.
+:::
+
+```tex "lem.fps.ext" (slot := statement)
+\begin{lemma}
+\label{lem.fps.ext}
+\lean{AlgebraicCombinatorics.FPS.fps_ext_iff}
+\leanhelper
+\leanok
+Two FPSs $f$ and $g$ are equal if and only if $\left[x^{n}\right]f = \left[x^{n}\right]g$
+for all $n\in\mathbb{N}$.
+\end{lemma}
+```
+
+:::proof "lem.fps.ext"
+Immediate from the definition of FPS as a sequence.
+:::
+
+```tex "lem.fps.ext" (slot := proof)
+\begin{proof}
+\leanok
+Immediate from the definition of FPS as a sequence.
+\end{proof}
+```
+
+:::lemma_ "lem.fps.coeff.zero.mul" (parent := "fps_helper_lemmas") (lean := "AlgebraicCombinatorics.FPS.coeff_zero_mul_fps")
+For any
+$`\mathbf{a},\mathbf{b}\in K\left[\left[x\right]\right]`, we have
+$`\left[x^{0}\right]\left(\mathbf{ab}\right) = \left[x^{0}\right]
+\mathbf{a}\cdot\left[x^{0}\right]\mathbf{b}`.
+That is, the constant term of a product is the product of the constant terms.
+:::
+
+```tex "lem.fps.coeff.zero.mul" (slot := statement)
+\begin{lemma}
+\label{lem.fps.coeff.zero.mul}
+\lean{AlgebraicCombinatorics.FPS.coeff_zero_mul_fps}
+\leanhelper
+\leanok
+For any $\mathbf{a},\mathbf{b}\in K\left[\left[x\right]\right]$, we have
+$\left[x^{0}\right]\left(\mathbf{ab}\right) = \left[x^{0}\right]
+\mathbf{a}\cdot\left[x^{0}\right]\mathbf{b}$.
+That is, the constant term of a product is the product of the constant terms.
+\end{lemma}
+```
+
+:::proof "lem.fps.coeff.zero.mul"
+This follows from the product formula with $`n=0`:
+$`\left[x^{0}\right](\mathbf{ab}) = \sum_{i=0}^{0}
+\left[x^{i}\right]\mathbf{a}\cdot\left[x^{0-i}\right]\mathbf{b}
+= \left[x^{0}\right]\mathbf{a}\cdot\left[x^{0}\right]\mathbf{b}`.
+:::
+
+```tex "lem.fps.coeff.zero.mul" (slot := proof)
+\begin{proof}
+\leanok
+Follows from the product formula with $n=0$: $\left[x^{0}\right](\mathbf{ab}) = \sum_{i=0}^{0} \left[x^{i}\right]\mathbf{a}\cdot\left[x^{0-i}\right]\mathbf{b} = \left[x^{0}\right]\mathbf{a}\cdot\left[x^{0}\right]\mathbf{b}$.
+\end{proof}
+```
+
+:::lemma_ "lem.fps.xk.mul.shift" (parent := "fps_helper_lemmas") (lean := "AlgebraicCombinatorics.FPS.coeff_X_pow_mul")
+For any $`k\in\mathbb{N}` and any FPS $`\mathbf{a}`,
+$$`\left[x^{n}\right]\left(x^{k}\cdot\mathbf{a}\right) =
+\begin{cases}
+0, & \text{if }n<k;\\
+\left[x^{n-k}\right]\mathbf{a}, & \text{if }n\geq k.
+\end{cases}`
+That is, multiplication by $`x^{k}` shifts coefficients by $`k` positions.
+:::
+
+```tex "lem.fps.xk.mul.shift" (slot := statement)
+\begin{lemma}
+\label{lem.fps.xk.mul.shift}
+\lean{AlgebraicCombinatorics.FPS.coeff_X_pow_mul}
+\leanhelper
+\leanok
+For any $k\in\mathbb{N}$ and any FPS $\mathbf{a}$,
+\[
+\left[x^{n}\right]\left(x^{k}\cdot\mathbf{a}\right) =
+\begin{cases}
+0, & \text{if }n<k;\\
+\left[x^{n-k}\right]\mathbf{a}, & \text{if }n\geq k.
+\end{cases}
+\]
+That is, multiplication by $x^{k}$ shifts coefficients by $k$ positions.
+\end{lemma}
+```
+
+:::proof "lem.fps.xk.mul.shift"
+By induction on $`k`, using the lemma on multiplication by $`x` for the
+induction step.
+:::
+
+```tex "lem.fps.xk.mul.shift" (slot := proof)
+\begin{proof}
+\leanok
+By induction on $k$, using Lemma \ref{lem.fps.xa} for the induction step.
+\end{proof}
+```
+
+:::lemma_ "lem.fps.summable.add" (parent := "fps_helper_lemmas") (lean := "AlgebraicCombinatorics.FPS.summableFPS_add")
+If $`\left(\mathbf{a}_{i}\right)_{i\in I}` and
+$`\left(\mathbf{b}_{i}\right)_{i\in I}` are summable families of FPSs, then so
+is $`\left(\mathbf{a}_{i}+\mathbf{b}_{i}\right)_{i\in I}`.
+:::
+
+```tex "lem.fps.summable.add" (slot := statement)
+\begin{lemma}
+\label{lem.fps.summable.add}
+\lean{AlgebraicCombinatorics.FPS.summableFPS_add}
+\leanhelper
+\leanok
+If $\left(\mathbf{a}_{i}\right)_{i\in I}$ and $\left(\mathbf{b}_{i}\right)_{i\in I}$
+are summable families of FPSs, then so is $\left(\mathbf{a}_{i}+\mathbf{b}_{i}\right)_{i\in I}$.
+\end{lemma}
+```
+
+:::proof "lem.fps.summable.add"
+For each $`n\in\mathbb{N}`,
+$`\{i \mid \left[x^{n}\right](\mathbf{a}_{i}+\mathbf{b}_{i})\neq 0\}
+\subseteq \{i \mid \left[x^{n}\right]\mathbf{a}_{i}\neq 0\} \cup
+\{i \mid \left[x^{n}\right]\mathbf{b}_{i}\neq 0\}`, and the union of two
+finite sets is finite.
+:::
+
+```tex "lem.fps.summable.add" (slot := proof)
+\begin{proof}
+\leanok
+For each $n\in\mathbb{N}$,
+$\{i \mid \left[x^{n}\right](\mathbf{a}_{i}+\mathbf{b}_{i})\neq 0\}
+\subseteq \{i \mid \left[x^{n}\right]\mathbf{a}_{i}\neq 0\} \cup
+\{i \mid \left[x^{n}\right]\mathbf{b}_{i}\neq 0\}$, and the union of two
+finite sets is finite.
+\end{proof}
+```
+
+:::lemma_ "lem.fps.summable.neg" (parent := "fps_helper_lemmas") (lean := "AlgebraicCombinatorics.FPS.summableFPS_neg")
+If $`\left(\mathbf{a}_{i}\right)_{i\in I}` is a summable family of FPSs, then
+so is $`\left(-\mathbf{a}_{i}\right)_{i\in I}`.
+:::
+
+```tex "lem.fps.summable.neg" (slot := statement)
+\begin{lemma}
+\label{lem.fps.summable.neg}
+\lean{AlgebraicCombinatorics.FPS.summableFPS_neg}
+\leanhelper
+\leanok
+If $\left(\mathbf{a}_{i}\right)_{i\in I}$ is a summable family of FPSs,
+then so is $\left(-\mathbf{a}_{i}\right)_{i\in I}$.
+\end{lemma}
+```
+
+:::proof "lem.fps.summable.neg"
+For each $`n`, $`\left[x^{n}\right](-\mathbf{a}_{i})
+=-\left[x^{n}\right]\mathbf{a}_{i}`, so
+$`\{i \mid \left[x^{n}\right](-\mathbf{a}_{i})\neq 0\}
+= \{i \mid \left[x^{n}\right]\mathbf{a}_{i}\neq 0\}`.
+:::
+
+```tex "lem.fps.summable.neg" (slot := proof)
+\begin{proof}
+\leanok
+For each $n$, $\left[x^{n}\right](-\mathbf{a}_{i})=-\left[x^{n}\right]\mathbf{a}_{i}$,
+so $\{i \mid \left[x^{n}\right](-\mathbf{a}_{i})\neq 0\} = \{i \mid \left[x^{n}\right]\mathbf{a}_{i}\neq 0\}$.
+\end{proof}
+```
+
+:::lemma_ "lem.fps.essfin.add" (parent := "fps_helper_lemmas") (lean := "AlgebraicCombinatorics.FPS.essentiallyFinite_add")
+The sum of two essentially finite families is essentially finite.
+:::
+
+```tex "lem.fps.essfin.add" (slot := statement)
+\begin{lemma}
+\label{lem.fps.essfin.add}
+\lean{AlgebraicCombinatorics.FPS.essentiallyFinite_add}
+\leanhelper
+\leanok
+The sum of two essentially finite families is essentially finite.
+\end{lemma}
+```
+
+:::proof "lem.fps.essfin.add"
+$`\{i \mid a_{i}+b_{i}\neq 0\}\subseteq \{i \mid a_{i}\neq 0\}\cup\{i \mid b_{i}\neq 0\}`,
+and the union of two finite sets is finite.
+:::
+
+```tex "lem.fps.essfin.add" (slot := proof)
+\begin{proof}
+\leanok
+$\{i \mid a_{i}+b_{i}\neq 0\}\subseteq \{i \mid a_{i}\neq 0\}\cup\{i \mid b_{i}\neq 0\}$,
+and the union of two finite sets is finite.
+\end{proof}
+```
+
+:::lemma_ "lem.fps.essfin.neg" (parent := "fps_helper_lemmas") (lean := "AlgebraicCombinatorics.FPS.essentiallyFinite_neg")
+The negation of an essentially finite family is essentially finite.
+:::
+
+```tex "lem.fps.essfin.neg" (slot := statement)
+\begin{lemma}
+\label{lem.fps.essfin.neg}
+\lean{AlgebraicCombinatorics.FPS.essentiallyFinite_neg}
+\leanhelper
+\leanok
+The negation of an essentially finite family is essentially finite.
+\end{lemma}
+```
+
+:::proof "lem.fps.essfin.neg"
+$`\{i \mid -a_{i}\neq 0\}=\{i \mid a_{i}\neq 0\}`.
+:::
+
+```tex "lem.fps.essfin.neg" (slot := proof)
+\begin{proof}
+\leanok
+$\{i \mid -a_{i}\neq 0\}=\{i \mid a_{i}\neq 0\}$.
+\end{proof}
+```
+
+:::lemma_ "lem.fps.essfin.sub" (parent := "fps_helper_lemmas") (lean := "AlgebraicCombinatorics.FPS.essentiallyFinite_sub")
+The difference of two essentially finite families is essentially finite.
+:::
+
+```tex "lem.fps.essfin.sub" (slot := statement)
+\begin{lemma}
+\label{lem.fps.essfin.sub}
+\lean{AlgebraicCombinatorics.FPS.essentiallyFinite_sub}
+\leanhelper
+\leanok
+The difference of two essentially finite families is essentially finite.
+\end{lemma}
+```
+
+:::proof "lem.fps.essfin.sub"
+Write $`a_i - b_i = a_i + (-b_i)` and apply the previous addition and negation
+lemmas.
+:::
+
+```tex "lem.fps.essfin.sub" (slot := proof)
+\begin{proof}
+\leanok
+Write $a_i - b_i = a_i + (-b_i)$ and apply
+Lemma~\ref{lem.fps.essfin.add} and Lemma~\ref{lem.fps.essfin.neg}.
+\end{proof}
+```
+
+:::definition "def.fps.essFinSum" (parent := "fps_helper_lemmas") (lean := "AlgebraicCombinatorics.FPS.essFinSum")
+For an essentially finite family $`(a_i)_{i\in I}`, the _essentially finite
+sum_ $`\sum_{i\in I} a_i` is defined as $`\sum_{i\in S} a_i` where
+$`S = \{i\in I \mid a_i \neq 0\}`.
+:::
+
+```tex "def.fps.essFinSum" (slot := statement)
+\begin{definition}
+\label{def.fps.essFinSum}
+\lean{AlgebraicCombinatorics.FPS.essFinSum}
+\leanhelper
+\leanok
+For an essentially finite family $(a_i)_{i\in I}$, the \emph{essentially finite sum}
+$\sum_{i\in I} a_i$ is defined as $\sum_{i\in S} a_i$ where $S = \{i\in I \mid a_i \neq 0\}$.
+\end{definition}
+```
+
+:::lemma_ "lem.fps.essFinSum.add" (parent := "fps_helper_lemmas") (lean := "AlgebraicCombinatorics.FPS.essFinSum_add")
+The essentially finite sum distributes over addition: if
+$`(a_i)_{i\in I}` and $`(b_i)_{i\in I}` are essentially finite families, then
+$`\sum_{i\in I}(a_i + b_i) = \sum_{i\in I} a_i + \sum_{i\in I} b_i`.
+:::
+
+```tex "lem.fps.essFinSum.add" (slot := statement)
+\begin{lemma}
+\label{lem.fps.essFinSum.add}
+\lean{AlgebraicCombinatorics.FPS.essFinSum_add}
+\leanhelper
+\leanok
+The essentially finite sum distributes over addition:
+if $(a_i)_{i\in I}$ and $(b_i)_{i\in I}$ are essentially finite families,
+then $\sum_{i\in I}(a_i + b_i) = \sum_{i\in I} a_i + \sum_{i\in I} b_i$.
+\end{lemma}
+```
+
+:::proof "lem.fps.essFinSum.add"
+All three sums can be computed over the finite set
+$`S = \{i \mid a_i\neq 0\}\cup\{i \mid b_i\neq 0\}`, so this reduces to the
+finite sum identity
+$`\sum_{i\in S}(a_i+b_i)=\sum_{i\in S}a_i+\sum_{i\in S}b_i`.
+:::
+
+```tex "lem.fps.essFinSum.add" (slot := proof)
+\begin{proof}
+\leanok
+All three sums can be computed over the finite set
+$S = \{i \mid a_i\neq 0\}\cup\{i \mid b_i\neq 0\}$,
+so this reduces to the finite sum identity $\sum_{i\in S}(a_i+b_i)=\sum_{i\in S}a_i+\sum_{i\in S}b_i$.
+\end{proof}
+```
+
+:::lemma_ "lem.fps.essFinSum.smul" (parent := "fps_helper_lemmas") (lean := "AlgebraicCombinatorics.FPS.essFinSum_smul")
+For a scalar $`c\in K` and an essentially finite family
+$`(a_i)_{i\in I}`,
+$`\sum_{i\in I} c\, a_i = c\cdot\sum_{i\in I} a_i`.
+:::
+
+```tex "lem.fps.essFinSum.smul" (slot := statement)
+\begin{lemma}
+\label{lem.fps.essFinSum.smul}
+\lean{AlgebraicCombinatorics.FPS.essFinSum_smul}
+\leanhelper
+\leanok
+For a scalar $c\in K$ and an essentially finite family $(a_i)_{i\in I}$,
+$\sum_{i\in I} c\, a_i = c\cdot\sum_{i\in I} a_i$.
+\end{lemma}
+```
+
+:::proof "lem.fps.essFinSum.smul"
+The support of $`(c\,a_i)` is contained in the support of $`(a_i)`, so this
+reduces to the finite identity
+$`\sum_{i\in S}c\,a_i = c\sum_{i\in S}a_i`.
+:::
+
+```tex "lem.fps.essFinSum.smul" (slot := proof)
+\begin{proof}
+\leanok
+The support of $(c\,a_i)$ is contained in the support of $(a_i)$,
+so this reduces to the finite identity $\sum_{i\in S}c\,a_i = c\sum_{i\in S}a_i$.
+\end{proof}
+```
+
+:::lemma_ "lem.fps.summable.sub" (parent := "fps_helper_lemmas") (lean := "AlgebraicCombinatorics.FPS.summableFPS_sub")
+If $`\left(\mathbf{a}_{i}\right)_{i\in I}` and
+$`\left(\mathbf{b}_{i}\right)_{i\in I}` are summable families of FPSs, then so
+is $`\left(\mathbf{a}_{i}-\mathbf{b}_{i}\right)_{i\in I}`.
+:::
+
+```tex "lem.fps.summable.sub" (slot := statement)
+\begin{lemma}
+\label{lem.fps.summable.sub}
+\lean{AlgebraicCombinatorics.FPS.summableFPS_sub}
+\leanhelper
+\leanok
+If $\left(\mathbf{a}_{i}\right)_{i\in I}$ and $\left(\mathbf{b}_{i}\right)_{i\in I}$
+are summable families of FPSs, then so is $\left(\mathbf{a}_{i}-\mathbf{b}_{i}\right)_{i\in I}$.
+\end{lemma}
+```
+
+:::proof "lem.fps.summable.sub"
+Write $`\mathbf{a}_i - \mathbf{b}_i = \mathbf{a}_i + (-\mathbf{b}_i)` and
+apply the previous summable-add and summable-neg lemmas.
+:::
+
+```tex "lem.fps.summable.sub" (slot := proof)
+\begin{proof}
+\leanok
+Write $\mathbf{a}_i - \mathbf{b}_i = \mathbf{a}_i + (-\mathbf{b}_i)$
+and apply Lemma~\ref{lem.fps.summable.add} and Lemma~\ref{lem.fps.summable.neg}.
+\end{proof}
+```
+
+:::lemma_ "lem.fps.summable.of_essfin" (parent := "fps_helper_lemmas") (lean := "AlgebraicCombinatorics.FPS.summableFPS_of_essentiallyFinite")
+If $`(\mathbf{a}_i)_{i\in I}` is a family of FPSs such that
+$`\{i \mid \mathbf{a}_i \neq 0\}` is finite, then the family is summable.
+:::
+
+```tex "lem.fps.summable.of_essfin" (slot := statement)
+\begin{lemma}
+\label{lem.fps.summable.of_essfin}
+\lean{AlgebraicCombinatorics.FPS.summableFPS_of_essentiallyFinite}
+\leanhelper
+\leanok
+If $(\mathbf{a}_i)_{i\in I}$ is a family of FPSs such that
+$\{i \mid \mathbf{a}_i \neq 0\}$ is finite, then the family is summable.
+\end{lemma}
+```
+
+:::proof "lem.fps.summable.of_essfin"
+For each $`n`,
+$`\{i \mid [x^n]\mathbf{a}_i \neq 0\} \subseteq \{i \mid \mathbf{a}_i \neq 0\}`,
+which is finite by hypothesis.
+:::
+
+```tex "lem.fps.summable.of_essfin" (slot := proof)
+\begin{proof}
+\leanok
+For each $n$, $\{i \mid [x^n]\mathbf{a}_i \neq 0\} \subseteq \{i \mid \mathbf{a}_i \neq 0\}$,
+which is finite by hypothesis.
+\end{proof}
+```
+
+:::group "fps_generating_functions"
+Generating functions of sequences.
+:::
+
+```tex
+\subsection{Generating functions}
+```
+
+:::definition "def.fps.gf" (parent := "fps_generating_functions") (lean := "AlgebraicCombinatorics.FPS.generatingFunction")
+The ordinary generating function of a sequence
+$`(a_0, a_1, a_2, \ldots)` is the FPS
+$`(a_0, a_1, a_2, \ldots) = \sum_{n\geq 0} a_n x^n`.
+:::
+
+```tex "def.fps.gf" (slot := statement)
+\begin{definition}
+\label{def.fps.gf}
+\lean{AlgebraicCombinatorics.FPS.generatingFunction}
+\leanhelper
+\leanok
+The \emph{(ordinary) generating function} of a sequence $(a_0, a_1, a_2, \ldots)$
+is the FPS $(a_0, a_1, a_2, \ldots) = \sum_{n\geq 0} a_n x^n$.
+\end{definition}
+```
+
+:::lemma_ "lem.fps.gf.coeff" (parent := "fps_generating_functions") (lean := "AlgebraicCombinatorics.FPS.generatingFunction_coeff")
+The $`n`-th coefficient of the generating function of a sequence
+$`(a_n)` is $`a_n`.
+:::
+
+```tex "lem.fps.gf.coeff" (slot := statement)
+\begin{lemma}
+\label{lem.fps.gf.coeff}
+\lean{AlgebraicCombinatorics.FPS.generatingFunction_coeff}
+\leanhelper
+\leanok
+The $n$-th coefficient of the generating function of a sequence $(a_n)$ is $a_n$.
+\end{lemma}
+```
+
+:::proof "lem.fps.gf.coeff"
+Immediate from the definitions.
+:::
+
+```tex "lem.fps.gf.coeff" (slot := proof)
+\begin{proof}
+\leanok
+Immediate from the definitions.
 \end{proof}
 ```
