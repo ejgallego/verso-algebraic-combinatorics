@@ -278,3 +278,216 @@ the invertibility proof equals $f^{-1}$,
 so the result follows from Lemma~\ref{lem.fps.inv-coeff-succ}.
 \end{proof}
 ```
+
+:::group "fps_newton_binomial"
+Newton's binomial formula and its negative-exponent variants.
+:::
+
+```tex
+\subsection{Newton's binomial formula}
+```
+
+:::theorem "prop.fps.invertible.1+x" (parent := "fps_newton_binomial") (lean := "AlgebraicCombinatorics.fps_onePlusX_isUnit, AlgebraicCombinatorics.fps_onePlusX_inv")
+The FPS $`1+x\in K[[x]]` is invertible, and its inverse is
+$$`\left(1+x\right)^{-1}=\sum_{n\in\mathbb{N}}\left(-1\right)^{n}x^{n}.`
+:::
+
+```tex "prop.fps.invertible.1+x" (slot := statement)
+\begin{proposition}
+\label{prop.fps.invertible.1+x}
+\lean{AlgebraicCombinatorics.fps_onePlusX_isUnit, AlgebraicCombinatorics.fps_onePlusX_inv}
+\leantarget
+\leanok
+The FPS $1+x\in K[[x]]$ is invertible, and its inverse is%
+\[
+\left(1+x\right)^{-1}=\sum_{n\in\mathbb{N}}\left(-1\right)^{n}x^{n}.
+\]
+\end{proposition}
+```
+
+:::proof "prop.fps.invertible.1+x"
+Direct computation:
+$`(1+x)\cdot\sum_{n\geq 0}(-1)^n x^n = 1` by telescoping. All powers of
+$`x` other than $`1` cancel out.
+:::
+
+```tex "prop.fps.invertible.1+x" (slot := proof)
+\begin{proof}
+\leanok
+Direct computation: $(1+x)\cdot\sum_{n\geq 0}(-1)^n x^n = 1$ by telescoping
+(all powers of $x$ other than $1$ cancel out).
+\end{proof}
+```
+
+:::theorem "thm.fps.newton-binom" (parent := "fps_newton_binomial") (lean := "AlgebraicCombinatorics.fps_newtonBinomial_nat, AlgebraicCombinatorics.fps_newtonBinomial_neg")
+For each $`n\in\mathbb{Z}`, we have
+$$`\left(1+x\right)^{n}=\sum_{k\in\mathbb{N}}\dbinom{n}{k}x^{k}.`
+:::
+
+```tex "thm.fps.newton-binom" (slot := statement)
+\begin{theorem}
+\label{thm.fps.newton-binom}
+\lean{AlgebraicCombinatorics.fps_newtonBinomial_nat, AlgebraicCombinatorics.fps_newtonBinomial_neg}
+\leantarget
+\leanok
+For each $n\in\mathbb{Z}$, we have%
+\[
+\left(1+x\right)^{n}=\sum_{k\in\mathbb{N}}\dbinom{n}{k}x^{k}.
+\]
+\end{theorem}
+```
+
+:::proof "thm.fps.newton-binom"
+For $`n\geq 0`, this is the standard binomial theorem: the sum
+$`\sum_{k\in\mathbb{N}}\dbinom{n}{k}x^{k}` reduces to
+$`\sum_{k=0}^{n}\dbinom{n}{k}x^{k}` since $`\dbinom{n}{k}=0` for $`k>n`.
+
+For $`n<0`, we have $`-n\in\mathbb{N}`, so the corollary for negative natural
+powers, applied to $`-n`, yields
+$`\left(1+x\right)^{-(-n)} = \sum_{k\in\mathbb{N}}\dbinom{-(-n)}{k}x^k`,
+which rewrites as
+$`\left(1+x\right)^n = \sum_{k\in\mathbb{N}}\dbinom{n}{k}x^k`.
+:::
+
+```tex "thm.fps.newton-binom" (slot := proof)
+\begin{proof}
+\leanok
+For $n\geq 0$, this is the standard binomial theorem (the sum
+$\sum_{k\in\mathbb{N}}\dbinom{n}{k}x^{k}$ reduces to $\sum_{k=0}^{n}\dbinom{n}{k}x^{k}$
+since $\dbinom{n}{k}=0$ for $k > n$ by Proposition~\ref{prop.binom.0}).
+
+For $n<0$, we have $-n\in\mathbb{N}$, so Corollary~\ref{cor.fps.anti-newton-binom-2}
+(applied to $-n$ instead of $n$) yields
+$\left(1+x\right)^{-(-n)} = \sum_{k\in\mathbb{N}}\dbinom{-(-n)}{k}x^k$,
+which rewrites as $\left(1+x\right)^n = \sum_{k\in\mathbb{N}}\dbinom{n}{k}x^k$.
+\end{proof}
+```
+
+:::theorem "thm.binom.upneg-n" (parent := "fps_newton_binomial") (lean := "AlgebraicCombinatorics.binomUpperNegation, AlgebraicCombinatorics.binomUpperNegation_int")
+Let $`n\in\mathbb{C}` and $`k\in\mathbb{Z}`. Then
+$$`\dbinom{-n}{k}=\left(-1\right)^{k}\dbinom{k+n-1}{k}.`
+:::
+
+```tex "thm.binom.upneg-n" (slot := statement)
+\begin{theorem}
+\label{thm.binom.upneg-n}
+\lean{AlgebraicCombinatorics.binomUpperNegation, AlgebraicCombinatorics.binomUpperNegation_int}
+\leantarget
+\leanok
+Let $n\in\mathbb{C}$ and $k\in\mathbb{Z}$. Then,%
+\[
+\dbinom{-n}{k}=\left(-1\right)^{k}\dbinom{k+n-1}{k}.
+\]
+\end{theorem}
+```
+
+:::proof "thm.binom.upneg-n"
+If $`k<0`, then both $`\dbinom{-n}{k}` and $`\dbinom{k+n-1}{k}` are $`0`.
+For $`k\geq 0`, expand using the definition and observe that the numerators
+differ by a factor of $`\left(-1\right)^{k}`.
+:::
+
+```tex "thm.binom.upneg-n" (slot := proof)
+\begin{proof}
+\leanok
+If $k<0$, then both $\dbinom{-n}{k}$ and $\dbinom{k+n-1}{k}$ are $0$.
+For $k\geq 0$, expand using the definition and
+observe the numerators differ by a factor of $(-1)^k$.
+\end{proof}
+```
+
+:::theorem "prop.fps.anti-newton-binom" (parent := "fps_newton_binomial") (lean := "AlgebraicCombinatorics.fps_onePlusX_pow_neg")
+For each $`n\in\mathbb{N}`, we have
+$$`\left(1+x\right)^{-n}=\sum_{k\in\mathbb{N}}\left(-1\right)^{k}\dbinom{n+k-1}{k}x^{k}.`
+:::
+
+```tex "prop.fps.anti-newton-binom" (slot := statement)
+\begin{proposition}
+\label{prop.fps.anti-newton-binom}
+\lean{AlgebraicCombinatorics.fps_onePlusX_pow_neg}
+\leantarget
+\leanok
+For each $n\in\mathbb{N}$, we have%
+\[
+\left(1+x\right)^{-n}=\sum_{k\in\mathbb{N}}\left(-1\right)^{k}%
+\dbinom{n+k-1}{k}x^{k}.
+\]
+\end{proposition}
+```
+
+:::proof "prop.fps.anti-newton-binom"
+By induction on $`n`.
+
+_Induction base:_ $`\left(1+x\right)^{-0} = 1`, and
+$`\sum_{k\in\mathbb{N}} (-1)^k \dbinom{0+k-1}{k} x^k = 1`
+since $`\dbinom{k-1}{k} = 0` for all $`k > 0`.
+
+_Induction step:_ Assume the formula holds for $`n = j`. We must prove it for
+$`n = j+1`. We have
+$`\left(1+x\right)^{-(j+1)} = \left(1+x\right)^{-j} \cdot \left(1+x\right)^{-1}`.
+Using the induction hypothesis and multiplying by $`1+x`, it suffices to show
+$$`\left(1+x\right)^{-j} = \left(\sum_{k\in\mathbb{N}} (-1)^k \dbinom{j+k}{k} x^k\right) \cdot \left(1+x\right).`
+Expanding the right hand side, using Pascal's identity
+$`\dbinom{j+k}{k} = \dbinom{j+k-1}{k-1} + \dbinom{j+k-1}{k}` and collecting
+terms, the $`\dbinom{j+k-1}{k-1}` terms telescope, and we obtain
+$`\sum_{k\in\mathbb{N}} (-1)^k \dbinom{j+k-1}{k} x^k = \left(1+x\right)^{-j}`
+by the induction hypothesis.
+:::
+
+```tex "prop.fps.anti-newton-binom" (slot := proof)
+\begin{proof}
+By induction on $n$.
+
+\textit{Induction base:} $\left(1+x\right)^{-0} = 1$, and
+$\sum_{k\in\mathbb{N}} (-1)^k \dbinom{0+k-1}{k} x^k = 1$
+since $\dbinom{k-1}{k} = 0$ for all $k > 0$ (by Proposition~\ref{prop.binom.0}).
+
+\textit{Induction step:} Assume the formula holds for $n = j$. We must prove it for $n = j+1$.
+We have $\left(1+x\right)^{-(j+1)} = \left(1+x\right)^{-j} \cdot \left(1+x\right)^{-1}$.
+Using the induction hypothesis and multiplying by $1+x$, it suffices to show
+\[
+\left(1+x\right)^{-j} = \left(\sum_{k\in\mathbb{N}} (-1)^k \dbinom{j+k}{k} x^k\right) \cdot \left(1+x\right).
+\]
+Expanding the right hand side, using Pascal's identity
+$\dbinom{j+k}{k} = \dbinom{j+k-1}{k-1} + \dbinom{j+k-1}{k}$
+(Proposition~\ref{prop.binom.rec}), and collecting terms (the
+$\dbinom{j+k-1}{k-1}$ terms telescope), we obtain
+$\sum_{k\in\mathbb{N}} (-1)^k \dbinom{j+k-1}{k} x^k = \left(1+x\right)^{-j}$
+by the induction hypothesis.
+\end{proof}
+```
+
+:::corollary "cor.fps.anti-newton-binom-2" (parent := "fps_newton_binomial") (lean := "AlgebraicCombinatorics.fps_onePlusX_pow_neg'")
+For each $`n\in\mathbb{N}`, we have
+$$`\left(1+x\right)^{-n}=\sum_{k\in\mathbb{N}}\dbinom{-n}{k}x^{k}.`
+:::
+
+```tex "cor.fps.anti-newton-binom-2" (slot := statement)
+\begin{corollary}
+\label{cor.fps.anti-newton-binom-2}
+\lean{AlgebraicCombinatorics.fps_onePlusX_pow_neg'}
+\leantarget
+\leanok
+For each $n\in\mathbb{N}$, we have%
+\[
+\left(1+x\right)^{-n}=\sum_{k\in\mathbb{N}}\dbinom{-n}{k}x^{k}.
+\]
+\end{corollary}
+```
+
+:::proof "cor.fps.anti-newton-binom-2"
+The previous proposition yields
+$`\left(1+x\right)^{-n} = \sum_{k\in\mathbb{N}} (-1)^k \dbinom{n+k-1}{k} x^k`.
+By the upper-negation theorem, we have
+$`(-1)^k \dbinom{n+k-1}{k} = (-1)^k \dbinom{k+n-1}{k} = \dbinom{-n}{k}`.
+:::
+
+```tex "cor.fps.anti-newton-binom-2" (slot := proof)
+\begin{proof}
+\leanok
+Proposition~\ref{prop.fps.anti-newton-binom} yields
+$\left(1+x\right)^{-n} = \sum_{k\in\mathbb{N}} (-1)^k \dbinom{n+k-1}{k} x^k$.
+By Theorem~\ref{thm.binom.upneg-n}, we have
+$(-1)^k \dbinom{n+k-1}{k} = (-1)^k \dbinom{k+n-1}{k} = \dbinom{-n}{k}$.
+\end{proof}
+```

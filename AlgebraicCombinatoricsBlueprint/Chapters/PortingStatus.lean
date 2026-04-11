@@ -29,7 +29,7 @@ The current direct-port work now covers all of `chapter_notations.tex` in
 `NotationsExamples`, from the opening prose through the auxiliary
 generating-function results. `CommutativeRings` is now started through the
 `Fractions and integer powers` subsection. `FPSDefinition` now covers all of
-`chapter_fps_definition.tex`. `DividingFPS` is now started through the
-inverse-coefficient formulas. The remaining source chapters are still pending
-first-pass Verso transcription.
+`chapter_fps_definition.tex`. `DividingFPS` is now started through Newton's
+binomial formula. The remaining source chapters are still pending first-pass
+Verso transcription.
 :::
