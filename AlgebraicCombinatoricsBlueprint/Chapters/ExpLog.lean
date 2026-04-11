@@ -386,3 +386,279 @@ g^{\prime}.
 This proves part \textbf{(b)}.
 \end{proof}
 ```
+
+:::group "exp_log_inverse_helpers"
+Auxiliary uniqueness and substitution lemmas for the inverse theorem.
+:::
+
+```tex
+\subsection{Helpers for Theorem~\ref{thm.fps.exp-log-inv}}
+```
+
+:::lemma_ "lem.fps.ode-uniqueness-mul-inv" (parent := "exp_log_inverse_helpers") (lean := "PowerSeries.eq_of_derivative_eq_mul_of_inv")
+Let $`h_1,h_2,g \in K\llbracket x \rrbracket`.
+If $`h_1' = (1+h_1)\cdot g` and $`h_2' = (1+h_2)\cdot g` and
+$`[x^0]h_1 = [x^0]h_2`, then $`h_1 = h_2`.
+:::
+
+```tex "lem.fps.ode-uniqueness-mul-inv" (slot := statement)
+\begin{lemma}[ODE uniqueness: $h' = (1+h) \cdot g$]
+\label{lem.fps.ode-uniqueness-mul-inv}
+\lean{PowerSeries.eq_of_derivative_eq_mul_of_inv}
+\leanhelper
+\leanok
+Let $h_1, h_2, g \in K\llbracket x \rrbracket$.
+If $h_1' = (1 + h_1) \cdot g$ and $h_2' = (1 + h_2) \cdot g$
+and $[x^0] h_1 = [x^0] h_2$, then $h_1 = h_2$.
+\end{lemma}
+```
+
+:::proof "lem.fps.ode-uniqueness-mul-inv"
+Use strong induction on the coefficient index. The base case uses the equality
+of constant terms. For the inductive step, the differential equation relates
+$`\left[x^{n+1}\right]h\cdot (n+1)` to a convolution depending only on lower
+coefficients; by induction, these lower coefficients agree for $`h_1` and
+$`h_2`, and then the $`\mathbb{Q}`-algebra structure lets us cancel $`n+1`.
+:::
+
+```tex "lem.fps.ode-uniqueness-mul-inv" (slot := proof)
+\begin{proof}
+By strong induction on the coefficient index.
+The base case uses the matching constant terms.
+For the inductive step, the ODE relates $[x^{n+1}] h \cdot (n+1)$ to a
+convolution involving only lower coefficients; by the induction hypothesis,
+these coincide for $h_1$ and $h_2$, and one cancels $n+1$ using the
+$\mathbb{Q}$-algebra structure.
+\end{proof}
+```
+
+:::lemma_ "lem.fps.ode-uniqueness-one" (parent := "exp_log_inverse_helpers") (lean := "PowerSeries.eq_of_derivative_eq_one")
+Let $`h_1,h_2 \in K\llbracket x \rrbracket`.
+If $`h_1' = 1` and $`h_2' = 1` and $`[x^0]h_1 = [x^0]h_2`, then
+$`h_1 = h_2`.
+:::
+
+```tex "lem.fps.ode-uniqueness-one" (slot := statement)
+\begin{lemma}[ODE uniqueness: $h' = 1$]
+\label{lem.fps.ode-uniqueness-one}
+\lean{PowerSeries.eq_of_derivative_eq_one}
+\leanhelper
+\leanok
+Let $h_1, h_2 \in K\llbracket x \rrbracket$.
+If $h_1' = 1$ and $h_2' = 1$ and $[x^0] h_1 = [x^0] h_2$,
+then $h_1 = h_2$.
+\end{lemma}
+```
+
+:::proof "lem.fps.ode-uniqueness-one"
+As in the previous lemma: use strong induction on the coefficient index and
+cancel $`n+1` at each step.
+:::
+
+```tex "lem.fps.ode-uniqueness-one" (slot := proof)
+\begin{proof}
+As in Lemma~\ref{lem.fps.ode-uniqueness-mul-inv}, by strong induction on
+the coefficient index, cancelling $n+1$ at each step.
+\end{proof}
+```
+
+:::lemma_ "lem.fps.invOnePlusX-subst-expbar-mul-exp" (parent := "exp_log_inverse_helpers") (lean := "PowerSeries.invOnePlusX_subst_expbar_mul_exp")
+We have $`(\iota \circ \overline{\exp}) \cdot \exp = 1`.
+:::
+
+```tex "lem.fps.invOnePlusX-subst-expbar-mul-exp" (slot := statement)
+\begin{lemma}[$\iota \circ \overline{\exp}$ times $\exp$]
+\label{lem.fps.invOnePlusX-subst-expbar-mul-exp}
+\lean{PowerSeries.invOnePlusX_subst_expbar_mul_exp}
+\leanhelper
+\leanok
+We have $(\iota \circ \overline{\exp}) \cdot \exp = 1$.
+\end{lemma}
+```
+
+:::proof "lem.fps.invOnePlusX-subst-expbar-mul-exp"
+Substitute $`\overline{\exp}` into the identity
+$`\iota \cdot (1+x) = 1`, observing that
+$`(1+x)\circ \overline{\exp} = 1 + \overline{\exp} = \exp`.
+:::
+
+```tex "lem.fps.invOnePlusX-subst-expbar-mul-exp" (slot := proof)
+\begin{proof}
+We substitute $\overline{\exp}$ into the identity
+$\iota \cdot (1 + x) = 1$, noting that
+$(1 + x) \circ \overline{\exp} = 1 + \overline{\exp} = \exp$.
+\end{proof}
+```
+
+:::lemma_ "lem.fps.compos-cst-term-0" (parent := "exp_log_inverse_helpers") (lean := "PowerSeries.constantCoeff_subst_of_constantCoeff_zero")
+Let $`f,g\in K\left[\left[x\right]\right]` be two FPSs with
+$`\left[x^0\right]g=0`. Then
+$`\left[x^0\right](f\circ g)=\left[x^0\right]f`.
+:::
+
+```tex "lem.fps.compos-cst-term-0" (slot := statement)
+\begin{lemma}
+\label{lem.fps.compos-cst-term-0}
+\lean{PowerSeries.constantCoeff_subst_of_constantCoeff_zero}
+\leantarget
+\leanok
+Let $f,g\in K\left[\left[x\right]
+\right]$ be two FPSs with $\left[x^{0}\right]g=0$. Then, $\left[
+x^{0}\right]\left(f\circ g\right)=\left[x^{0}\right]f$.
+\end{lemma}
+```
+
+:::proof "lem.fps.compos-cst-term-0"
+Write $`f=\sum_{n\in\mathbb{N}} f_n x^n`, so
+$`f_0=\left[x^0\right]f`. Since
+$`f[g]=\sum_{n\in\mathbb{N}} f_n g^n`, the constant-term computation from
+substitution gives
+$`\left[x^0\right]\left(\sum_{n\in\mathbb{N}} f_n g^n\right)=f_0`. Rewriting
+this in terms of $`f\circ g` yields the claim.
+:::
+
+```tex "lem.fps.compos-cst-term-0" (slot := proof)
+\begin{proof}
+\leanok
+Write $f$ in the form
+$f=\sum_{n\in\mathbb{N}}f_{n}x^{n}$ with $f_{0},f_{1},f_{2},\ldots\in K$.
+Thus, $f_{0}=\left[x^{0}\right]f$. Now, $f\left[g\right]=\sum_{n\in\mathbb{N}}f_{n}g^{n}$. However,
+$\left[x^{0}\right]
+\left(\sum_{n\in\mathbb{N}}f_{n}g^{n}\right)=f_{0}=\left[x^{0}\right]
+f$. In view of $f\circ g=f\left[g\right]=\sum_{n\in\mathbb{N}}f_{n}g^{n}$,
+we can rewrite this as $\left[x^{0}\right]\left(f\circ g\right)
+=\left[x^{0}\right]f$.
+\end{proof}
+```
+
+:::theorem "thm.fps.exp-log-inv" (parent := "exp_log_inverse_helpers") (lean := "PowerSeries.expbar_comp_logbar, PowerSeries.logbar_comp_expbar")
+We have
+$$`\overline{\exp}\circ\overline{\log}=x
+\qquad\text{and}\qquad
+\overline{\log}\circ\overline{\exp}=x.`
+:::
+
+```tex "thm.fps.exp-log-inv" (slot := statement)
+\begin{theorem}
+\label{thm.fps.exp-log-inv}
+\lean{PowerSeries.expbar_comp_logbar, PowerSeries.logbar_comp_expbar}
+\leantarget
+\leanok
+We have
+\[
+\overline{\exp}\circ\overline{\log}=x\ \ \ \ \ \ \ \ \ \ \text{and}%
+\ \ \ \ \ \ \ \ \ \ \overline{\log}\circ\overline{\exp}=x.
+\]
+\end{theorem}
+```
+
+:::proof "thm.fps.exp-log-inv"
+First prove
+$`\overline{\log}\circ\overline{\exp}=x`. The idea is to show that
+$`\overline{\log}\circ\overline{\exp}` and $`x` have the same constant term,
+namely $`0`, and the same derivative, namely $`1`. Over a
+$`\mathbb{Q}`-algebra, a power series is determined by its constant term and
+its derivative, so equality follows.
+
+Indeed, $`\left[x^0\right]\overline{\exp}=0`, so the constant-term lemma gives
+$`\left[x^0\right]\left(\overline{\log}\circ\overline{\exp}\right)=0`.
+Also, the derivative proposition applied to $`g=\overline{\exp}` shows
+$`\left(\overline{\log}\circ\overline{\exp}\right)' = 1 = x'`, because
+$`1+\overline{\exp}=\exp` and $`\overline{\exp}'=\exp`.
+Hence
+$`\overline{\log}\circ\overline{\exp}=x`.
+
+For the other identity, first show that
+$`\exp\circ\overline{\log}=1+x`. Apply the quotient rule to
+$`\dfrac{\exp\circ\overline{\log}}{1+x}`. Using the chain rule together with
+$`\overline{\log}'=(1+x)^{-1}`, its derivative simplifies to $`0`, so the
+quotient is constant. Comparing constant terms shows this constant is $`1`,
+hence $`\exp\circ\overline{\log}=1+x`.
+
+Finally, since $`\overline{\exp}=\exp-1`, we obtain
+$`\overline{\exp}\circ\overline{\log}
+=\left(\exp\circ\overline{\log}\right)+\left(\underline{-1}\circ\overline{\log}\right)
+=(1+x)+(-1)=x`.
+:::
+
+```tex "thm.fps.exp-log-inv" (slot := proof)
+\begin{proof}
+Let us first prove that
+$\overline{\log}\circ\overline{\exp}=x$.
+
+The idea of this proof is to show that $\overline{\log}\circ
+\overline{\exp}$ and $x$ are two FPSs with the same constant term (namely,
+$0$) and with the same derivative. Once this is proved, they must be equal
+(since a FPS is determined by its constant term and its derivative over a $\mathbb{Q}$-algebra).
+
+We have $\left[x^{0}\right]\overline{\exp}=0$
+(since $\overline{\exp}=\sum_{n\geq1}\dfrac{1}{n!}x^{n}$). Hence, Lemma
+\ref{lem.fps.compos-cst-term-0} (applied to $f=\overline{\log}$ and
+$g=\overline{\exp}$) yields $\left[x^{0}\right]\left(\overline{\log
+}\circ\overline{\exp}\right)=\left[x^{0}\right]\overline{\log}=0$ (since
+$\overline{\log}=\sum_{n\geq1}\dfrac{\left(-1\right)^{n-1}}{n}x^{n}$).
+Now,
+\[
+\left[x^{0}\right]\left(\overline{\log}\circ\overline{\exp}-x\right)
+=\underbrace{\left[x^{0}\right]\left(\overline{\log}\circ\overline{\exp
+}\right)}_{=0}-\underbrace{\left[x^{0}\right]x}_{=0}=0.
+\]
+However, $\overline{\exp}=\exp-1$ and thus $1+\overline{\exp}=\exp$. Now,
+Proposition \ref{prop.fps.exp-log-der} \textbf{(b)} (applied to $g=\overline
+{\exp}$) yields
+\[
+\left(\overline{\log}\circ\overline{\exp}\right)^{\prime}=\left(
+\underbrace{1+\overline{\exp}}_{=\exp}\right)^{-1}\cdot\underbrace{\overline
+{\exp}^{\prime}}_{=\exp}=\exp^{-1}\cdot\exp=1=x^{\prime}.
+\]
+Hence,
+$\overline{\log}\circ\overline{\exp}-x$ is constant (since its derivative is $0$). Since its constant
+term is $0$, this constant must be $0$. Thus, $\overline{\log
+}\circ\overline{\exp}=x$.
+
+Now it remains to prove that $\overline{\exp}\circ\overline{\log}=x$.
+
+We shall first show
+that $\exp\circ\overline{\log}=1+x$.
+
+To wit: The FPS $1+x$ is invertible. Applying the quotient rule
+to $f=\exp\circ\,\overline{\log}$ and
+$g=1+x$, we obtain
+\[
+\left(\dfrac{\exp\circ\,\overline{\log}}{1+x}\right)^{\prime}
+=\dfrac{\left(\exp\circ\,\overline{\log}\right)^{\prime}\cdot\left(
+1+x\right)-\left(\exp\circ\,\overline{\log}\right)\cdot\left(
+1+x\right)^{\prime}}{\left(1+x\right)^{2}}.
+\]
+In view of
+\[
+\left(\exp\circ\,\overline{\log}\right)^{\prime}
+=\left(\exp\circ\,\overline{\log}\right)\cdot\underbrace{\overline{\log}^{\prime}
+}_{=\left(1+x\right)^{-1}}
+=\left(\exp\circ\,\overline{\log}\right)\cdot\left(1+x\right)^{-1}
+\]
+and $\left(1+x\right)^{\prime}=1$, we can rewrite this as
+\begin{align*}
+\left(\dfrac{\exp\circ\,\overline{\log}}{1+x}\right)^{\prime}
+=\dfrac{\left(\exp\circ\,\overline{\log}\right)-\left(\exp
+\circ\,\overline{\log}\right)}{\left(1+x\right)^{2}}=0=0^{\prime}.
+\end{align*}
+Thus,
+$\dfrac{\exp\circ\,\overline{\log}}{1+x}$ is constant, say equal to $\underline{a}$ for some $a\in K$.
+Then $\exp\circ\,\overline{\log}=a\left(1+x\right)$, so
+$\left[x^{0}\right]\left(\exp\circ\,\overline{\log}\right)=a$.
+However, it is easy to see that $\left[x^{0}\right]\left(\exp
+\circ\,\overline{\log}\right)=1$
+(using Lemma \ref{lem.fps.compos-cst-term-0}).
+Comparing, we find $a=1$. Thus, $\exp\circ\,\overline{\log}=1+x$.
+
+Now, $\overline{\exp}=\exp-1=\exp+\,\underline{-1}$. Hence,
+\begin{align*}
+\overline{\exp}\circ\overline{\log}
+=\underbrace{\exp\circ\,\overline{\log}}_{=1+x}+\underbrace{\underline{-1}
+\circ\overline{\log}}_{=\underline{-1}}
+=1+x+\underline{-1}=x.
+\end{align*}
+This completes the proof.
+\end{proof}
+```
