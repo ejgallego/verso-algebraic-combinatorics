@@ -1218,3 +1218,162 @@ shows that they are mutually inverse. Combining these results, we conclude
 that these two maps are mutually inverse group isomorphisms.
 \end{proof}
 ```
+
+:::group "exp_log_loder"
+The logarithmic derivative and its first basic identities.
+:::
+
+```tex
+\subsection{The logarithmic derivative}
+```
+
+:::definition "def.fps.loder.1" (parent := "exp_log_loder") (lean := "PowerSeries.loder")
+In this definition, we do _not_ use the standing
+$`\mathbb{Q}`-algebra convention, so $`K` can be an arbitrary commutative
+ring. Set
+$`K\left[\left[x\right]\right]_1=\left\{f\in K\left[\left[x\right]\right]\mid \left[x^0\right]f=1\right\}`.
+
+For any FPS $`f\in K\left[\left[x\right]\right]_1`, define the
+_logarithmic derivative_ $`\operatorname{loder}f\in K\left[\left[x\right]\right]`
+to be the FPS
+$`\dfrac{f'}{f}`. This is well-defined because such an $`f` is invertible.
+:::
+
+```tex "def.fps.loder.1" (slot := statement)
+\begin{definition}
+\label{def.fps.loder.1}
+\lean{PowerSeries.loder}
+\leantarget
+\leanok
+In this definition, we do \textbf{not} use Convention
+\ref{conv.fps.exp.K-Q-alg}; thus, $K$ can be an arbitrary commutative ring.
+However, we set $K\left[\left[x\right]\right]_{1}=\left\{f\in
+K\left[\left[x\right]\right]\ \mid\ \left[x^{0}\right]f=1\right\}
+$.
+
+For any FPS $f\in K\left[\left[x\right]\right]_{1}$, we define the
+\emph{logarithmic derivative} $\operatorname{loder}f\in K\left[\left[
+x\right]\right]$ to be the FPS $\dfrac{f^{\prime}}{f}$. (This is
+well-defined, since $f$ is easily seen to be invertible.)
+\end{definition}
+```
+
+:::lemma_ "lem.fps.isUnit-constantCoeff-one" (parent := "exp_log_loder") (lean := "PowerSeries.isUnit_of_constantCoeff_eq_one, PowerSeries.isUnit_iff_constantCoeff_isUnit, PowerSeries.mul_inv_cancel_of_constantCoeff_eq_one, PowerSeries.inv_mul_cancel_of_constantCoeff_eq_one, PowerSeries.constantCoeff_inv_of_constantCoeff_eq_one")
+If $`\left[x^0\right]f = 1`, then $`f` is a unit in
+$`K\llbracket x \rrbracket`; that is,
+$`f\cdot f^{-1}=1` and $`f^{-1}\cdot f=1`.
+Moreover, $`\left[x^0\right](f^{-1})=1`.
+More generally, $`f` is a unit if and only if $`\left[x^0\right]f` is a unit
+in $`K`.
+:::
+
+```tex "lem.fps.isUnit-constantCoeff-one" (slot := statement)
+\begin{lemma}[Invertibility of FPS with constant term $1$]
+\label{lem.fps.isUnit-constantCoeff-one}
+\lean{PowerSeries.isUnit_of_constantCoeff_eq_one, PowerSeries.isUnit_iff_constantCoeff_isUnit, PowerSeries.mul_inv_cancel_of_constantCoeff_eq_one, PowerSeries.inv_mul_cancel_of_constantCoeff_eq_one, PowerSeries.constantCoeff_inv_of_constantCoeff_eq_one}
+\leanhelper
+\leanok
+If $[x^0]f = 1$, then $f$ is a unit in $K\llbracket x \rrbracket$, i.e.,
+$f \cdot f^{-1} = 1$ and $f^{-1} \cdot f = 1$.
+Moreover, $[x^0](f^{-1}) = 1$.
+More generally, $f$ is a unit iff $[x^0]f$ is a unit in $K$.
+\end{lemma}
+```
+
+:::proof "lem.fps.isUnit-constantCoeff-one"
+Since $`\left[x^0\right]f` is a unit, the invertibility criterion for power
+series gives that $`f` is invertible. The constant coefficient of $`f^{-1}` is
+then the inverse of $`\left[x^0\right]f = 1`, so it is again $`1`.
+:::
+
+```tex "lem.fps.isUnit-constantCoeff-one" (slot := proof)
+\begin{proof}
+\leanok
+Since $[x^0]f$ is a unit, the invertibility criterion for power series
+gives the result (a power series is invertible if and only if its constant coefficient is invertible).
+The constant coefficient of $f^{-1}$ is the inverse of $[x^0]f = 1$.
+\end{proof}
+```
+
+:::lemma_ "lem.fps.loder-one" (parent := "exp_log_loder") (lean := "PowerSeries.loder_one")
+$`\operatorname{loder}(1) = 0`.
+:::
+
+```tex "lem.fps.loder-one" (slot := statement)
+\begin{lemma}[$\operatorname{loder}(1) = 0$]
+\label{lem.fps.loder-one}
+\lean{PowerSeries.loder_one}
+\leanhelper
+\leanok
+$\operatorname{loder}(1) = 0$.
+\end{lemma}
+```
+
+:::proof "lem.fps.loder-one"
+$`1' = 0`, so
+$`\operatorname{loder}(1) = 0\cdot 1^{-1} = 0`.
+:::
+
+```tex "lem.fps.loder-one" (slot := proof)
+\begin{proof}
+\leanok
+$1' = 0$, so $\operatorname{loder}(1) = 0 \cdot 1^{-1} = 0$.
+\end{proof}
+```
+
+:::theorem "prop.fps.loder.log" (parent := "exp_log_loder") (lean := "PowerSeries.loder_eq_derivative_Log")
+Let $`K` be a commutative $`\mathbb{Q}`-algebra. Let
+$`f\in K\left[\left[x\right]\right]_1` be an FPS. Then
+$`\operatorname{loder}f = \left(\operatorname{Log}f\right)'`.
+:::
+
+```tex "prop.fps.loder.log" (slot := statement)
+\begin{proposition}
+\label{prop.fps.loder.log}
+\lean{PowerSeries.loder_eq_derivative_Log}
+\leantarget
+\leanok
+Let $K$ be a commutative $\mathbb{Q}$-algebra. Let
+$f\in K\left[\left[x\right]\right]_{1}$ be an FPS. Then,
+$\operatorname{loder}f=\left(\operatorname{Log}f\right)^{\prime}$.
+\end{proposition}
+```
+
+:::proof "prop.fps.loder.log"
+By definition,
+$`\operatorname{Log}f=\overline{\log}\circ (f-1)`.
+Since $`f\in K\left[\left[x\right]\right]_1`, we have
+$`\left[x^0\right](f-1)=0`, so
+`prop.fps.exp-log-der` part *(b)* applies and gives
+$`\left(\operatorname{Log}f\right)' = f^{-1}\cdot (f-1)'`.
+But $`(f-1)' = f'`, hence
+$`\left(\operatorname{Log}f\right)' = \dfrac{f'}{f} = \operatorname{loder}f`.
+:::
+
+```tex "prop.fps.loder.log" (slot := proof)
+\begin{proof}
+\leanok
+The definition of
+$\operatorname{Log}$ yields $\operatorname{Log}f=\overline{\log}\circ\left(
+f-1\right)$.
+
+From $f\in K\left[\left[x\right]\right]_{1}$, we obtain $\left[
+x^{0}\right]f=1$. Now, $\left[x^{0}\right]
+\left(f-1\right)=\left[x^{0}\right]f-\left[x^{0}\right]1=0$. Hence, Proposition
+\ref{prop.fps.exp-log-der} \textbf{(b)} (applied to $g=f-1$) yields
+\[
+\left(\overline{\log}\circ\left(f-1\right)\right)^{\prime}=\left(
+\underbrace{1+\left(f-1\right)}_{=f}\right)^{-1}\cdot\left(f-1\right)
+^{\prime}=f^{-1}\cdot\left(f-1\right)^{\prime}=\dfrac{\left(f-1\right)
+^{\prime}}{f}.
+\]
+In view of $\operatorname{Log}f=\overline{\log}\circ\left(f-1\right)$, we
+can rewrite this as
+$\left(\operatorname{Log}f\right)^{\prime}=\dfrac{\left(f-1\right)
+^{\prime}}{f}$.
+
+Since $\left(f-1\right)^{\prime}=f^{\prime}$, we can rewrite
+this further as $\left(\operatorname{Log}f\right)^{\prime}=\dfrac
+{f^{\prime}}{f}=\operatorname{loder}f$.
+\end{proof}
+```
