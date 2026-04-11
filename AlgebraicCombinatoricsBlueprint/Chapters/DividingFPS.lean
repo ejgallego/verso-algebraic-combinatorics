@@ -641,3 +641,230 @@ For each $n\in\mathbb{N}$, $[x^n]\frac{xb}{x}=[x^{n+1}](xb)=[x^n]b$
 (by Lemma~\ref{lem.fps.coeff-divByX} and the coefficient formula for $xb$).
 \end{proof}
 ```
+
+:::group "fps_misc_lemmas"
+Auxiliary coefficient lemmas about multiples of powers of the indeterminate.
+:::
+
+```tex
+\subsection{A few lemmas}
+```
+
+:::lemma_ "lem.fps.g=xh" (parent := "fps_misc_lemmas") (lean := "AlgebraicCombinatorics.fps_exists_X_mul_of_constantCoeff_zero")
+Let $`a\in K[[x]]` be an FPS with $`\left[x^{0}\right]a=0`. Then there exists
+an $`h\in K[[x]]` such that $`a=xh`.
+:::
+
+```tex "lem.fps.g=xh" (slot := statement)
+\begin{lemma}
+\label{lem.fps.g=xh}
+\lean{AlgebraicCombinatorics.fps_exists_X_mul_of_constantCoeff_zero}
+\leantarget
+\leanok
+Let $a\in K[[x]]$ be an FPS
+with $\left[x^{0}\right]a=0$. Then, there exists an $h\in K[[x]]$ such that $a=xh$.
+\end{lemma}
+```
+
+:::proof "lem.fps.g=xh"
+The FPS $`\frac{a}{x}` is well-defined because the constant term of $`a` is
+$`0`. Set $`h=\frac{a}{x}`. Then the lemma on reconstructing a series from its
+quotient by $`x` gives $`a = x\cdot h`.
+:::
+
+```tex "lem.fps.g=xh" (slot := proof)
+\begin{proof}
+\leanok
+The FPS $\dfrac{a}{x}$ is well-defined (since $a_0 = 0$).
+Set $h = \dfrac{a}{x}$; then $a = x \cdot \dfrac{a}{x} = xh$
+(by Lemma~\ref{lem.fps.eq-X-mul-divByX}).
+\end{proof}
+```
+
+:::lemma_ "lem.fps.first-n-coeffs-of-xna" (parent := "fps_misc_lemmas") (lean := "AlgebraicCombinatorics.fps_coeff_X_pow_mul_eq_zero")
+Let $`k\in\mathbb{N}`. Let $`a\in K[[x]]` be any FPS. Then the first $`k`
+coefficients of the FPS $`x^{k}a` are $`0`.
+:::
+
+```tex "lem.fps.first-n-coeffs-of-xna" (slot := statement)
+\begin{lemma}
+\label{lem.fps.first-n-coeffs-of-xna}
+\lean{AlgebraicCombinatorics.fps_coeff_X_pow_mul_eq_zero}
+\leantarget
+\leanok
+Let $k\in\mathbb{N}$. Let $a\in K[[x]]$ be any FPS. Then, the first $k$ coefficients of
+the FPS $x^{k}a$ are $0$.
+\end{lemma}
+```
+
+:::proof "lem.fps.first-n-coeffs-of-xna"
+If $`m<k`, then
+$$`\left[x^m\right](x^k a)
+= \sum_{i=0}^{m} \left[x^i\right](x^k)\cdot \left[x^{m-i}\right]a.`
+But $`\left[x^i\right](x^k)=0` for every $`i\le m<k`, so each summand is
+$`0`.
+:::
+
+```tex "lem.fps.first-n-coeffs-of-xna" (slot := proof)
+\begin{proof}
+\leanok
+For $m<k$, we have
+$[x^m](x^k a) = \sum_{i=0}^{m} [x^i](x^k)\cdot [x^{m-i}]a = 0$
+since $[x^i](x^k) = 0$ for all $i\leq m < k$.
+\end{proof}
+```
+
+:::lemma_ "lem.fps.muls-of-xn" (parent := "fps_misc_lemmas") (lean := "AlgebraicCombinatorics.fps_first_k_coeffs_zero_iff_X_pow_dvd")
+Let $`k\in\mathbb{N}`. Let $`f\in K[[x]]` be any FPS. Then the first $`k`
+coefficients of $`f` are $`0` if and only if $`f` is a multiple of $`x^k`.
+:::
+
+```tex "lem.fps.muls-of-xn" (slot := statement)
+\begin{lemma}
+\label{lem.fps.muls-of-xn}
+\lean{AlgebraicCombinatorics.fps_first_k_coeffs_zero_iff_X_pow_dvd}
+\leantarget
+\leanok
+Let $k\in\mathbb{N}$. Let $f\in K[[x]]$ be any FPS. Then, the first $k$ coefficients of
+$f$ are $0$ if and only if $f$ is a multiple of $x^{k}$.
+\end{lemma}
+```
+
+:::proof "lem.fps.muls-of-xn"
+$`\Longleftarrow`: This is the previous lemma.
+
+$`\Longrightarrow`: If the first $`k` coefficients of $`f` vanish, then
+$`f = \sum_{n\ge k} f_n x^n = x^k \sum_{n\ge k} f_n x^{n-k}`, so $`f` is a
+multiple of $`x^k`.
+:::
+
+```tex "lem.fps.muls-of-xn" (slot := proof)
+\begin{proof}
+\leanok
+$\Longleftarrow$: By Lemma~\ref{lem.fps.first-n-coeffs-of-xna}.
+
+$\Longrightarrow$: If $f_n = 0$ for each $n \in \{0, 1, \ldots, k-1\}$, then
+$f = \sum_{n \geq k} f_n x^n = x^k \sum_{n \geq k} f_n x^{n-k}$.
+\end{proof}
+```
+
+:::lemma_ "lem.fps.prod.irlv.fg" (parent := "fps_misc_lemmas") (lean := "AlgebraicCombinatorics.fps_coeff_mul_eq_of_coeff_eq")
+Let $`a,f,g\in K[[x]]` be three FPSs. Let $`n\in\mathbb{N}`. Assume that
+$`\left[x^{m}\right]f=\left[x^{m}\right]g` for each
+$`m\in\{0,1,\ldots,n\}`. Then
+$`\left[x^{m}\right](af)=\left[x^{m}\right](ag)` for each
+$`m\in\{0,1,\ldots,n\}`.
+:::
+
+```tex "lem.fps.prod.irlv.fg" (slot := statement)
+\begin{lemma}
+\label{lem.fps.prod.irlv.fg}
+\lean{AlgebraicCombinatorics.fps_coeff_mul_eq_of_coeff_eq}
+\leantarget
+\leanok
+Let $a,f,g\in K[[x]]$ be three FPSs. Let $n\in\mathbb{N}$. Assume that
+$[x^{m}]f=[x^{m}]g$ for each $m\in\{0,1,\ldots,n\}$.
+Then,
+$[x^{m}](af)=[x^{m}](ag)$ for each $m\in\{0,1,\ldots,n\}$.
+\end{lemma}
+```
+
+:::proof "lem.fps.prod.irlv.fg"
+Fix $`m\in\{0,1,\ldots,n\}`. For each $`j\in\{0,1,\ldots,m\}`, we have
+$`j\le m\le n`, hence $`\left[x^j\right]f=\left[x^j\right]g`. Expanding the
+coefficient of a product therefore gives the same finite sum for
+$`\left[x^m\right](af)` and $`\left[x^m\right](ag)`.
+:::
+
+```tex "lem.fps.prod.irlv.fg" (slot := proof)
+\begin{proof}
+\leanok
+Let $m \in \{0,1,\ldots,n\}$. Each $j \in \{0,1,\ldots,m\}$ satisfies $j \leq m \leq n$
+and thus $[x^j]f = [x^j]g$. Hence,
+$[x^m](af) = \sum_{j=0}^m [x^{m-j}]a \cdot [x^j]f
+= \sum_{j=0}^m [x^{m-j}]a \cdot [x^j]g = [x^m](ag)$.
+\end{proof}
+```
+
+:::lemma_ "lem.fps.prod.irlv.mul" (parent := "fps_misc_lemmas") (lean := "AlgebraicCombinatorics.fps_coeff_zero_of_multiple")
+Let $`u,v\in K[[x]]` be two FPSs such that $`v` is a multiple of $`u`. Let
+$`n\in\mathbb{N}`. Assume $`\left[x^{m}\right]u=0` for each
+$`m\in\{0,1,\ldots,n\}`. Then $`\left[x^{m}\right]v=0` for each
+$`m\in\{0,1,\ldots,n\}`.
+:::
+
+```tex "lem.fps.prod.irlv.mul" (slot := statement)
+\begin{lemma}
+\label{lem.fps.prod.irlv.mul}
+\lean{AlgebraicCombinatorics.fps_coeff_zero_of_multiple}
+\leantarget
+\leanok
+Let $u,v\in K[[x]]$ be two FPSs such that $v$ is a multiple of $u$. Let $n\in\mathbb{N}$. Assume
+$[x^{m}]u=0$ for each $m\in\{0,1,\ldots,n\}$.
+Then $[x^{m}]v=0$ for each $m\in\{0,1,\ldots,n\}$.
+\end{lemma}
+```
+
+:::proof "lem.fps.prod.irlv.mul"
+Write $`v=ua`. Since $`\left[x^m\right]u=0=\left[x^m\right]0` for each
+$`m\le n`, the previous lemma applied to $`f=u` and $`g=0` yields
+$`\left[x^m\right](au)=\left[x^m\right](a\cdot 0)=0`. Because $`v=ua=au`,
+the same holds for $`v`.
+:::
+
+```tex "lem.fps.prod.irlv.mul" (slot := proof)
+\begin{proof}
+\leanok
+Write $v=ua$. We have $[x^m]u = 0 = [x^m]0$ for each $m \in \{0,1,\ldots,n\}$.
+Lemma~\ref{lem.fps.prod.irlv.fg} (applied to $f=u$ and $g=0$) yields
+$[x^m](au) = [x^m](a \cdot 0) = 0$ for each $m \in \{0,1,\ldots,n\}$.
+Since $v = ua = au$, we get $[x^m]v = 0$.
+\end{proof}
+```
+
+:::lemma_ "lem.fps.prod.irlv.cong-mul" (parent := "fps_misc_lemmas") (lean := "AlgebraicCombinatorics.fps_coeff_mul_eq_of_both_coeff_eq")
+Let $`a,b,c,d\in K[[x]]` be four FPSs. Let $`n\in\mathbb{N}`. Assume
+$`\left[x^{m}\right]a=\left[x^{m}\right]b` and
+$`\left[x^{m}\right]c=\left[x^{m}\right]d` for each
+$`m\in\{0,1,\ldots,n\}`. Then
+$`\left[x^{m}\right](ac)=\left[x^{m}\right](bd)` for each
+$`m\in\{0,1,\ldots,n\}`.
+:::
+
+```tex "lem.fps.prod.irlv.cong-mul" (slot := statement)
+\begin{lemma}
+\label{lem.fps.prod.irlv.cong-mul}
+\lean{AlgebraicCombinatorics.fps_coeff_mul_eq_of_both_coeff_eq}
+\leantarget
+\leanok
+Let $a,b,c,d\in K[[x]]$ be four FPSs. Let $n\in\mathbb{N}$. Assume
+$[x^{m}]a=[x^{m}]b$ and $[x^{m}]c=[x^{m}]d$ for each $m\in\{0,1,\ldots,n\}$.
+Then $[x^{m}](ac)=[x^{m}](bd)$ for each $m\in\{0,1,\ldots,n\}$.
+\end{lemma}
+```
+
+:::proof "lem.fps.prod.irlv.cong-mul"
+The difference $`ac-bc=(a-b)c` is a multiple of $`a-b`, and the coefficients
+of $`a-b` up to degree $`n` vanish. The previous lemma therefore gives
+$`\left[x^m\right](ac)=\left[x^m\right](bc)` for $`m\le n`.
+
+Applying the same argument to $`bc-bd=b(c-d)` shows
+$`\left[x^m\right](bc)=\left[x^m\right](bd)` for $`m\le n`.
+
+Combining the two equalities yields the claim.
+:::
+
+```tex "lem.fps.prod.irlv.cong-mul" (slot := proof)
+\begin{proof}
+\leanok
+The FPS $ac - bc = (a-b)c$ is a multiple of $a-b$, and $[x^m](a-b) = 0$
+for each $m \in \{0,1,\ldots,n\}$. By Lemma~\ref{lem.fps.prod.irlv.mul},
+$[x^m](ac - bc) = 0$, so $[x^m](ac) = [x^m](bc)$.
+
+Similarly, $bc - bd = b(c-d) = (c-d)b$ is a multiple of $c-d$, and
+$[x^m](c-d) = 0$. By Lemma~\ref{lem.fps.prod.irlv.mul},
+$[x^m](bc - bd) = 0$, so $[x^m](bc) = [x^m](bd)$.
+
+Combining: $[x^m](ac) = [x^m](bc) = [x^m](bd)$.
+\end{proof}
+```
