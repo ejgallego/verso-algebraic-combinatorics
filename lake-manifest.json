@@ -1,11 +1,11 @@
 {"version": "1.1.0",
  "packagesDir": ".lake/packages",
  "packages":
- [{"url": "https://github.com/ejgallego/verso-blueprint.git",
+ [{"url": "https://github.com/leanprover/verso-blueprint.git",
    "type": "git",
    "subDir": null,
    "scope": "",
-   "rev": "3d5addd124f1c175c1b29b22b043036de1f113cd",
+   "rev": "a0d91b97b9b7f46b499e291d9c99c23bb8f82da5",
    "name": "VersoBlueprint",
    "manifestFile": "lake-manifest.json",
    "inputRev": "v4.28.0",
