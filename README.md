@@ -1,39 +1,30 @@
 # Algebraic Combinatorics Blueprint
 
-This repository is the Verso port and integration repo for `Algebraic Combinatorics Blueprint`.
+[![Blueprint Pages](https://github.com/ejgallego/verso-algebraic-combinatorics/actions/workflows/blueprint.yml/badge.svg)](https://github.com/ejgallego/verso-algebraic-combinatorics/actions/workflows/blueprint.yml)
 
-- Upstream formalization: `algebraic-combinatorics/`
-- Shared harness: `tools/verso-harness/`
-- Harness config: `verso-harness.toml`
+Verso Blueprint port of the Algebraic Combinatorics Blueprint, with the
+upstream [`algebraic-combinatorics`](algebraic-combinatorics/) formalization
+carried locally as a submodule.
 
-## Pages
+Blueprint: <https://ejgallego.github.io/verso-algebraic-combinatorics/>
 
-- Public site: configure after GitHub Pages is enabled for this repo
-- Workflow: `.github/workflows/blueprint.yml` via the upstream `verso-blueprint` reusable workflow
-- Local build: `bash ./scripts/ci-pages.sh`
-- Local output: `_out/site/html-multi/index.html`
+This repo follows the upstream blueprint strictly and translates its source
+markup language to Verso with the help of AI.
 
-## Port Source
+## Build
 
-The written-mathematics source of truth remains the legacy TeX / leanblueprint
-material identified by `tex_source_glob` in `verso-harness.toml`.
+```bash
+lake build
+```
 
-For normal blueprint and integration work in this repo, treat the upstream
-formalization checkout at `algebraic-combinatorics/` as read-only unless you are
-explicitly doing upstream or fork work there.
+## Generate
 
-## Workflow
+```bash
+lake env lean --run BlueprintMain.lean --output _out/site
+```
 
-This repo is a consumer of the shared harness. For startup, retrofit, LT audit,
-and maintenance rules, use the harness docs:
-
-- `tools/verso-harness/README.md`
-- `tools/verso-harness/references/start-new-port.md`
-- `tools/verso-harness/references/retrofit.md`
-- `AGENTS.md`
-
-## Notes
-
-- Root `lean-toolchain` follows the upstream formalization toolchain.
-- `lakefile.lean` pins the matching `VersoBlueprint` branch for that toolchain.
-- Generic LT commands should be run via `tools/verso-harness/scripts/...`.
+This repository follows the shared
+[`tools/verso-harness`](tools/verso-harness/) workflow. The root
+[`lean-toolchain`](lean-toolchain) matches the upstream formalization, and
+[`lakefile.lean`](lakefile.lean) pins `VersoBlueprint` to the matching release
+branch.
