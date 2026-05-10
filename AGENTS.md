@@ -36,6 +36,10 @@
   Lean code in blueprint modules.
 - Preserve TeX `\uses{...}` edges as Verso `{uses "..."}[]` references inside
   the relevant node or proof, not just in free prose.
+- Translate TeX `\ref{...}` references to blueprint nodes as `{bpref "..."}[]`
+  when the source is only pointing at the node and should not add a dependency
+  edge. Do not upgrade these to `{uses "..."}[]` unless the source has
+  `\uses{...}` or this repo explicitly wants a graph dependency.
 - Keep prose as prose unless the source really gives a graph-visible theorem,
   definition, lemma, corollary, or proof-style object.
 - Preserve TeX environment kind faithfully. Use `:::lemma_` for TeX
@@ -47,15 +51,16 @@
 - When the source block still needs to stay visible, prefer a labeled local
   `tex` block over rewriting it into placeholder prose.
 - Treat metadata cleanup as a second phase of LT rather than as a substitute
-  for LT.
+  for LT. First localize the text with a `tex` witness, then tighten
+  `(lean := "...")`, `{uses "..."}[]`, and `{bpref "..."}[]`.
 - Port coherent chapter blocks rather than scattering small edits across
   unrelated chapters.
 - Keep shared TeX macros in one `TeXPrelude.lean` module.
 - Prefer the harness pattern where `VersoBlueprint` drives the `verso`
   dependency unless this repo has a concrete reason to pin `verso` directly.
-- Generated consumers keep `verso.blueprint.math.lint` enabled, disable the
-  noisy `VersoManual` inline-code line-length warning, and default
-  `verso.blueprint.externalCode.strictResolve` from
+- Generated consumers keep the version-appropriate Verso math-lint option
+  enabled, disable the noisy `VersoManual` inline-code line-length warning, and
+  default the version-appropriate strict-resolve option from
   `harness.strict_external_code`.
 - After editing direct-port chapters, run:
   - `python3 tools/verso-harness/scripts/check_lt_source_pairs.py --project-root . <chapter.lean>`
